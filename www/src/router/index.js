@@ -5,6 +5,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Start from '@/components/Start'
 import Chores from '@/components/Chores'
+import Households from '@/components/Households'
 import Household from '@/components/Household'
 
 Vue.use(Router)
@@ -31,15 +32,19 @@ export default new Router({
       path:'/start',
       name: 'Start',
       component: Start
-
     },
     {
-      path: '/household',
+      path: '/households',
+      name: 'Households',
+      component: Households
+    },
+    {
+      path: '/households/:id',
       name: 'Household',
       component: Household
     },
     {
-      path: '/chores',
+      path: '/households/:id/chores',
       name: 'Chores',
       component: Chores
     },

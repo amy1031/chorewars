@@ -20,7 +20,7 @@ let state = {
   user: {},
   error: {},
   households: [],
-  household: {},
+  activeHousehold: {},
   chores: {},
   prize: {}
 
@@ -49,9 +49,8 @@ export default new Vuex.Store({
       state.user = user
     },
 
-    setHousehold(state, household) {
-      state.household = household
-
+    setActiveHousehold(state, activeHousehold) {
+      state.activeHousehold = activeHousehold
     },
     setHouseholds(state, households) {
       state.households = households
@@ -92,7 +91,7 @@ export default new Vuex.Store({
       commit('setError')
     },
     getHouseholds({ commit, dispatch }) {
-      debugger
+     //debugger
       api('households')
         .then(res => {
           commit('setHouseholds', res.data.data)
@@ -102,7 +101,7 @@ export default new Vuex.Store({
     getHousehold({ commit, dispatch }, id) {
       api('households/' + id)
         .then(res => {
-          commit('setHousehold', res.data.data)
+          commit('setActiveHousehold', res.data.data)
         })
         .catch(handleError)
     },
@@ -122,8 +121,10 @@ export default new Vuex.Store({
     },
 
     createHousehold({ commit, dispatch }, household) {
+     // debugger
       api.post('households', household)
         .then(res => {
+          commit('setActiveHousehold', household)
           dispatch('getHouseholds')
         })
         .catch(handleError)
