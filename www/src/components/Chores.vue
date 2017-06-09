@@ -8,7 +8,7 @@
           <span class="custom-control-description">Chore: {{chore.name}} - </span>
         </label>
         <span>Value</span>
-        <input v-model="checkedChores[chore.points]" type="number" :value= "chore.points" :placeholder="chore.points"/>
+        <input  type="number" v-model="chore.points" :placeholder="chore.points"/>
       </div>
       <button type="submit" class="btn btn-success">Submit Chore List</button>
     </form>
@@ -21,12 +21,8 @@
     name: 'chores',
     data() {
       return {
-        choresList: {
-         name: "",
-         points: ""
-        },
         checkedChores: [],
-        checkedChorePoints: []
+
 
       }
 
