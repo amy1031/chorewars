@@ -34,6 +34,11 @@ export default new Router({
 
     },
     {
+      path: '/household',
+      name: 'Household',
+      component: Household
+    },
+    {
       path: '/chores',
       name: 'Chores',
       component: Chores

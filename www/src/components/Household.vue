@@ -1,7 +1,6 @@
 <template>
   <div class="household">
-
-
+    
   </div>
 </template>
 
@@ -10,7 +9,9 @@
 export default {
   name: 'household',
   data(){
+    return {
 
+    }
   },
   computed:{
     user(){
