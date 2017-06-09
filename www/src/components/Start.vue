@@ -15,7 +15,7 @@
             <div class='container-fluid'>
               <div class='row'>
                 <div class="col-sm-3" v-for="household in households">
-                   <h1> {{household.name}}</h1>
+                   <h6> <router-link :to="'/households/'+household._id">{{household.name}}</router-link></h6>
                 </div>
               </div>
             </div>
@@ -43,7 +43,6 @@
     },
     computed: {
       households() {
-        debugger
         return this.$store.state.households
       },
       user(){
@@ -55,12 +54,12 @@
         this.$store.dispatch("createHousehold", {name: this.name, creatorId: this.creatorId})
       },
       householdFormToggle() {
-        debugger
+      //  debugger
         this.newHousehold = true;
         this.addHouseholdButton = false;
       },
       householdFormToggleBack() {
-        debugger
+       // debugger
         this.newHousehold = false;
         this.addHouseholdButton = true;
       }

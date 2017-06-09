@@ -1,25 +1,24 @@
 <template>
-  <div class="household">
-    
-  </div>
+    <div class="household">
+
+        {{household.name}}
+    </div>
 </template>
 
 
 <script>
 export default {
-  name: 'household',
-  data(){
-    return {
-
+    name: 'household',
+    computed:{
+        household(){
+            return this.$store.state.activeHousehold
     }
-  },
-  computed:{
-    user(){
-      return this.$store.state.user
-    }
-  },
-  methods:{},
-  components:{}
+    },
+    mounted() {
+      this.$store.dispatch('getHousehold', this.$route.params.id)
+    },
+    methods:{},
+    components:{}
 }
 </script>
 
