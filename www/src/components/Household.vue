@@ -19,9 +19,16 @@ export default {
     }
     },
     mounted() {
-      this.$store.dispatch('getHousehold', this.$route.params.id)
+      this.$store.dispatch('getHousehold', this.$route.params.id),
+      this.checkChores(this.$store.state.activeHousehold)
     },
-    methods:{},
+    methods:{
+        checkChores(activeHousehold){
+            debugger
+                this.$store.dispatch("checkChores", activeHousehold)
+            
+        }
+    },
     components:{}
 }
 </script>

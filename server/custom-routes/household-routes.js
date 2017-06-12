@@ -63,9 +63,11 @@ export default {
       let action = 'Updates the game chore list to the active household'
       Household.findById(req.params.householdId)
         .then(household =>{
-         debugger
-          household._doc.choresList.push(req.body)
-          res.send(handleResponse(action, req.body))
+          household.choresList = req.body
+          household.save(household).then(() =>{
+            res.send(handleResponse(action, req.body))
+          })  
+          
         })
         .catch(error => {
           return next(handleResponse(action, null, error))

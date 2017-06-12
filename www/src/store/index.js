@@ -151,6 +151,12 @@ export default new Vuex.Store({
           router.push('/households/' + activeHousehold._id)
         })
         .catch(handleError)
+    },
+    checkChores({commit, dispatch}, activeHousehold){
+      debugger
+      if(activeHousehold.choresList.length == 0){
+      router.push('/household/' + activeHousehold._id + '/chores')
+      }
     }
   }
 
