@@ -35,16 +35,11 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user
-      router.push('/households')
+    //  router.push('/households')
     },
     setError(state) {
       state.error = {}
     },
-    setAuth(state, user) {
-      state.user = user || {}
-      // router.push('household')
-    },
-
     setLogin(state, user) {
       state.user = user
     },
@@ -60,6 +55,10 @@ export default new Vuex.Store({
     },
     setChores(state, chores){
       state.chores = chores
+    },
+    setHouseholdChores(state, chores){
+      debugger
+      state.activeHousehold.choresList = chores;
     }
   },
   actions: {
@@ -67,24 +66,31 @@ export default new Vuex.Store({
       auth.post('login', user)
       .then( res => {
         commit('setUser', res.data.data)
+        router.push('/start')
 
-        if (state.user === null) {
-            router.push('/')
-          }else{
-            router.push('/households')
-          }
-      }) .catch(err => {
-          router.push('/login')
+      //   if (state.user === null) {
+      //       router.push('/')
+      //     }else{
+      //       router.push('/start')
+      //     }
+      // }) .catch(err => {
+      //     router.push('/login')
         })
         .catch(handleError)
     },
     getAuth({ commit, dispatch }) {
-      auth('authenticate')
+     auth('authenticate')
         .then(res => {
-          commit('setAuth', res.data.data)
-
-        }).catch((err => {
-        }))
+          commit('setUser', res.data.data)
+          //state.user = res.data.data
+          if (state.user === null) {
+            router.push('/')
+          } else {
+            router.push('/start')
+          }
+        }).catch(err => {
+          router.push('/')
+        })
 
     },
     clearError({ commit, dispatch }) {
@@ -106,7 +112,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     getPrize({ commit, dispatch }, prize) {
-      api('household/' + prize.householdId + "/prize/" + prize._id)
+      api('households/' + prize.householdId + "/prize/" + prize._id)
         .then(res => {
           commit('setPrize', res.data.data)
         })
@@ -136,10 +142,13 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-    addChoresToHousehold({commit, dispatch}, chores){
-      api.post('household/' + 'chores')
+    addChoresToHousehold({commit, dispatch}, activeHousehold){
+    //  debugger
+      api.put('households/' + activeHousehold._id + '/chores', activeHousehold.choresList)
         .then(res => {
-          dispatch()
+          //debugger
+          commit('setHouseholdChores', activeHousehold.choresList)
+          router.push('/households/' + activeHousehold._id)
         })
         .catch(handleError)
     }

@@ -63,6 +63,7 @@ router.delete('/logout', (req, res) => {
 
 
 router.get('/authenticate', (req,res) => {
+ // debugger
   Users.findById(req.session.uid).then(user => {
     return res.send ({
       data: user

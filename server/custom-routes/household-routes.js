@@ -47,7 +47,7 @@ export default {
         .then(household => {
           Chores.find({ householdId: req.params.householdId })
             .then(chores => {
-              household.chores = chores
+              household.choresList = chores
               res.send(handleResponse(action, chores))
             })
         }).catch(error => {
@@ -57,12 +57,13 @@ export default {
   },
   addChoresByHousehold: {
     path: '/households/:householdId/chores',
-    reqType: 'post',
+    reqType: 'put',
     method(req, res, next){
-      let action = 'Adds the game chore list to the household with points'
+     // debugger
+      let action = 'Updates the game chore list to the active household'
       Household.findById(req.params.householdId)
         .then(household =>{
-          debugger
+         debugger
           household._doc.choresList.push(req.body)
           res.send(handleResponse(action, req.body))
         })

@@ -1,7 +1,8 @@
 <template>
     <div class="household">
 
-        {{household.name}}
+        {{activeHousehold.name}}
+      <!--  {{chores.name}} -->
     </div>
 </template>
 
@@ -10,8 +11,11 @@
 export default {
     name: 'household',
     computed:{
-        household(){
+        activeHousehold(){
             return this.$store.state.activeHousehold
+    },
+    chores() {
+        return this.$store.state.activeHousehold.choresList
     }
     },
     mounted() {

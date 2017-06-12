@@ -1,6 +1,6 @@
 <template>
   <div class="chores">
-    <form @submit.prevent="addChoresToHousehold(choresList)">
+    <form @submit.prevent="addChoresToHousehold(checkedChores)">
       <div class="loop" v-for="chore in chores">
         <label class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" :value="chore" v-model="checkedChores"/>
@@ -29,15 +29,21 @@
     },
     mounted() {
       this.$store.dispatch('getChores')
+      this.$store.dispatch('getHousehold', this.$route.params.id)
     },
     computed: {
       chores(){
         return this.$store.state.chores
+      },
+      activeHousehold() {
+        return this.$store.state.activeHousehold
       }
     },
     methods: {
       addChoresToHousehold(chores){
-        this.$store.dispatch('addChoresToHousehold', chores)
+       // debugger
+        this.activeHousehold.choresList = chores
+        this.$store.dispatch('addChoresToHousehold', this.activeHousehold)
 
       }
     },
