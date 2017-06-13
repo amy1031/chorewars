@@ -4,7 +4,7 @@
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollabaratorsButton">Search Users</button>
             <form class="form-inline find-user-form" @submit.prevent="searchUsers" v-show="newSearch">
                 <div class="form-group">
-                    <input type="text" class="form-control" v-model="userName" name="userName" placeholder="Household Name" />
+                    <input type="text" class="form-control" v-model="username" name="userName" placeholder="Household Name" />
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="searchFormToggleBack">Add New Collabarators</button>
                 </div>
             </form>
@@ -21,7 +21,7 @@ export default {
     name: 'household',
     data() {
         return {
-            userName: "",
+            username: "",
             newSearch: false,
             addCollabaratorsButton: true
         }
@@ -47,7 +47,8 @@ export default {
             this.addCollabaratorsButton = true;
         },
         searchUsers(){
-            this.$store.dispatch("searchUsers", this.userName)
+            debugger
+            this.$store.dispatch("searchUsers", {user: this.username, householdId: this.$route.params.id})
         }
     },
     components: {}
