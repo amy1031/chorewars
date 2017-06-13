@@ -30,7 +30,7 @@ export default {
     // },
     methods:{
         addPointsToUser(chore) {
-            debugger
+            //debugger
             this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id})
             this.completedChore(chore)
         },

@@ -44,6 +44,28 @@ export default {
 
 
     }
+  },
+    updateUser: {
+    path: '/updateUser',
+    reqType: 'put',
+    method(req, res, next) {
+      debugger
+      let action = 'Update user object'
+      Users.findById(req.body.userId)
+        .then(user => {
+          if (!user) {
+            res.sendStatus(404)({ error: "User Not Found" })
+          } else {
+               user.points += chorePoints
+               user.save(user).then(() => {
+                  res.send(handleResponse(action, req.body))
+                })
+              .catch(error => {
+                return next(handleResponse(action, null, error))
+              })
+          }
+        })
+    }
   }
 
 }
