@@ -60,6 +60,12 @@ export default new Vuex.Store({
     setHouseholdChores(state, chores){
       debugger
       state.activeHousehold.choresList = chores;
+    },
+    addCompletedChore(state, chore){
+      state.user.completedChores.push(chore)
+    },
+    addPointsToUser(state, chorePoints) {
+      state.user.points += chorePoints
     }
   },
   actions: {
@@ -170,6 +176,20 @@ export default new Vuex.Store({
           //debugger
           commit('setHouseholdChores', activeHousehold.choresList)
           router.push('/households/' + activeHousehold._id)
+        })
+        .catch(handleError)
+    },
+    completedChore({commit, dispatch}, {chore, userId}){
+      auth.put('users/' + userId, chore)
+      .then(res => {
+        commit('addCompletedChore', chore)
+      })
+        .catch(handleError)
+    },
+    addPointsToUser({commit, dispatch}, {chorePoints, userId}){
+        auth.put('users/' + userId, chorePoints)
+        .then(res => {
+          commit('addPointsToUser', chorePoints)
         })
         .catch(handleError)
     },

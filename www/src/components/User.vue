@@ -3,7 +3,7 @@
     {{user.name}}
     <!--{{activeHousehold.name}}-->
     <ul>
-        <li v-for='chore in this.choresList'>{{chore.name}} <button class="delete" @click="completedChore(chore)">x</button></li>
+        <li v-for='chore in this.choresList'>{{chore.name}} <button class="delete" @click="addPointsToUser(chore)">x</button></li>
     </ul>
     </div>
 </template>
@@ -29,8 +29,13 @@ export default {
     //     this.$store.dispatch('getHousehold', this.$route.params.id)
     // },
     methods:{
+        addPointsToUser(chore) {
+            debugger
+            this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id})
+            this.completedChore(chore)
+        },
         completedChore(chore) {
-            this.$store.dispatch('completedChore', chore)
+            this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
         }
     },
     components:{}
