@@ -13,7 +13,7 @@ var schema = new mongoose.Schema({
   // Relations
 	chores: { type: ObjectId, ref: models.chore.name},
 	choresList: {type: Array},
-	members: { type: ObjectId, ref: models.user.name},
+	members: { type: Array},
 	prize: { type: ObjectId, ref: models.prize.name},
 	leaderboard: {type: ObjectId, ref: models.leaderboard.creatorId }
 });

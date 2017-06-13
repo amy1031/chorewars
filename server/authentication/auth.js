@@ -2,6 +2,7 @@ let router = require('express').Router()
 let Users = require('../models/user')
 
 router.post('/register', (req, res) => {
+  debugger
   Users.create(req.body)
     .then((user) => {
       req.session.uid = user._id
@@ -16,6 +17,11 @@ router.post('/register', (req, res) => {
     .catch(err => {
       res.send({ error: err })
     })
+}),
+
+router.post('/findUsers', (req, res) => {
+  debugger
+  Users.findOne({userName: req.body.userName})
 })
 
 

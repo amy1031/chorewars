@@ -42,6 +42,7 @@ export default new Vuex.Store({
     },
     setLogin(state, user) {
       state.user = user
+      //LETS REDIRECT THE PAGE
     },
 
     setActiveHousehold(state, activeHousehold) {
@@ -62,6 +63,19 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    register({ commit, dispatch }, user) {
+      auth.post('register', user)
+        .then(res => {
+          commit('setLogin', res.data)
+          if (res.data.error) {
+            return handleError(res.data.error)
+          }
+
+
+        })
+        .catch(handleError)
+    },
+
     login({ commit, dispatch }, user) {
       auth.post('login', user)
       .then( res => {
@@ -153,10 +167,17 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     checkChores({commit, dispatch}, activeHousehold){
-      debugger
+      // debugger
       if(activeHousehold.choresList.length == 0){
       router.push('/household/' + activeHousehold._id + '/chores')
       }
+    },
+    searchUsers({commit, dispatch}, userName){
+      auth.post("findUsers", userName)
+        .then(res => {
+          debugger
+        })
+        .catch(handleError)
     }
   }
 
