@@ -10,8 +10,8 @@
             </form>
         </div>
 
-        {{activeHousehold.name}}
-        <!--  {{chores.name}} -->
+        {{activeHousehold.name}}<br>
+        <router-link :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
     </div>
 </template>
 
@@ -36,7 +36,6 @@ export default {
     },
     mounted() {
         this.$store.dispatch('getHousehold', this.$route.params.id)
-
     },
     methods: {
         searchFormToggle() {

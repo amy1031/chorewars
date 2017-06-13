@@ -44,7 +44,6 @@ export default new Vuex.Store({
       state.user = user
       //LETS REDIRECT THE PAGE
     },
-
     setActiveHousehold(state, activeHousehold) {
       state.activeHousehold = activeHousehold
       //Vue.set(state.activeHousehold, activeHousehold._id, activeHousehold)
@@ -108,6 +107,13 @@ export default new Vuex.Store({
         })
 
     },
+   // getUser({commit, dispatch}, user) {
+    //     api('user')
+    //     .then(res => {
+    //       commit('setUser', res.data.data)
+    //     })
+    //     .catch(handleError)
+    // },
     clearError({ commit, dispatch }) {
       commit('setError')
     },
@@ -171,7 +177,7 @@ export default new Vuex.Store({
       debugger
       api.post("findUsers", data)
         .then(res => {
-          debugger
+       //   debugger
         })
         .catch(handleError)
     }
