@@ -2,7 +2,7 @@
     <div class="household">
 
         {{activeHousehold.name}}
-      <!--  {{chores.name}} -->
+       <h6> <router-link :to="'/households/'+activeHousehold._id+'/chores'">Add Chores</router-link></h6>
     </div>
 </template>
 
@@ -19,16 +19,10 @@ export default {
     }
     },
     mounted() {
-      this.$store.dispatch('getHousehold', this.$route.params.id),
-      this.checkChores(this.$store.state.activeHousehold)
+      //  debugger
+        this.$store.dispatch('getHousehold', this.$route.params.id)
     },
-    methods:{
-        checkChores(activeHousehold){
-            debugger
-                this.$store.dispatch("checkChores", activeHousehold)
-            
-        }
-    },
+    methods:{},
     components:{}
 }
 </script>
