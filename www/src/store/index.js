@@ -179,7 +179,6 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-<<<<<<< HEAD
     completedChore({commit, dispatch}, {chore, userId}){
       auth.put('users/' + userId, chore)
       .then(res => {
@@ -196,11 +195,9 @@ export default new Vuex.Store({
     },
     searchUsers({commit, dispatch}, userName){
       auth.post("findUsers", userName)
-=======
     searchUsers({commit, dispatch}, data){
       debugger
       api.post("findUsers", data)
->>>>>>> 192f2e48dd3fe1fc6b96ef7729cbf5a33be24f38
         .then(res => {
        //   debugger
         })
