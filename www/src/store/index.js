@@ -47,6 +47,7 @@ export default new Vuex.Store({
 
     setActiveHousehold(state, activeHousehold) {
       state.activeHousehold = activeHousehold
+      //Vue.set(state.activeHousehold, activeHousehold._id, activeHousehold)
     },
     setHouseholds(state, households) {
       state.households = households
@@ -165,12 +166,6 @@ export default new Vuex.Store({
           router.push('/households/' + activeHousehold._id)
         })
         .catch(handleError)
-    },
-    checkChores({commit, dispatch}, activeHousehold){
-      // debugger
-      if(activeHousehold.choresList.length == 0){
-      router.push('/household/' + activeHousehold._id + '/chores')
-      }
     },
     searchUsers({commit, dispatch}, userName){
       auth.post("findUsers", userName)
