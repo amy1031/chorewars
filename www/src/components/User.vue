@@ -1,6 +1,6 @@
 <template>
     <div class="user">
-    {{user.name}}
+    {{user.name}} - {{user.points}}
     <!--{{activeHousehold.name}}-->
     <ul>
         <li v-for='chore in this.choresList'>{{chore.name}} <button class="delete" @click="addPointsToUser(chore)">x</button></li>
@@ -25,9 +25,6 @@ export default {
             return this.$store.state.activeHousehold
         } 
     },
-    // mounted() {
-    //     this.$store.dispatch('getHousehold', this.$route.params.id)
-    // },
     methods:{
         addPointsToUser(chore) {
             //debugger
