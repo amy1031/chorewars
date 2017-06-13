@@ -167,8 +167,9 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-    searchUsers({commit, dispatch}, userName){
-      auth.post("findUsers", userName)
+    searchUsers({commit, dispatch}, data){
+      debugger
+      api.post("findUsers", data)
         .then(res => {
           debugger
         })

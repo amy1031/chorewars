@@ -1,5 +1,6 @@
 let router = require('express').Router()
 let Users = require('../models/user')
+let Household = require('../models/household')
 
 router.post('/register', (req, res) => {
   debugger
@@ -19,10 +20,17 @@ router.post('/register', (req, res) => {
     })
 }),
 
-router.post('/findUsers', (req, res) => {
-  debugger
-  Users.findOne({userName: req.body.userName})
-})
+// router.post('/findUsers', (req, res) => {
+//   debugger
+//   Users.findOne({userName: req.body.user})
+//     .then(user=>{
+//       if(!user){
+//         res.sendStatus(404)({error: "User Not Found"})
+//       }else{
+//         Household.findByIdAndUpdate
+//       }
+//     })
+// })
 
 
 router.post('/login', (req, res) => {
