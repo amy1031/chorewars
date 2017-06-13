@@ -10,8 +10,8 @@
             </form>
         </div>
 
-        {{activeHousehold.name}}
-        <!--  {{chores.name}} -->
+        {{activeHousehold.name}}<br>
+        <router-link :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
     </div>
 </template>
 
@@ -35,14 +35,9 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('getHousehold', this.$route.params.id),
-            this.checkChores(this.$store.state.activeHousehold)
+        this.$store.dispatch('getHousehold', this.$route.params.id)
     },
     methods: {
-        checkChores(activeHousehold) {
-            this.$store.dispatch("checkChores", activeHousehold)
-
-        },
         searchFormToggle() {
             this.newSearch = true;
             this.addCollabaratorsButton = false;
