@@ -58,7 +58,7 @@ export default new Vuex.Store({
       state.chores = chores
     },
     setHouseholdChores(state, chores){
-      debugger
+      //debugger
       state.activeHousehold.choresList = chores;
     },
     addCompletedChore(state, chore){
