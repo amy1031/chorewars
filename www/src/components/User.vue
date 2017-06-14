@@ -8,6 +8,10 @@
         <ul>
             <li v-for='chore in this.choresList'>{{chore.name}} <button class="delete" @click="addPointsToUser(chore)">✔</button></li>
         </ul>
+        <h6>Completed:</h6>
+        <ul>
+            <li v-for='done in this.completedChores'>{{done.name}}</li>
+        </ul>
     </div>
 </template>
 
@@ -17,7 +21,8 @@ export default {
     name: 'user',
     data () {
         return {
-            choresList: this.$store.state.activeHousehold.choresList
+            choresList: this.$store.state.activeHousehold.choresList,
+            completedChores: this.$store.state.user.completedChores
         }
     },
     computed:{
