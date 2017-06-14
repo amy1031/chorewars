@@ -20,7 +20,7 @@
         </ul>
         <h6>Household Members:</h6>
         <ul>
-            <li v-for='member in members'>{{member.name}}</li>
+            <li v-for='member in activeHousehold.members'>{{member.name}}</li>
         </ul>
     </div>
 </template>
@@ -42,10 +42,10 @@ export default {
         },
         completedChores() {
             return this.$store.state.activeHousehold.choreLog
-        },
-        members() {
-            return this.$store.state.activeHousehold.members
         }
+        // members() {
+        //     return this.$store.state.activeHousehold.members
+        // }
     },
     mounted() {
         this.$store.dispatch('getHousehold', this.$route.params.id)
