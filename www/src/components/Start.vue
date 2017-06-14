@@ -52,7 +52,11 @@ export default {
   },
   methods: {
     createHousehold() {
-      this.$store.dispatch("createHousehold", { name: this.name, creatorId: this.creatorId })
+      this.$store.dispatch("createHousehold", { name: this.name, creatorId: this.creatorId})
+      this.addCreatorToMembers();
+    },
+    addCreatorToMembers() {
+      this.$store.dispatch('searchUsers', { user: this.user.name, householdId: this.$route.params.id})
     },
     householdFormToggle() {
       //  debugger

@@ -46,7 +46,6 @@ export default new Vuex.Store({
     setActiveHousehold(state, activeHousehold) {
       state.activeHousehold = activeHousehold
      //Vue.set(state, "activeHousehold", activeHousehold)
-     //console.log(state.activeHousehold)
     },
     setHouseholds(state, households) {
       state.households = households
@@ -58,7 +57,6 @@ export default new Vuex.Store({
       state.chores = chores
     },
     setHouseholdChores(state, chores){
-      //debugger
       //state.activeHousehold.choresList = chores;
       Vue.set(state.activeHousehold, "choresList", chores)
     },
@@ -105,13 +103,6 @@ export default new Vuex.Store({
           router.push('/')
         })
     },
-   // getUser({commit, dispatch}, user) {
-    //     api('user')
-    //     .then(res => {
-    //       commit('setUser', res.data.data)
-    //     })
-    //     .catch(handleError)
-    // },
     clearError({ commit, dispatch }) {
       commit('setError')
     },
@@ -153,6 +144,12 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
+    addCreatorToMembers({commit, dispatch}, user) {
+      api.post('addCreator', user)
+      .then(res => {
+
+      })
+    },
     createPrize({ commit, dispatch }, prize) {
       api.post('prize/', prize)
         .then(res => {
@@ -161,10 +158,8 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     addChoresToHousehold({commit, dispatch}, activeHousehold){
-    //  debugger
       api.put('households/' + activeHousehold._id + '/chores', activeHousehold.choresList)
         .then(res => {
-          //debugger
           commit('setHouseholdChores', activeHousehold.choresList)
           router.push('/households/' + activeHousehold._id)
         })
@@ -184,8 +179,7 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-    householdChores({commit, dispatch}, {chore, householdId})
-    {
+    householdChores({commit, dispatch}, {chore, householdId}){
       api.put('householdChores', {chore, householdId})
       .then(res => {
         commit('householdChores', chore)
