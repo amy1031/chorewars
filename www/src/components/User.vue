@@ -36,11 +36,17 @@ export default {
     methods:{
         addPointsToUser(chore) {
             //debugger
+            chore.completedBy = this.user._id;
             this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
             this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
+            this.householdChores(chore, this.activeHousehold._id)
+        },
+        householdChores(chore, householdId) {
+            //debugger
+            this.$store.dispatch('householdChores', {chore: chore, householdId: householdId})
         }
     },
     components:{}

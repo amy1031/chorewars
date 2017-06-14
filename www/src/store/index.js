@@ -65,6 +65,9 @@ export default new Vuex.Store({
     },
     addPointsToUser(state, chorePoints) {
       state.user.points += chorePoints
+    },
+    householdChores(state, chore) {
+      state.activeHousehold.choreLog.push(chore)
     }
   },
   actions: {
@@ -178,6 +181,14 @@ export default new Vuex.Store({
           commit('addPointsToUser', chorePoints)
         })
         .catch(handleError)
+    },
+    householdChores({commit, dispatch}, {chore, householdId})
+    {
+      api.put('householdChores', {chore, householdId})
+      .then(res => {
+        commit('householdChores', chore)
+      })
+      .catch(handleError)
     },
     searchUsers({commit, dispatch}, data){
       debugger

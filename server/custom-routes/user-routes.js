@@ -85,6 +85,27 @@ export default {
           }
         })
     }
+  },
+   householdChores: {
+    path: '/householdChores',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Update household Chore Log array'
+      Household.findOne({ _id: req.body.householdId })
+        .then(household => {
+          if (!household) {
+            res.sendStatus(404)({ error: "Household Not Found" })
+          } else {
+               household.choreLog.push(req.body.chore)
+               household.save(household).then(() => {
+                  res.send(handleResponse(action, req.body))
+                })
+              .catch(error => {
+                return next(handleResponse(action, null, error))
+              })
+          }
+        })
+    }
   }
 
 }
