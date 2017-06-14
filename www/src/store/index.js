@@ -45,7 +45,8 @@ export default new Vuex.Store({
     },
     setActiveHousehold(state, activeHousehold) {
       state.activeHousehold = activeHousehold
-      //Vue.set(state.activeHousehold, activeHousehold._id, activeHousehold)
+     //Vue.set(state, "activeHousehold", activeHousehold)
+     //console.log(state.activeHousehold)
     },
     setHouseholds(state, households) {
       state.households = households
@@ -58,7 +59,8 @@ export default new Vuex.Store({
     },
     setHouseholdChores(state, chores){
       //debugger
-      state.activeHousehold.choresList = chores;
+      //state.activeHousehold.choresList = chores;
+      Vue.set(state.activeHousehold, "choresList", chores)
     },
     addCompletedChore(state, chore){
       state.user.completedChores.push(chore)

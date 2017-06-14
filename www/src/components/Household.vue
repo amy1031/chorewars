@@ -16,7 +16,11 @@
         <hr>
         <h6>Household Completed Chores:</h6>
         <ul>
-            <li v-for='completed in this.allCompletedChores'>{{completed.name}}</li>
+            <li v-for='completed in completedChores'>{{completed.name}}</li>
+        </ul>
+        <h6>Household Members:</h6>
+        <ul>
+            <li v-for='member in members'>{{member.name}}</li>
         </ul>
     </div>
 </template>
@@ -30,7 +34,6 @@ export default {
             username: "",
             newSearch: false,
             addCollaboratorsButton: true,
-            allCompletedChores: this.$store.state.activeHousehold.choreLog
         }
     },
     computed: {
@@ -38,7 +41,13 @@ export default {
             return this.$store.state.activeHousehold
         },
         chores() {
-            return this.$store.state.activeHousehold.choresList
+            return this.$store.state.choreLog
+        },
+        completedChores() {
+            return this.$store.state.activeHousehold.choreLog
+        },
+        members() {
+            return this.$store.state.activeHousehold.members
         }
     },
     mounted() {
