@@ -59,7 +59,7 @@ export default {
     path: '/households/:householdId/chores',
     reqType: 'put',
     method(req, res, next){
-     // debugger
+     //
       let action = 'Updates the game chore list to the active household'
       Household.findById(req.params.householdId)
         .then(household =>{

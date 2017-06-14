@@ -28,7 +28,7 @@ export default {
             // Might need more validation to check if user is creator of household for stupid users
             Household.findById(req.body.householdId)
               .then(household => {
-                debugger
+
                 for (var i = 0; i < household.members.length; i++) {
                   var member = household.members[i];
                   if(member.email == user.email){
@@ -57,7 +57,6 @@ export default {
       let action = 'Update user object'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
-          //debugger
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
@@ -79,7 +78,7 @@ export default {
       let action = 'Update user object'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
-          //debugger
+          //
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
@@ -118,7 +117,7 @@ export default {
 
 }
 // router.post('/findUsers', (req, res) => {
-//   debugger
+//
 //   Users.findOne({userName: req.body.user})
 //     .then(user=>{
 //       if(!user){
