@@ -166,14 +166,14 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     completedChore({commit, dispatch}, {chore, userId}){
-      api.put('updateUser', {chore, userId})
+      api.put('updateUserChore', {chore, userId})
       .then(res => {
         commit('addCompletedChore', chore)
       })
         .catch(handleError)
     },
     addPointsToUser({commit, dispatch}, {chorePoints, userId}){
-        api.put('updateUser', {chorePoints, userId})
+        api.put('updateUserPoints', {chorePoints, userId})
         .then(res => {
           commit('addPointsToUser', chorePoints)
         })
