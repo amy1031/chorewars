@@ -23,7 +23,6 @@ let state = {
   activeHousehold: {},
   chores: {},
   prize: {}
-
 }
 
 let handleError = (err) => {
@@ -76,25 +75,14 @@ export default new Vuex.Store({
           if (res.data.error) {
             return handleError(res.data.error)
           }
-
-
         })
         .catch(handleError)
     },
-
     login({ commit, dispatch }, user) {
       auth.post('login', user)
       .then( res => {
         commit('setUser', res.data.data)
         router.push('/start')
-
-      //   if (state.user === null) {
-      //       router.push('/')
-      //     }else{
-      //       router.push('/start')
-      //     }
-      // }) .catch(err => {
-      //     router.push('/login')
         })
         .catch(handleError)
     },
@@ -111,7 +99,6 @@ export default new Vuex.Store({
         }).catch(err => {
           router.push('/')
         })
-
     },
    // getUser({commit, dispatch}, user) {
     //     api('user')
@@ -152,7 +139,6 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-
     createHousehold({ commit, dispatch }, household) {
      // debugger
       api.post('households', household)

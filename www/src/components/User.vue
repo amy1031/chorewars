@@ -4,7 +4,7 @@
         <h4>User: {{user.name}}</h4>
         <h5>Points: {{user.points}}</h5>
         <hr>
-        <h6>Possible Chores to Complete:</h6>
+        <h6>Chores to Complete:</h6>
         <ul>
             <li v-for='chore in this.choresList'>{{chore.name}} <button class="delete" @click="addPointsToUser(chore)">✔</button></li>
         </ul>
