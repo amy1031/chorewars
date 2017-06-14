@@ -11,7 +11,8 @@
         </div>
 
         {{activeHousehold.name}}<br>
-        <router-link :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
+        <router-link :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link><br>
+        <router-link :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
     </div>
 </template>
 
