@@ -49,6 +49,29 @@ export default {
         })
     }
   },
+  addCreatorToHousehold: {
+    path: '/addCreator',
+    reqType: 'post',
+    method(req, res, next) {
+    // debugger
+      let action = 'Add creator to newly created household'
+      Users.findOne({ name: req.body.name })
+        .then(user => {
+        //  debugger
+            Household.findOne({ creatorId: req.body._id })
+              .then(household => {
+               // debugger
+                    household.members.push(user)
+                    household.save(household).then(() => {
+                    res.send(handleResponse(action, req.body))
+              })
+              .catch(error => {
+                return next(handleResponse(action, null, error))
+              })
+        })
+        })
+    }
+  },
     updateUserPoints: {
     path: '/updateUserPoints',
     reqType: 'put',

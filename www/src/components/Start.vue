@@ -56,7 +56,8 @@ export default {
       this.addCreatorToMembers();
     },
     addCreatorToMembers() {
-      this.$store.dispatch('searchUsers', { user: this.user.name, householdId: this.$route.params.id})
+      //debugger
+      this.$store.dispatch('addCreatorToMembers', this.user)
     },
     householdFormToggle() {
       //  debugger
