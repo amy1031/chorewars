@@ -8,7 +8,7 @@
 
     <h1>{{ msg }}</h1>
     <router-link to="/login">Login</router-link>
-    </button>
+    <router-link to='/register'>Register</router-link>
   </div>
 </template>
 
