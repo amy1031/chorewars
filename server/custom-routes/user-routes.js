@@ -28,7 +28,6 @@ export default {
             // Might need more validation to check if user is creator of household for stupid users
             Household.findById(req.body.householdId)
               .then(household => {
-
                 for (var i = 0; i < household.members.length; i++) {
                   var member = household.members[i];
                   if(member.email == user.email){

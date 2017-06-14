@@ -34,13 +34,14 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user
+      router.push('/start')
     },
     setError(state) {
       state.error = {}
     },
     setLogin(state, user) {
       state.user = user
-      //LETS REDIRECT THE PAGE
+      router.push('/start')
     },
     setActiveHousehold(state, activeHousehold) {
       state.activeHousehold = activeHousehold
@@ -146,7 +147,7 @@ export default new Vuex.Store({
     addCreatorToMembers({commit, dispatch}, user) {
       api.post('addCreator', user)
       .then(res => {
-          
+
       })
     },
     createPrize({ commit, dispatch }, prize) {
