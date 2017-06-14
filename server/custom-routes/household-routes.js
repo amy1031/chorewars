@@ -66,8 +66,8 @@ export default {
           household.choresList = req.body
           household.save(household).then(() =>{
             res.send(handleResponse(action, req.body))
-          })  
-          
+          })
+
         })
         .catch(error => {
           return next(handleResponse(action, null, error))
