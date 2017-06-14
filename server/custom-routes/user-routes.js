@@ -15,7 +15,6 @@ export default {
         })
     }
   },
-
   findUsersByName: {
     path: '/findUsers',
     reqType: 'post',

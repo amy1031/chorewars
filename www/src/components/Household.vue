@@ -40,9 +40,6 @@ export default {
         activeHousehold() {
             return this.$store.state.activeHousehold
         },
-        chores() {
-            return this.$store.state.choreLog
-        },
         completedChores() {
             return this.$store.state.activeHousehold.choreLog
         },
