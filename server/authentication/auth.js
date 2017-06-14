@@ -3,7 +3,6 @@ let Users = require('../models/user')
 let Household = require('../models/household')
 
 router.post('/register', (req, res) => {
-  debugger
   Users.create(req.body)
     .then((user) => {
       req.session.uid = user._id
@@ -19,18 +18,6 @@ router.post('/register', (req, res) => {
       res.send({ error: err })
     })
 }),
-
-// router.post('/findUsers', (req, res) => {
-//   debugger
-//   Users.findOne({userName: req.body.user})
-//     .then(user=>{
-//       if(!user){
-//         res.sendStatus(404)({error: "User Not Found"})
-//       }else{
-//         Household.findByIdAndUpdate
-//       }
-//     })
-// })
 
 
 router.post('/login', (req, res) => {

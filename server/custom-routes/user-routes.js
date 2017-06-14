@@ -30,10 +30,19 @@ export default {
             Household.findById(req.body.householdId)
               .then(household => {
                 debugger
-                household.members.push(user)
-                household.save(household).then(() => {
-                  res.send(handleResponse(action, req.body))
-                })
+                for (var i = 0; i < household.members.length; i++) {
+                  var member = household.members[i];
+                  if(member.email == user.email){
+                    res.send(handleResponse(action, "User is already part of the household"))
+                    return;
+                  }
+                }
+                if(true){
+                    household.members.push(user)
+                    household.save(household).then(() => {
+                    res.send(handleResponse(action, req.body))
+                  })
+                }
               })
               .catch(error => {
                 return next(handleResponse(action, null, error))
