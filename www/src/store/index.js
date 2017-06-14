@@ -23,7 +23,6 @@ let state = {
   activeHousehold: {},
   chores: {},
   prize: {}
-
 }
 
 let handleError = (err) => {
@@ -58,7 +57,7 @@ export default new Vuex.Store({
       state.chores = chores
     },
     setHouseholdChores(state, chores){
-      debugger
+      //debugger
       state.activeHousehold.choresList = chores;
     },
     addCompletedChore(state, chore){
@@ -66,6 +65,9 @@ export default new Vuex.Store({
     },
     addPointsToUser(state, chorePoints) {
       state.user.points += chorePoints
+    },
+    householdChores(state, chore) {
+      state.activeHousehold.choreLog.push(chore)
     }
   },
   actions: {
@@ -76,25 +78,14 @@ export default new Vuex.Store({
           if (res.data.error) {
             return handleError(res.data.error)
           }
-
-
         })
         .catch(handleError)
     },
-
     login({ commit, dispatch }, user) {
       auth.post('login', user)
       .then( res => {
         commit('setUser', res.data.data)
         router.push('/start')
-
-      //   if (state.user === null) {
-      //       router.push('/')
-      //     }else{
-      //       router.push('/start')
-      //     }
-      // }) .catch(err => {
-      //     router.push('/login')
         })
         .catch(handleError)
     },
@@ -111,7 +102,6 @@ export default new Vuex.Store({
         }).catch(err => {
           router.push('/')
         })
-
     },
    // getUser({commit, dispatch}, user) {
     //     api('user')
@@ -152,7 +142,6 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-
     createHousehold({ commit, dispatch }, household) {
      // debugger
       api.post('households', household)
@@ -180,18 +169,26 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     completedChore({commit, dispatch}, {chore, userId}){
-      auth.put('updateUser', chore)
+      api.put('updateUserChore', {chore, userId})
       .then(res => {
         commit('addCompletedChore', chore)
       })
         .catch(handleError)
     },
     addPointsToUser({commit, dispatch}, {chorePoints, userId}){
-        auth.put('updateUser', chorePoints)
+        api.put('updateUserPoints', {chorePoints, userId})
         .then(res => {
           commit('addPointsToUser', chorePoints)
         })
         .catch(handleError)
+    },
+    householdChores({commit, dispatch}, {chore, householdId})
+    {
+      api.put('householdChores', {chore, householdId})
+      .then(res => {
+        commit('householdChores', chore)
+      })
+      .catch(handleError)
     },
     searchUsers({commit, dispatch}, data){
       debugger

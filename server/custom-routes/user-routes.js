@@ -49,24 +49,64 @@ export default {
               })
           }
         })
-
-
-
     }
   },
-    updateUser: {
-    path: '/updateUser',
+    updateUserPoints: {
+    path: '/updateUserPoints',
     reqType: 'put',
     method(req, res, next) {
-      debugger
       let action = 'Update user object'
-      Users.findById(req.body.userId)
+      Users.findOne({ _id: req.body.userId })
         .then(user => {
+          //debugger
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-               user.points += chorePoints
+               user.points += req.body.chorePoints
                user.save(user).then(() => {
+                  res.send(handleResponse(action, req.body))
+                })
+              .catch(error => {
+                return next(handleResponse(action, null, error))
+              })
+          }
+        })
+    }
+  },
+  updateUserChore: {
+    path: '/updateUserChore',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Update user object'
+      Users.findOne({ _id: req.body.userId })
+        .then(user => {
+          //debugger
+          if (!user) {
+            res.sendStatus(404)({ error: "User Not Found" })
+          } else {
+               user.completedChores.push(req.body.chore)
+               user.save(user).then(() => {
+                  res.send(handleResponse(action, req.body))
+                })
+              .catch(error => {
+                return next(handleResponse(action, null, error))
+              })
+          }
+        })
+    }
+  },
+   householdChores: {
+    path: '/householdChores',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Update household Chore Log array'
+      Household.findOne({ _id: req.body.householdId })
+        .then(household => {
+          if (!household) {
+            res.sendStatus(404)({ error: "Household Not Found" })
+          } else {
+               household.choreLog.push(req.body.chore)
+               household.save(household).then(() => {
                   res.send(handleResponse(action, req.body))
                 })
               .catch(error => {
