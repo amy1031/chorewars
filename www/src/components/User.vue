@@ -42,7 +42,7 @@ export default {
         },
         completedChore(chore) {
             debugger
-            this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id, householdId: this.activeHousehold._id})
+            this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
             this.householdChores(chore, this.activeHousehold._id)
         },
         householdChores(chore, householdId) {
