@@ -60,8 +60,18 @@ export default new Vuex.Store({
       //state.activeHousehold.choresList = chores;
       Vue.set(state.activeHousehold, "choresList", chores)
     },
-    addCompletedChore(state, chore){
+    setMembers(state, household){
       debugger
+      //state.activeHousehold.choresList = chores;
+      Vue.set(state.activeHousehold, "members", household.members)
+    },
+    addCompletedChore(state, chore){
+      //debugger
+      state.user.completedChores.push(chore)
+    },
+    memberCompletedChore(state, chore){
+      debugger
+<<<<<<< HEAD
       if(!state.user.completedChores[state.activeHousehold._id]){
         state.user.completedChores[state.activeHousehold._id] = []
         state.user.completedChores[state.activeHousehold._id].push(chore)
@@ -69,6 +79,9 @@ export default new Vuex.Store({
         state.user.completedChores[state.activeHousehold._id].push(chore)
       }
 
+=======
+      state.activeHousehold.members[0].completedChores.push(chore)
+>>>>>>> ce41e84b815bda684d2507c5675e8bb949850c5c
     },
     addPointsToUser(state, chorePoints) {
       state.user.points += chorePoints
@@ -128,6 +141,13 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
+    getMembers({ commit, dispatch }, id) {
+      api('households/' + id)
+        .then(res => {
+          commit('setMembers', res.data.data)
+        })
+        .catch(handleError)
+    },
     getPrize({ commit, dispatch }, prize) {
       api('households/' + prize.householdId + "/prize/" + prize._id)
         .then(res => {
@@ -177,6 +197,14 @@ export default new Vuex.Store({
       .then(res => {
         debugger
         commit('addCompletedChore', chore)
+      })
+        .catch(handleError)
+    },
+    memberCompletedChore({commit, dispatch}, {chore, householdId}){
+      api.put('memberCompletedChore', {chore, householdId})
+      .then(res => {
+        debugger
+        commit('memberCompletedChore', chore)
       })
         .catch(handleError)
     },

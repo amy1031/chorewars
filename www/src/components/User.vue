@@ -47,7 +47,12 @@ export default {
         householdChores(chore, householdId) {
             //debugger
             this.$store.dispatch('householdChores', {chore: chore, householdId: householdId})
-        }
+            this.memberCompletedChore(chore, this.activeHousehold._id)
+        },
+        memberCompletedChore(chore, householdId) {
+            debugger
+            this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
+        },
     },
     components:{}
 }

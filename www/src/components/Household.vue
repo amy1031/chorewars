@@ -42,6 +42,9 @@ export default {
         },
         completedChores() {
             return this.$store.state.activeHousehold.choreLog
+        },
+        user(){
+            return this.$store.state.user
         }
         // members() {
         //     return this.$store.state.activeHousehold.members
@@ -49,6 +52,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('getHousehold', this.$route.params.id)
+        this.$store.dispatch('getMembers', this.$route.params.id)
     },
     methods: {
         searchFormToggle() {
