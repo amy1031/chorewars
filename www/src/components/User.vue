@@ -50,9 +50,9 @@ export default {
             this.memberCompletedChore(chore, this.activeHousehold._id)
         },
         memberCompletedChore(chore, householdId) {
-            debugger
+           // debugger
             this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
-        },
+        }
     },
     components:{}
 }

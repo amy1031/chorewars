@@ -49,6 +49,40 @@ export default {
         })
     }
   },
+    updateHouseholdMemberChore: {
+    path: '/updateMemberChore',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Update member completed chore list in active household'
+      Users.findOne({ name: req.body.user })
+        .then(user => {
+          if (!user) {
+            res.sendStatus(404)({ error: "User Not Found" })
+          } else {
+            // Might need more validation to check if user is creator of household for stupid users
+            Household.findById(req.body.householdId)
+              .then(household => {
+                for (var i = 0; i < household.members.length; i++) {
+                  var member = household.members[i];
+                  if(member.email == user.email){
+                    res.send(handleResponse(action, "User is already part of the household"))
+                    return;
+                  }
+                }
+                if(true){
+                    household.members.push(user)
+                    household.save(household).then(() => {
+                    res.send(handleResponse(action, req.body))
+                  })
+                }
+              })
+              .catch(error => {
+                return next(handleResponse(action, null, error))
+              })
+          }
+        })
+    }
+  },
   addCreatorToHousehold: {
     path: '/addCreator',
     reqType: 'post',
