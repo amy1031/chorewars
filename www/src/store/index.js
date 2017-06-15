@@ -70,17 +70,13 @@ export default new Vuex.Store({
       state.user.completedChores.push(chore)
     },
     memberCompletedChore(state, chore){
-      //debugger
-      // if(!state.user.completedChores[state.activeHousehold._id]){
-      //   state.user.completedChores[state.activeHousehold._id] = []
-      //   state.user.completedChores[state.activeHousehold._id].push(chore)
-      // }else{
-      //   state.user.completedChores[state.activeHousehold._id].push(chore)
-      // }
-
+        state.user.completedChores.push(chore)
     },
     addPointsToUser(state, chorePoints) {
+      debugger
       state.user.points += chorePoints
+      // state.user.points[this.activeHousehold._id] += chorePoints
+      //Added points so they live on the household they were earned on!
     },
     householdChores(state, chore) {
       state.activeHousehold.choreLog.push(chore)

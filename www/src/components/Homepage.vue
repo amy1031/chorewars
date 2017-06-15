@@ -1,10 +1,5 @@
 <template>
   <div class="homepage">
-    <nav class="navbar fixed-top navbar-light bg-faded">
-      <a class="navbar-brand" href="">
-        <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Bootstrap
-      </a>
-    </nav>
 
     <h1>{{ msg }}</h1>
     <router-link to="/login">Login</router-link>

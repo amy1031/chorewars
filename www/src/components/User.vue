@@ -10,7 +10,7 @@
         </ul>
         <h6>Completed:</h6>
         <ul>
-            <li v-for='done in this.completedChores'>{{done.name}}</li>
+            <li v-if="" v-for='done in this.completedChores'>{{done.name}}</li>
         </ul>
     </div>
 </template>
