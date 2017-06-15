@@ -42,13 +42,14 @@ export default {
         },
         completedChores() {
             return this.$store.state.activeHousehold.choreLog
-        }
+        },
         // members() {
         //     return this.$store.state.activeHousehold.members
         // }
     },
     mounted() {
         this.$store.dispatch('getHousehold', this.$route.params.id)
+        this.$store.dispatch('getMembers', this.$route.params.id)
     },
     methods: {
         searchFormToggle() {

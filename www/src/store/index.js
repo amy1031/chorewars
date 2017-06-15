@@ -60,9 +60,13 @@ export default new Vuex.Store({
       //state.activeHousehold.choresList = chores;
       Vue.set(state.activeHousehold, "choresList", chores)
     },
+    setMembers(state, household){
+      //state.activeHousehold.choresList = chores;
+      Vue.set(state.activeHousehold, "members", household.members)
+    },
     addCompletedChore(state, chore){
-      debugger
-      state.user.completedChores[state.activeHousehold._id].push(chore)
+      //debugger
+      state.user.completedChores.push(chore)
     },
     addPointsToUser(state, chorePoints) {
       state.user.points += chorePoints
@@ -119,6 +123,13 @@ export default new Vuex.Store({
       api('households/' + id)
         .then(res => {
           commit('setActiveHousehold', res.data.data)
+        })
+        .catch(handleError)
+    },
+    getMembers({ commit, dispatch }, id) {
+      api('households/' + id)
+        .then(res => {
+          commit('setMembers', res.data.data)
         })
         .catch(handleError)
     },
