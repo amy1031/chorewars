@@ -71,7 +71,6 @@ export default new Vuex.Store({
     },
     memberCompletedChore(state, chore){
       debugger
-<<<<<<< HEAD
       if(!state.user.completedChores[state.activeHousehold._id]){
         state.user.completedChores[state.activeHousehold._id] = []
         state.user.completedChores[state.activeHousehold._id].push(chore)
@@ -79,9 +78,6 @@ export default new Vuex.Store({
         state.user.completedChores[state.activeHousehold._id].push(chore)
       }
 
-=======
-      state.activeHousehold.members[0].completedChores.push(chore)
->>>>>>> ce41e84b815bda684d2507c5675e8bb949850c5c
     },
     addPointsToUser(state, chorePoints) {
       state.user.points += chorePoints
