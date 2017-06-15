@@ -31,7 +31,7 @@ export default {
         },
         activeHousehold() {
             return this.$store.state.activeHousehold
-        } 
+        }
     },
     methods:{
         addPointsToUser(chore) {
@@ -41,7 +41,8 @@ export default {
             this.completedChore(chore)
         },
         completedChore(chore) {
-            this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
+            debugger
+            this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id, householdId: this.activeHousehold._id})
             this.householdChores(chore, this.activeHousehold._id)
         },
         householdChores(chore, householdId) {
