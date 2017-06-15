@@ -41,7 +41,6 @@ export default {
             this.completedChore(chore)
         },
         completedChore(chore) {
-            debugger
             this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
             this.householdChores(chore, this.activeHousehold._id)
         },
