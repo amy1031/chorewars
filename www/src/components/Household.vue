@@ -43,6 +43,9 @@ export default {
         completedChores() {
             return this.$store.state.activeHousehold.choreLog
         },
+        user(){
+            return this.$store.state.user
+        }
         // members() {
         //     return this.$store.state.activeHousehold.members
         // }
