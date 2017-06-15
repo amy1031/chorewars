@@ -10,7 +10,7 @@
         </ul>
         <h6>Completed:</h6>
         <ul>
-            <li v-for='done in this.completedChores'>{{done.name}}</li>
+            <li v-if="" v-for='done in this.completedChores'>{{done.name}}</li>
         </ul>
     </div>
 </template>
@@ -47,12 +47,7 @@ export default {
         householdChores(chore, householdId) {
             //debugger
             this.$store.dispatch('householdChores', {chore: chore, householdId: householdId})
-            this.memberCompletedChore(chore, this.activeHousehold._id)
-        },
-        memberCompletedChore(chore, householdId) {
-            debugger
-            this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
-        },
+        }
     },
     components:{}
 }
