@@ -56,7 +56,7 @@ export default {
       let action = 'Update member completed chore list in active household'
       Household.findOne({ _id: req.body.householdId })
         .then(household => {
-          debugger
+        //  debugger
           for (var i = 0; i < household.members.length; i++) {
             var member = household.members[i];
             if (member._id == req.body.chore.completedBy) {
@@ -97,7 +97,7 @@ export default {
     path: '/updateUserPoints',
     reqType: 'put',
     method(req, res, next) {
-      debugger
+     // debugger
       let action = 'Update user object'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
@@ -106,9 +106,16 @@ export default {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
             var householdId = req.body.householdId
-            user.points[householdId].value += req.body.chorePoints
+            var newPoints = req.body.chorePoints;
+            if(user.points[householdId]) {
+            var oldPoints = user.points[householdId];
+            var updatedPoints = newPoints + oldPoints
+            user.points[householdId] = updatedPoints
+            }else{
+              user.points[householdId] = newPoints
+            }
             user.save(user).then(() => {
-              res.send(handleResponse(action, req.body))
+              res.send(handleResponse(action, user))
             })
               .catch(error => {
                 return next(handleResponse(action, null, error))

@@ -35,13 +35,14 @@ export default {
     },
     methods:{
         addPointsToUser(chore) {
-            debugger
+           // debugger
             chore.householdId = this.activeHousehold._id
             chore.completedBy = this.user._id;
             this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
+            debugger
             this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
             this.householdChores(chore, this.activeHousehold._id)
         },
@@ -51,7 +52,7 @@ export default {
             this.memberCompletedChore(chore, this.activeHousehold._id)
         },
         memberCompletedChore(chore, householdId) {
-            debugger
+           // debugger
             this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
         }
     },
