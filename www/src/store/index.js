@@ -61,19 +61,19 @@ export default new Vuex.Store({
       Vue.set(state.activeHousehold, "choresList", chores)
     },
     setMembers(state, household){
-      debugger
+     //debugger
       //state.activeHousehold.choresList = chores;
       Vue.set(state.activeHousehold, "members", household.members)
     },
     addCompletedChore(state, chore){
-      debugger
+     // debugger
       state.user.completedChores.push(chore)
     },
     memberCompletedChore(state, chore){
         state.user.completedChores.push(chore)
     },
     addPointsToUser(state, chore) {
-      debugger
+      //debugger
 
       // var newPoints = chore.chorePoints;
       //     if(state.user.points[chore.householdId]) {
@@ -84,7 +84,7 @@ export default new Vuex.Store({
       //         state.user.points[chore.householdId] = newPoints
       //       }
 
-     state.user.points[chore.householdId] = chore.chorePoints
+     state.user.points[chore.householdId] += chore.chorePoints
       // state.user.points[this.activeHousehold._id] += chorePoints
       //Added points so they live on the household they were earned on!
     },
@@ -174,7 +174,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     addCreatorToMembers({commit, dispatch}, user) {
-      debugger
+    //  debugger
       api.post('addCreator', user)
       .then(res => {
 
@@ -203,7 +203,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     memberCompletedChore({commit, dispatch}, {chore, householdId}){
-      debugger
+     // debugger
       api.put('updateMemberChore', {chore, householdId})
       .then(res => {
         commit('memberCompletedChore', chore)
@@ -213,7 +213,7 @@ export default new Vuex.Store({
     addPointsToUser({commit, dispatch}, {chorePoints, userId, householdId}){
         api.put('updateUserPoints', {chorePoints, userId, householdId})
         .then(res => {
-          debugger
+         // debugger
           commit('addPointsToUser', {chorePoints, householdId})
         })
         .catch(handleError)
