@@ -34,6 +34,11 @@ schema.pre('save', function (next) {
   });
 });
 
+schema.post("save", function(err, user, next) {
+  console.log("error?", error)
+  next()
+})
+
 schema.methods.validatePassword = function (password) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, this.password, function (err, isMatch) {

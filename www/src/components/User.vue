@@ -2,7 +2,7 @@
     <div class="user">
         <h3>Household: {{activeHousehold.name}}</h3>
         <h4>User: {{user.name}}</h4>
-        <h5>Points: {{user.points}}</h5>
+        <h5>Points: {{user.points[this.activeHousehold._id]}}</h5>
         <hr>
         <h6>Chores to Complete:</h6>
         <ul>

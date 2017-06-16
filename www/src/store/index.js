@@ -75,16 +75,16 @@ export default new Vuex.Store({
     addPointsToUser(state, chore) {
       debugger
 
-      var newPoints = chore.chorePoints;
-          if(state.user.points[chore.householdId]) {
-            var oldPoints = state.user.points[chore.householdId];
-            var updatedPoints = newPoints + oldPoints
-            state.user.points[chore.householdId] = updatedPoints
-            }else{
-              state.user.points[chore.householdId] = newPoints
-            }
+      // var newPoints = chore.chorePoints;
+      //     if(state.user.points[chore.householdId]) {
+      //       var oldPoints = state.user.points[chore.householdId];
+      //       var updatedPoints = newPoints + oldPoints
+      //       state.user.points[chore.householdId] = updatedPoints
+      //       }else{
+      //         state.user.points[chore.householdId] = newPoints
+      //       }
 
-     // state.user.points[chore.householdId] += chore.chorePoints
+     state.user.points[chore.householdId] = chore.chorePoints
       // state.user.points[this.activeHousehold._id] += chorePoints
       //Added points so they live on the household they were earned on!
     },
