@@ -174,6 +174,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     addCreatorToMembers({commit, dispatch}, user) {
+      debugger
       api.post('addCreator', user)
       .then(res => {
 
@@ -232,11 +233,11 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-    logout({commit, dispatch}){
+    logout({commit, dispatch}, user){
       debugger
-      auth.delete('logout')
+      auth.delete('logout', user)
         .then(res => {
-          console.log(res)
+          router.push('/')
         })
         .catch(handleError)
     }

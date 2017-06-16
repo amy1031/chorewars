@@ -2,8 +2,8 @@
   <div class="navbar">
     <nav class="navbar fixed-top navbar-light bg-faded">
       <a class="navbar-brand" href="">
-        <img src="" width="30" height="30" class="d-inline-block align-top" alt=""> Bootstrap
-        <button type="button" class="btn btn-outline-danger" @click="logout">Logout</button>
+        <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Bootstrap
+        <button type="button" class="btn btn-outline-danger" @click.preventDefault="logout(user)">Logout</button>
       </a>
     </nav>
   </div>
@@ -24,12 +24,15 @@ export default {
   },
 
   computed:{
-
+    user(){
+      return this.$store.state.user
     },
+
+  },
   methods:{
     logout(){
       debugger
-      this.$store.dispatch('logout')
+      this.$store.dispatch('logout', this.user)
     }
   },
   components:{}
