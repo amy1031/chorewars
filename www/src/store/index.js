@@ -44,9 +44,14 @@ export default new Vuex.Store({
       router.push('/start')
     },
     setActiveHousehold(state, activeHousehold) {
+<<<<<<< HEAD
       debugger
       state.activeHousehold = activeHousehold
      //Vue.set(state, "activeHousehold", activeHousehold)
+=======
+      //state.activeHousehold = activeHousehold
+     Vue.set(state, "activeHousehold", activeHousehold)
+>>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
     },
     setHouseholds(state, households) {
       state.households = households
@@ -73,8 +78,24 @@ export default new Vuex.Store({
     memberCompletedChore(state, chore){
         state.user.completedChores.push(chore)
     },
+<<<<<<< HEAD
     addPointsToUser(state, chorePoints) {
       state.user.points += chorePoints
+=======
+    addPointsToUser(state, chore) {
+      debugger
+
+      // var newPoints = chore.chorePoints;
+      //     if(state.user.points[chore.householdId]) {
+      //       var oldPoints = state.user.points[chore.householdId];
+      //       var updatedPoints = newPoints + oldPoints
+      //       state.user.points[chore.householdId] = updatedPoints
+      //       }else{
+      //         state.user.points[chore.householdId] = newPoints
+      //       }
+
+     state.user.points[chore.householdId] = chore.chorePoints
+>>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
       // state.user.points[this.activeHousehold._id] += chorePoints
       //Added points so they live on the household they were earned on!
     },
@@ -187,21 +208,32 @@ export default new Vuex.Store({
     completedChore({commit, dispatch}, {chore, userId}){
       api.put('updateUserChore', {chore, userId})
       .then(res => {
+<<<<<<< HEAD
         commit('addCompletedChore', chore)
+=======
+        // debugger
+        // commit('addCompletedChore', chore)
+>>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
       })
         .catch(handleError)
     },
     memberCompletedChore({commit, dispatch}, {chore, householdId}){
-      api.put('memberCompletedChore', {chore, householdId})
+      debugger
+      api.put('updateMemberChore', {chore, householdId})
       .then(res => {
+<<<<<<< HEAD
+=======
+       // debugger
+>>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
         commit('memberCompletedChore', chore)
       })
         .catch(handleError)
     },
-    addPointsToUser({commit, dispatch}, {chorePoints, userId}){
-        api.put('updateUserPoints', {chorePoints, userId})
+    addPointsToUser({commit, dispatch}, {chorePoints, userId, householdId}){
+        api.put('updateUserPoints', {chorePoints, userId, householdId})
         .then(res => {
-          commit('addPointsToUser', chorePoints)
+          debugger
+          commit('addPointsToUser', {chorePoints, householdId})
         })
         .catch(handleError)
     },

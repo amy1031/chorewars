@@ -9,7 +9,7 @@ let schema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true, dropDups: true },
   password: { type: String, required: true },
-	points: { type: Number , default: 0},
+	points: { type: Object, default: {} },
 	isWinner: { type: Boolean, default: false },
   completedChores: { type: Array },
   created: { type: Number, required: true, default: Date.now() },
@@ -33,6 +33,11 @@ schema.pre('save', function (next) {
     }
   });
 });
+
+schema.post("save", function(err, user, next) {
+  console.log("error?", error)
+  next()
+})
 
 schema.methods.validatePassword = function (password) {
   return new Promise((resolve, reject) => {

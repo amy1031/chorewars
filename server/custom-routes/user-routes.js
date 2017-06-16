@@ -30,14 +30,14 @@ export default {
               .then(household => {
                 for (var i = 0; i < household.members.length; i++) {
                   var member = household.members[i];
-                  if(member.email == user.email){
+                  if (member.email == user.email) {
                     res.send(handleResponse(action, "User is already part of the household"))
                     return;
                   }
                 }
-                if(true){
-                    household.members.push(user)
-                    household.save(household).then(() => {
+                if (true) {
+                  household.members.push(user)
+                  household.save(household).then(() => {
                     res.send(handleResponse(action, req.body))
                   })
                 }
@@ -49,43 +49,71 @@ export default {
         })
     }
   },
+  updateHouseholdMemberChore: {
+    path: '/updateMemberChore',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Update member completed chore list in active household'
+      Household.findOne({ _id: req.body.householdId })
+        .then(household => {
+          //  debugger
+          for (var i = 0; i < household.members.length; i++) {
+            var member = household.members[i];
+            if (member._id == req.body.chore.completedBy) {
+              member.completedChores.push(req.body.chore)
+              res.send(handleResponse(action, member))
+            }
+          }
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
   addCreatorToHousehold: {
     path: '/addCreator',
     reqType: 'post',
     method(req, res, next) {
-    // debugger
+      // debugger
       let action = 'Add creator to newly created household'
       Users.findOne({ name: req.body.name })
         .then(user => {
-        //  debugger
-            Household.findOne({ creatorId: req.body._id })
-              .then(household => {
-               // debugger
-                    household.members.push(user)
-                    household.save(household).then(() => {
-                    res.send(handleResponse(action, req.body))
+          //  debugger
+          Household.findOne({ creatorId: req.body._id })
+            .then(household => {
+              // debugger
+              household.members.push(user)
+              household.save(household).then(() => {
+                res.send(handleResponse(action, req.body))
               })
-              .catch(error => {
-                return next(handleResponse(action, null, error))
-              })
-        })
+                .catch(error => {
+                  return next(handleResponse(action, null, error))
+                })
+            })
         })
     }
   },
-    updateUserPoints: {
+  updateUserPoints: {
     path: '/updateUserPoints',
     reqType: 'put',
     method(req, res, next) {
+      // debugger
       let action = 'Update user object'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
+          // debugger
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-               user.points += req.body.chorePoints
-               user.save(user).then(() => {
-                  res.send(handleResponse(action, req.body))
-                })
+            var householdId = req.body.householdId
+            var points = req.body.chorePoints || 0
+            var newPoints = Object.assign({}, user.points)
+            newPoints[householdId] = user.points[householdId] ? user.points[householdId] + points : points
+            Users.update({ _id: user._id }, { $set: { points: newPoints } }).then(() => {
+              user.points = newPoints
+              console.log('The User Points', user.points)
+              res.send(handleResponse(action, user))
+            })
               .catch(error => {
                 return next(handleResponse(action, null, error))
               })
@@ -104,10 +132,10 @@ export default {
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-               user.completedChores.push(req.body.chore)
-               user.save(user).then(() => {
-                  res.send(handleResponse(action, req.body))
-                })
+            user.completedChores.push(req.body.chore)
+            user.save(user).then(() => {
+              res.send(handleResponse(action, req.body))
+            })
               .catch(error => {
                 return next(handleResponse(action, null, error))
               })
@@ -115,7 +143,7 @@ export default {
         })
     }
   },
-   householdChores: {
+  householdChores: {
     path: '/householdChores',
     reqType: 'put',
     method(req, res, next) {
@@ -125,10 +153,10 @@ export default {
           if (!household) {
             res.sendStatus(404)({ error: "Household Not Found" })
           } else {
-               household.choreLog.push(req.body.chore)
-               household.save(household).then(() => {
-                  res.send(handleResponse(action, req.body))
-                })
+            household.choreLog.push(req.body.chore)
+            household.save(household).then(() => {
+              res.send(handleResponse(action, req.body))
+            })
               .catch(error => {
                 return next(handleResponse(action, null, error))
               })

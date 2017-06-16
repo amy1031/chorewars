@@ -2,7 +2,7 @@
     <div class="user">
         <h3>Household: {{activeHousehold.name}}</h3>
         <h4>User: {{user.name}}</h4>
-        <h5>Points: {{user.points}}</h5>
+        <h5>Points: {{user.points[this.activeHousehold._id]}}</h5>
         <hr>
         <h6>Chores to Complete:</h6>
         <ul>
@@ -43,19 +43,32 @@ export default {
     },
     methods:{
         addPointsToUser(chore) {
+<<<<<<< HEAD
+=======
+           // debugger
+            chore.householdId = this.activeHousehold._id
+>>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
             chore.completedBy = this.user._id;
-            this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id})
+            this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
             debugger
+<<<<<<< HEAD
             chore.householdId = this.activeHousehold._id
+=======
+>>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
             this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
             this.householdChores(chore, this.activeHousehold._id)
         },
         householdChores(chore, householdId) {
             //debugger
             this.$store.dispatch('householdChores', {chore: chore, householdId: householdId})
+            this.memberCompletedChore(chore, this.activeHousehold._id)
+        },
+        memberCompletedChore(chore, householdId) {
+           // debugger
+            this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
         }
     },
     components:{}

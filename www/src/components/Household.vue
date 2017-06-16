@@ -52,7 +52,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('getHousehold', this.$route.params.id)
-        this.$store.dispatch('getMembers', this.$route.params.id)
+      //  this.$store.dispatch('getMembers', this.$route.params.id)
     },
     methods: {
         searchFormToggle() {
