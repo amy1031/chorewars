@@ -97,13 +97,16 @@ export default {
     path: '/updateUserPoints',
     reqType: 'put',
     method(req, res, next) {
+      debugger
       let action = 'Update user object'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
+          debugger
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-            user.points += req.body.chorePoints
+            var householdId = req.body.householdId
+            user.points[householdId].value += req.body.chorePoints
             user.save(user).then(() => {
               res.send(handleResponse(action, req.body))
             })

@@ -38,7 +38,7 @@ export default {
             debugger
             chore.householdId = this.activeHousehold._id
             chore.completedBy = this.user._id;
-            this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id})
+            this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
