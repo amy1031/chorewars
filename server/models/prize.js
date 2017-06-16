@@ -7,7 +7,7 @@ var schema = new mongoose.Schema({
   created: { type: Number, default: Date.now() },
   creatorId: {type: ObjectId, ref: models.user.name, required: true},
   // Relations
-	householdId: { type: ObjectId, ref: models.household.name, required: true},
+	householdId: { type: ObjectId, ref: models.household.name, required: true}
 });
 
 module.exports = mongoose.model(models.prize.name, schema);

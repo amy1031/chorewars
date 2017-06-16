@@ -7,7 +7,8 @@ var schema = new mongoose.Schema({
   points: { type: Number, default: 1, required: true },
   completedBy: { type: String, default: ""},
   created: { type: Number, default: Date.now() },
-  creatorId: {type: ObjectId, ref: models.user.name}
+  creatorId: {type: ObjectId, ref: models.user.name},
+  householdId: { type: String, default: "" }
 });
 
 module.exports = mongoose.model(models.chore.name, schema);
