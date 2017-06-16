@@ -44,14 +44,8 @@ export default new Vuex.Store({
       router.push('/start')
     },
     setActiveHousehold(state, activeHousehold) {
-<<<<<<< HEAD
-      debugger
-      state.activeHousehold = activeHousehold
-     //Vue.set(state, "activeHousehold", activeHousehold)
-=======
       //state.activeHousehold = activeHousehold
      Vue.set(state, "activeHousehold", activeHousehold)
->>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
     },
     setHouseholds(state, households) {
       state.households = households
@@ -78,10 +72,6 @@ export default new Vuex.Store({
     memberCompletedChore(state, chore){
         state.user.completedChores.push(chore)
     },
-<<<<<<< HEAD
-    addPointsToUser(state, chorePoints) {
-      state.user.points += chorePoints
-=======
     addPointsToUser(state, chore) {
       debugger
 
@@ -95,7 +85,6 @@ export default new Vuex.Store({
       //       }
 
      state.user.points[chore.householdId] = chore.chorePoints
->>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
       // state.user.points[this.activeHousehold._id] += chorePoints
       //Added points so they live on the household they were earned on!
     },
@@ -208,12 +197,7 @@ export default new Vuex.Store({
     completedChore({commit, dispatch}, {chore, userId}){
       api.put('updateUserChore', {chore, userId})
       .then(res => {
-<<<<<<< HEAD
         commit('addCompletedChore', chore)
-=======
-        // debugger
-        // commit('addCompletedChore', chore)
->>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
       })
         .catch(handleError)
     },
@@ -221,10 +205,6 @@ export default new Vuex.Store({
       debugger
       api.put('updateMemberChore', {chore, householdId})
       .then(res => {
-<<<<<<< HEAD
-=======
-       // debugger
->>>>>>> cbf3b74efedccc3a7338416eb89114023b11e20d
         commit('memberCompletedChore', chore)
       })
         .catch(handleError)
