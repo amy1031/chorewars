@@ -56,7 +56,7 @@ export default {
       let action = 'Update member completed chore list in active household'
       Household.findOne({ _id: req.body.householdId })
         .then(household => {
-          debugger
+          //debugger
           for (var i = 0; i < household.members.length; i++) {
             var member = household.members[i];
             if (member._id == req.body.chore.completedBy) {
@@ -78,10 +78,10 @@ export default {
       let action = 'Add creator to newly created household'
       Users.findOne({ name: req.body.name })
         .then(user => {
-          debugger
+         // debugger
           Household.find({ creatorId: req.body._id })
             .then(householdArr => {
-              debugger
+             // debugger
               for (var i = 0; i < householdArr.length; i++) {
                 var myHouse = householdArr[i]
                 if (myHouse.members.length == 0) {
@@ -106,17 +106,21 @@ export default {
     path: '/updateUserPoints',
     reqType: 'put',
     method(req, res, next) {
-      debugger
+     // debugger
       let action = 'Update user object'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
-          debugger
+         // debugger
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
             var householdId = req.body.householdId
-            user.points[householdId] += req.body.chorePoints
-            user.save(user).then(() => {
+            var points = req.body.chorePoints || 0
+             var newPoints = Object.assign({}, user.points)
+             newPoints[householdId] = user.points[householdId] ? user.points[householdId] + points : points
+             Users.update({ _id: user._id }, { $set: { points: newPoints } }).then(() => {
+             user.points = newPoints
+             console.log('The User Points', user.points)
               res.send(handleResponse(action, req.body))
             })
               .catch(error => {
