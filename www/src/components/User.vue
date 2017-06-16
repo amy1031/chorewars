@@ -10,7 +10,9 @@
         </ul>
         <h6>Completed:</h6>
         <ul>
-            <li v-if="" v-for='done in this.completedChores'>{{done.name}}</li>
+            <span v-for='done in this.completedChores'>
+                <li v-if="done.householdId == activeHouseholdId">{{done.name}}</li>
+            </span>
         </ul>
     </div>
 </template>
@@ -21,8 +23,8 @@ export default {
     name: 'user',
     data () {
         return {
-            choresList: this.$store.state.activeHousehold.choresList,
-            completedChores: this.$store.state.user.completedChores
+            choresList: this.$store.state.activeHousehold.choresList
+            // completedChores: this.$store.state.user.completedChores
         }
     },
     computed:{
@@ -31,16 +33,23 @@ export default {
         },
         activeHousehold() {
             return this.$store.state.activeHousehold
+        },
+        activeHouseholdId(){
+            return this.$store.state.activeHousehold._id
+        },
+        completedChores() {
+            return this.$store.state.user.completedChores
         }
     },
     methods:{
         addPointsToUser(chore) {
-            //debugger
             chore.completedBy = this.user._id;
             this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
+            debugger
+            chore.householdId = this.activeHousehold._id
             this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
             this.householdChores(chore, this.activeHousehold._id)
         },

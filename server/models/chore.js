@@ -8,6 +8,8 @@ var schema = new mongoose.Schema({
   completedBy: { type: String, default: ""},
   created: { type: Number, default: Date.now() },
   creatorId: {type: ObjectId, ref: models.user.name}
+  // householdId: { type: ObjectId, ref: models.household.name}
+  // Might need to use this later for when users can create their own chores
 });
 
 module.exports = mongoose.model(models.chore.name, schema);

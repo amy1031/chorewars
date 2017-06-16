@@ -41,7 +41,6 @@
     },
     methods: {
       addChoresToHousehold(chores){
-       // debugger
         this.activeHousehold.choresList = chores
         this.$store.dispatch('addChoresToHousehold', this.activeHousehold)
 

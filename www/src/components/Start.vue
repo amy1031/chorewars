@@ -1,5 +1,6 @@
 <template>
   <div class="start">
+    <navbar></navbar>
     <div class="container-fluid">
       <div class="startBody">
         <div id="start-view">
@@ -29,6 +30,7 @@
 
 
 <script>
+import Navbar from '@/components/Navbar'
 export default {
   name: 'start',
   data() {
@@ -70,7 +72,9 @@ export default {
       this.addHouseholdButton = true;
     }
   },
-  components: {}
+  components: {
+    Navbar
+  }
 }
 
 
