@@ -2,7 +2,8 @@
     <div class="user">
         <h3>Household: {{activeHousehold.name}}</h3>
         <h4>User: {{user.name}}</h4>
-        <h5 v-if="user.points[this.activeHousehold._id]">Points: {{user.points[this.activeHousehold._id]}}</h5> 
+        <h5 v-if="user.points != undefined">Points: {{user.points[this.activeHousehold._id]}}</h5>
+        <h5 v-else>Points: 0</h5>
         <hr>
         <h6>Chores to Complete:</h6>
         <ul>
@@ -44,7 +45,7 @@ export default {
     },
     methods:{
         addPointsToUser(chore) {
-           // //debugger
+           //debugger
             chore.householdId = this.activeHousehold._id
             chore.completedBy = this.user._id;
             this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
