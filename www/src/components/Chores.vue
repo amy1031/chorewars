@@ -10,6 +10,8 @@
         <span>Value</span>
         <input  type="number" v-model.number="chore.points" :placeholder="chore.points"/>
       </div>
+      <input type ="text" placeholder="Add a chore" v-model="newChore.name"/>
+      <input  type="number" v-model.number="newChore.points" placeholder="Your Chore Points"/><button @click="createChore(newChore)" type = "button" class = "btn btn-primary">+</button><br><br>
       <button type="submit" class="btn btn-success">Submit Chore List</button>
     </form>
   </div>
@@ -22,7 +24,7 @@
     data() {
       return {
         checkedChores: [],
-
+        newChore: {name:'', points: ''}
 
       }
 
@@ -44,6 +46,9 @@
         this.activeHousehold.choresList = chores
         this.$store.dispatch('addChoresToHousehold', this.activeHousehold)
 
+      },
+      createChore(newChore){
+        this.$store.dispatch('createChore', newChore)
       }
     },
     components: {}

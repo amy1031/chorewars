@@ -68,7 +68,10 @@ export default new Vuex.Store({
     addCompletedChore(state, chore){
      // //debugger
     //  state.user.completedChores.push(chore)
-    },
+  },
+  addNewChore(state, chore){
+    state.chores.push(chore)
+  },
     memberCompletedChore(state, chore){
         state.user.completedChores.push(chore)
     },
@@ -174,6 +177,15 @@ export default new Vuex.Store({
         .then(res => {
           commit('setActiveHousehold', household)
           dispatch('getHouseholds')
+        })
+        .catch(handleError)
+    },
+    createChore({ commit, dispatch }, chore) {
+     // //debugger
+      api.post('chores', chore)
+        .then(res => {
+          debugger
+          commit('addNewChore', chore)
         })
         .catch(handleError)
     },
