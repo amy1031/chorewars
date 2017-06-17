@@ -11,8 +11,8 @@
         </div>
 
         {{activeHousehold.name}}<br>
-        <router-link :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link><br>
-        <router-link :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
+        <router-link v-if="this.activeHousehold.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link><br>
+        <router-link  :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
         <hr>
         <h6>Household Completed Chores:</h6>
         <ul>
