@@ -16,7 +16,7 @@ var schema = new mongoose.Schema({
 	choresList: {type: Array},
 	//choresList is the chores that are added to the household when it is created
 	members: { type: Array},
-	prize: { type: ObjectId, ref: models.prize.name},
+	prize: { type: Object},
 	leaderboard: {type: ObjectId, ref: models.leaderboard.creatorId }
 });
 

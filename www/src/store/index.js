@@ -97,6 +97,9 @@ export default new Vuex.Store({
     },
     householdChores(state, chore) {
       state.activeHousehold.choreLog.push(chore)
+    },
+    addHouseholdPrize(state, prize){
+      state.activeHousehold.prize = prize
     }
   },
   actions: {
@@ -200,6 +203,14 @@ export default new Vuex.Store({
       api.post('prize/', prize)
         .then(res => {
           dispatch('getPrize')
+        })
+        .catch(handleError)
+    },
+    addHouseholdPrize({ commit, dispatch }, prize) {
+      api.post('households/' + prize.householdId + '/prize', prize)
+        .then(res => {
+          debugger
+          dispatch('addHouseholdPrize', prize)
         })
         .catch(handleError)
     },
