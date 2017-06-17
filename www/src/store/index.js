@@ -242,17 +242,15 @@ export default new Vuex.Store({
       .catch(handleError)
     },
     searchUsers({commit, dispatch}, data){
-      //debugger
       api.post("findUsers", data)
         .then(res => {
-       //   //debugger
         })
         .catch(handleError)
     },
     logout({commit, dispatch}, user){
-      //debugger
-      auth.delete('logout', user)
+      auth.delete('logout/', user)
         .then(res => {
+          debugger
           router.push('/')
         })
         .catch(handleError)

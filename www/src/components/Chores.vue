@@ -8,7 +8,7 @@
           <span class="custom-control-description">Chore: {{chore.name}} - </span>
         </label>
         <span>Value</span>
-        <input  type="number" v-model.number="chore.points" :placeholder="chore.points"/>
+        <input  type="number" min="1" max="10" v-model.number="chore.points" :placeholder="chore.points"/>
       </div>
       <input type ="text" placeholder="Add a chore" v-model="newChore.name"/>
       <input  type="number" v-model.number="newChore.points" placeholder="Your Chore Points"/><button @click="createChore(newChore)" type = "button" class = "btn btn-primary">+</button><br><br>
