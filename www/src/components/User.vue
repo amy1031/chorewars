@@ -14,6 +14,7 @@
                 <li v-if="chore.householdId == activeHouseholdId">{{chore.name}}</li>
             </span>
         </ul>
+        <router-link  :to="'/households/'+activeHousehold._id">Back to household</router-link>
     </div>
 </template>
 
