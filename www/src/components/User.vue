@@ -2,7 +2,7 @@
     <div class="user">
         <h3>Household: {{activeHousehold.name}}</h3>
         <h4>User: {{user.name}}</h4>
-        <h5 v-if="user.points">Points: {{user.points[this.activeHousehold._id]}}</h5> 
+        <h5 v-if="user.points[this.activeHousehold._id] || user.points">Points: {{user.points[this.activeHousehold._id]}}</h5> 
         <hr>
         <h6>Chores to Complete:</h6>
         <ul>
@@ -10,8 +10,8 @@
         </ul>
         <h6>Completed:</h6>
         <ul>
-            <span v-for='done in this.completedChores'>
-                <li v-if="done.householdId == activeHouseholdId">{{done.name}}</li>
+            <span v-for='chore in this.completedChores'>
+                <li v-if="chore.householdId == activeHouseholdId">{{chore.name}}</li>
             </span>
         </ul>
     </div>
@@ -43,24 +43,24 @@ export default {
     },
     methods:{
         addPointsToUser(chore) {
-           // debugger
-            //chore.householdId = this.activeHousehold._id
+           // //debugger
+            chore.householdId = this.activeHousehold._id
             chore.completedBy = this.user._id;
             this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
-          //  debugger
+          //  //debugger
             this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
             this.householdChores(chore, this.activeHousehold._id)
         },
         householdChores(chore, householdId) {
-            //debugger
+            ////debugger
             this.$store.dispatch('householdChores', {chore: chore, householdId: householdId})
             this.memberCompletedChore(chore, this.activeHousehold._id)
         },
         memberCompletedChore(chore, householdId) {
-           // debugger
+           // //debugger
             this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
         }
     },

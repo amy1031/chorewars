@@ -33,7 +33,7 @@
     computed: {},
     methods: {
       register() {
-        debugger
+        //debugger
         this.$store.dispatch('register', {
           name: this.name,
           email: this.email,

@@ -58,16 +58,16 @@ export default {
       this.addCreatorToMembers();
     },
     addCreatorToMembers() {
-      //debugger
+      ////debugger
       this.$store.dispatch('addCreatorToMembers', this.user)
     },
     householdFormToggle() {
-      //  debugger
+      //  //debugger
       this.newHousehold = true;
       this.addHouseholdButton = false;
     },
     householdFormToggleBack() {
-      // debugger
+      // //debugger
       this.newHousehold = false;
       this.addHouseholdButton = true;
     }

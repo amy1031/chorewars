@@ -64,7 +64,7 @@ export default {
             this.addCollaboratorsButton = true;
         },
         searchUsers(){
-            debugger
+            //debugger
             this.$store.dispatch("searchUsers", {user: this.username, householdId: this.$route.params.id})
         }
     },

@@ -61,19 +61,19 @@ export default new Vuex.Store({
       Vue.set(state.activeHousehold, "choresList", chores)
     },
     setMembers(state, household){
-     //debugger
+     ////debugger
       //state.activeHousehold.choresList = chores;
       Vue.set(state.activeHousehold, "members", household.members)
     },
     addCompletedChore(state, chore){
-     // debugger
-      state.user.completedChores.push(chore)
+     // //debugger
+    //  state.user.completedChores.push(chore)
     },
     memberCompletedChore(state, chore){
         state.user.completedChores.push(chore)
     },
     addPointsToUser(state, chore) {
-      //debugger
+      ////debugger
 
       // var newPoints = chore.chorePoints;
       //     if(state.user.points[chore.householdId]) {
@@ -129,7 +129,7 @@ export default new Vuex.Store({
       commit('setError')
     },
     getHouseholds({ commit, dispatch }) {
-     //debugger
+     ////debugger
       api('households')
         .then(res => {
           commit('setHouseholds', res.data.data)
@@ -165,7 +165,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     createHousehold({ commit, dispatch }, household) {
-     // debugger
+     // //debugger
       api.post('households', household)
         .then(res => {
           commit('setActiveHousehold', household)
@@ -174,7 +174,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     addCreatorToMembers({commit, dispatch}, user) {
-    //  debugger
+    //  //debugger
       api.post('addCreator', user)
       .then(res => {
 
@@ -203,7 +203,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     memberCompletedChore({commit, dispatch}, {chore, householdId}){
-     // debugger
+     // //debugger
       api.put('updateMemberChore', {chore, householdId})
       .then(res => {
         commit('memberCompletedChore', chore)
@@ -213,7 +213,7 @@ export default new Vuex.Store({
     addPointsToUser({commit, dispatch}, {chorePoints, userId, householdId}){
         api.put('updateUserPoints', {chorePoints, userId, householdId})
         .then(res => {
-         // debugger
+         // //debugger
           commit('addPointsToUser', {chorePoints, householdId})
         })
         .catch(handleError)
@@ -226,15 +226,15 @@ export default new Vuex.Store({
       .catch(handleError)
     },
     searchUsers({commit, dispatch}, data){
-      debugger
+      //debugger
       api.post("findUsers", data)
         .then(res => {
-       //   debugger
+       //   //debugger
         })
         .catch(handleError)
     },
     logout({commit, dispatch}, user){
-      debugger
+      //debugger
       auth.delete('logout', user)
         .then(res => {
           router.push('/')

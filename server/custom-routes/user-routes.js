@@ -78,22 +78,21 @@ export default {
       let action = 'Add creator to newly created household'
       Users.findOne({ name: req.body.name })
         .then(user => {
-         // debugger
-          Household.find({ creatorId: req.body._id })
-            .then(householdArr => {
-             // debugger
-              for (var i = 0; i < householdArr.length; i++) {
+         Household.find({ creatorId: req.body._id })
+             .then(householdArr => {
+               //debugger
+               for (var i = 0; i < householdArr.length; i++) {
                 var myHouse = householdArr[i]
-                if (myHouse.members.length == 0) {
+                 if (myHouse.members.length == 0) {
                   myHouse.members.push(user)
                   myHouse.save().then(() => {
-                    res.send(handleResponse(action, req.body))
-                  })
-
-
-                }
-
-              }
+                     res.send(handleResponse(action, req.body))
+                   })
+ 
+ 
+                 }
+ 
+               }
               // debugger
             })
             .catch(error => {

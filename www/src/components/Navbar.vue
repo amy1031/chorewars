@@ -31,7 +31,7 @@ export default {
   },
   methods:{
     logout(){
-      debugger
+      //debugger
       this.$store.dispatch('logout', this.user)
     }
   },
