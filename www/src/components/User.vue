@@ -26,7 +26,6 @@ export default {
     data () {
         return {
             choresList: this.$store.state.activeHousehold.choresList
-            // completedChores: this.$store.state.user.completedChores
         }
     },
     computed:{
@@ -45,25 +44,26 @@ export default {
     },
     methods:{
         addPointsToUser(chore) {
-           //debugger
+            // updates user.points
             chore.householdId = this.activeHousehold._id
             chore.completedBy = this.user._id;
             this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
-          //  //debugger
+            // updates user.completedChores
             this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
             this.householdChores(chore, this.activeHousehold._id)
         },
         householdChores(chore, householdId) {
-            ////debugger
+            // updates activehousehold.choreLog
             this.$store.dispatch('householdChores', {chore: chore, householdId: householdId})
-            this.memberCompletedChore(chore, this.activeHousehold._id)
+            this.memberCompletedChore(chore, this.activeHousehold._id, this.user._id)
         },
-        memberCompletedChore(chore, householdId) {
-           // //debugger
-            this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
+        memberCompletedChore(chore, householdId, userId) {
+            // updates activehousehold.members
+           debugger
+            this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId, userId: userId})
         }
     },
     components:{}

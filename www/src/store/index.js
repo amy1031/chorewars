@@ -206,9 +206,9 @@ export default new Vuex.Store({
       })
         .catch(handleError)
     },
-    memberCompletedChore({commit, dispatch}, {chore, householdId}){
+    memberCompletedChore({commit, dispatch}, {chore, householdId, userId}){
      // //debugger
-      api.put('updateMemberChore', {chore, householdId})
+      api.put('updateMemberChore', {chore, householdId, userId})
       .then(res => {
         commit('memberCompletedChore', chore)
       })

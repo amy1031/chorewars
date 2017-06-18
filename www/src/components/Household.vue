@@ -9,10 +9,12 @@
                 </div>
             </form>
         </div>
-
-        {{activeHousehold.name}}<br>
-        <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link><br>
-        <router-link  :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
+    
+        {{activeHousehold.name}}
+        <br>
+        <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
+        <br>
+        <router-link :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
         <hr>
         <h6>Household Completed Chores:</h6>
         <ul>
@@ -21,6 +23,7 @@
         <h6>Household Members:</h6>
         <ul>
             <li v-for='member in activeHousehold.members'>{{member.name}}</li>
+            {{memberPoints}} </li>
         </ul>
     </div>
 </template>
@@ -43,33 +46,58 @@ export default {
         completedChores() {
             return this.$store.state.activeHousehold.choreLog
         },
-        user(){
+        user() {
             return this.$store.state.user
-        }
-        // members() {
-        //     return this.$store.state.activeHousehold.members
-        // }
-    },
-    mounted() {
-        this.$store.dispatch('getHousehold', this.$route.params.id)
-      //  this.$store.dispatch('getMembers', this.$route.params.id)
-    },
-    methods: {
-        searchFormToggle() {
-            this.newSearch = true;
-            this.addCollaboratorsButton = false;
         },
-        searchFormToggleBack() {
-            this.newSearch = false;
-            this.addCollaboratorsButton = true;
-        },
-        searchUsers(){
-            //debugger
-            this.$store.dispatch("searchUsers", {user: this.username, householdId: this.$route.params.id})
+        memberPoints() {
+          //  debugger
+            // for(var i = 0; i < this.$store.state.activeHousehold.members.length; i++) {
+            //     var member = this.$store.state.activeHousehold.members[i]
+            //     for(var j = 0; j < member.completedChores.length; j++){
+            //         var h = member.completedChores[j]
+            //         if(h.householdId = this.activeHousehold._id) {
+            //             var points = h.points
+            //             points += points
+            //             return points
+            //         }
+            //     }
+            // }
+            for (var i = 0; i < this.$store.state.activeHousehold.choreLog.length; i++) {
+                var chore = this.$store.state.activeHousehold.choreLog[i]
+                if (chore.householdId = this.activeHousehold._id) {
+                    if (chore.completedBy == this.user._id) {
+                        var points = chore.points
+                        if (points > 0) {
+                            points += points
+                            return points
+                        } else {
+                            return points
+                        }
+                    }
+                }
+            }
         }
     },
-    components: {}
-}
+        mounted() {
+            this.$store.dispatch('getHousehold', this.$route.params.id)
+            //  this.$store.dispatch('getMembers', this.$route.params.id)
+        },
+        methods: {
+            searchFormToggle() {
+                this.newSearch = true;
+                this.addCollaboratorsButton = false;
+            },
+            searchFormToggleBack() {
+                this.newSearch = false;
+                this.addCollaboratorsButton = true;
+            },
+            searchUsers() {
+                //debugger
+                this.$store.dispatch("searchUsers", { user: this.username, householdId: this.$route.params.id })
+            }
+        },
+        components: {}
+    }
 </script>
 
 
