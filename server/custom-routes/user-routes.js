@@ -58,19 +58,11 @@ export default {
         .then(household => {
           for (var i = 0; i < household.members.length; i++) {
             let member = household.members[i];
-<<<<<<< HEAD
-            debugger
-            if (member.email == req.body.chore.creatorEmail) {
-              member.completedChores.push(req.body.chore)
-              household.members[i] = member
-
-=======
            debugger
             if (member.email == req.body.chore.completedBy) {
               member.completedChores.push(req.body.chore)
              // household.members[i] = member
-              
->>>>>>> 4e160e00c0061fd28e0eea46625b0e8f6cb4fddc
+
             }
           }
           household.save()
