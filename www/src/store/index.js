@@ -242,6 +242,10 @@ export default new Vuex.Store({
           router.push('/')
         })
         .catch(handleError)
+    },
+    startHousehold({commit, dispatch}, timeData){
+      api.post()
+
     }
   }
 

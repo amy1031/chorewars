@@ -92,6 +92,9 @@ export default {
                     return next(handleResponse(action, null, error))
                 })
         }
+    },
+    updateStartAndEndDate: {
+      path: 'post'
     }
 
     // getTasksAndAllComments: {

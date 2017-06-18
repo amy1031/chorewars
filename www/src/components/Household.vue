@@ -22,6 +22,8 @@
         <ul>
             <li v-for='member in activeHousehold.members'>{{member.name}}</li>
         </ul>
+
+        <button type="submit" class="btn btn-primary"  id="start-household-button" @click="startHousehold">Start the Household</button>
     </div>
 </template>
 
@@ -66,6 +68,18 @@ export default {
         searchUsers(){
             //debugger
             this.$store.dispatch("searchUsers", {user: this.username, householdId: this.$route.params.id})
+        },
+        startHousehold(){
+            let date = new Date()
+            let startTime = date.getTime();
+            let endTime = startTime + 1210000000
+            debugger
+            timeData = {
+                startTime: startTime,
+                endTime: endTime,
+                householdId: this.$route.params.id
+            }
+            this.$store.dispatch("startHousehold")
         }
     },
     components: {}
