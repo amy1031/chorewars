@@ -56,23 +56,21 @@ export default {
       let action = 'Update member completed chore list in active household'
       Household.findOne({ _id: req.body.householdId })
         .then(household => {
-          //debugger
           for (var i = 0; i < household.members.length; i++) {
             let member = household.members[i];
-           debugger
-            if (member._id == req.body.chore.completedBy) {
+            debugger
+            if (member.email == req.body.chore.creatorEmail) {
               member.completedChores.push(req.body.chore)
               household.members[i] = member
-              
+
             }
           }
           household.save()
           .then(() => {
-                debugger
                 res.send(handleResponse(action, household))
               })
           })
-            
+
         .catch(error => {
           return next(handleResponse(action, null, error))
         })

@@ -73,6 +73,7 @@ export default new Vuex.Store({
     state.chores.push(chore)
   },
     memberCompletedChore(state, chore){
+      debugger
         state.user.completedChores.push(chore)
     },
     addPointsToUser(state, chore) {
@@ -229,9 +230,9 @@ export default new Vuex.Store({
       })
         .catch(handleError)
     },
-    memberCompletedChore({commit, dispatch}, {chore, householdId, userId}){
-     // //debugger
-      api.put('updateMemberChore', {chore, householdId, userId})
+    memberCompletedChore({commit, dispatch}, {chore, householdId}){
+     debugger
+      api.put('updateMemberChore', {chore, householdId})
       .then(res => {
         commit('memberCompletedChore', chore)
       })

@@ -58,12 +58,13 @@ export default {
         householdChores(chore, householdId) {
             // updates activehousehold.choreLog
             this.$store.dispatch('householdChores', {chore: chore, householdId: householdId})
-            this.memberCompletedChore(chore, this.activeHousehold._id, this.user._id)
+            this.memberCompletedChore(chore, this.activeHousehold._id, this.user.email)
         },
-        memberCompletedChore(chore, householdId, userId) {
+        memberCompletedChore(chore, householdId, userEmail) {
             // updates activehousehold.members
-           debugger
-            this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId, userId: userId})
+            debugger
+            chore.creatorEmail = userEmail
+            this.$store.dispatch('memberCompletedChore', {chore: chore, householdId: householdId})
         }
     },
     components:{}
