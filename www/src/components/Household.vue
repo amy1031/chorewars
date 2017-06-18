@@ -8,6 +8,13 @@
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="searchFormToggleBack">Add New Collabarators</button>
                 </div>
             </form>
+            <button type="button" class='btn btn-primary' @click="prizeFormToggle" v-show="addPrizeButton">Add Your Prize</button>
+            <form class="form-inline find-user-form" @submit.prevent="addHouseholdPrize" v-show="newPrize">
+                <div class="form-group">
+                    <input type="text" class="form-control" v-model="prize.name" placeholder="Prize Name" />
+                    <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
+                </div>
+            </form>
         </div>
     
         {{activeHousehold.name}}
@@ -25,6 +32,8 @@
             <li v-for='member in activeHousehold.members'>{{member.name}}</li>
             {{memberPoints}} </li>
         </ul>
+
+        <button type="submit" class="btn btn-primary"  id="start-household-button" @click="startHousehold">Start the Household</button>
     </div>
 </template>
 
@@ -37,6 +46,9 @@ export default {
             username: "",
             newSearch: false,
             addCollaboratorsButton: true,
+            newPrize: false,
+            addPrizeButton: true,
+            prize: {name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id}
         }
     },
     computed: {
@@ -96,8 +108,41 @@ export default {
                 this.$store.dispatch("searchUsers", { user: this.username, householdId: this.$route.params.id })
             }
         },
+<<<<<<< HEAD
         components: {}
     }
+=======
+        prizeFormToggle() {
+            this.newPrize = true;
+            this.addPrizeButton = false;
+        },
+        prizeFormToggleBack() {
+            this.newPrize = false;
+            this.addPrizeButton = true;
+        },
+        searchUsers(){
+            //debugger
+            this.$store.dispatch("searchUsers", {user: this.username, householdId: this.$route.params.id})
+        },
+        startHousehold(){
+            let date = new Date()
+            let startTime = date.getTime();
+            let endTime = startTime + 1210000000
+            debugger
+            timeData = {
+                startTime: startTime,
+                endTime: endTime,
+                householdId: this.$route.params.id
+            }
+            this.$store.dispatch("startHousehold")
+        },
+        addHouseholdPrize(){
+            this.$store.dispatch("addHouseholdPrize", this.prize)
+        }
+    },
+    components: {}
+}
+>>>>>>> 2d3ef2f26c3bbfc119faf108c88c21c42d7b7efd
 </script>
 
 

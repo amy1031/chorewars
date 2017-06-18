@@ -68,7 +68,10 @@ export default new Vuex.Store({
     addCompletedChore(state, chore){
      // //debugger
     //  state.user.completedChores.push(chore)
-    },
+  },
+  addNewChore(state, chore){
+    state.chores.push(chore)
+  },
     memberCompletedChore(state, chore){
         state.user.completedChores.push(chore)
     },
@@ -94,6 +97,9 @@ export default new Vuex.Store({
     },
     householdChores(state, chore) {
       state.activeHousehold.choreLog.push(chore)
+    },
+    addHouseholdPrize(state, prize){
+      state.activeHousehold.prize = prize
     }
   },
   actions: {
@@ -177,6 +183,15 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
+    createChore({ commit, dispatch }, chore) {
+     // //debugger
+      api.post('chores', chore)
+        .then(res => {
+          debugger
+          commit('addNewChore', chore)
+        })
+        .catch(handleError)
+    },
     addCreatorToMembers({commit, dispatch}, user) {
     //  //debugger
       api.post('addCreator', user)
@@ -188,6 +203,14 @@ export default new Vuex.Store({
       api.post('prize/', prize)
         .then(res => {
           dispatch('getPrize')
+        })
+        .catch(handleError)
+    },
+    addHouseholdPrize({ commit, dispatch }, prize) {
+      api.post('households/' + prize.householdId + '/prize', prize)
+        .then(res => {
+          debugger
+          dispatch('addHouseholdPrize', prize)
         })
         .catch(handleError)
     },
@@ -230,20 +253,22 @@ export default new Vuex.Store({
       .catch(handleError)
     },
     searchUsers({commit, dispatch}, data){
-      //debugger
       api.post("findUsers", data)
         .then(res => {
-       //   //debugger
         })
         .catch(handleError)
     },
     logout({commit, dispatch}, user){
-      //debugger
-      auth.delete('logout', user)
+      auth.delete('logout/', user)
         .then(res => {
+          debugger
           router.push('/')
         })
         .catch(handleError)
+    },
+    startHousehold({commit, dispatch}, timeData){
+      api.post()
+
     }
   }
 

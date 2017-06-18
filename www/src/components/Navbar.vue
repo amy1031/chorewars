@@ -3,7 +3,9 @@
     <nav class="navbar fixed-top navbar-light bg-faded">
       <a class="navbar-brand" href="">
         <img src="" width="30" height="30" class="d-inline-block align-top" alt=""> Bootstrap
-        <button type="button" class="btn btn-outline-danger" @click.preventDefault="logout(user)">Logout</button>
+          <form @submit.prevent="logout(user)">
+            <button type="submit" class="btn btn-outline-danger">Logout</button>
+          </form>
       </a>
     </nav>
   </div>
@@ -31,7 +33,7 @@ export default {
   },
   methods:{
     logout(){
-      //debugger
+      debugger
       this.$store.dispatch('logout', this.user)
     }
   },
