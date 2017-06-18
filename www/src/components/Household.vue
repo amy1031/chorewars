@@ -108,10 +108,8 @@ export default {
                 this.$store.dispatch("searchUsers", { user: this.username, householdId: this.$route.params.id })
             }
         },
-<<<<<<< HEAD
-        components: {}
-    }
-=======
+        components: {
+    
         prizeFormToggle() {
             this.newPrize = true;
             this.addPrizeButton = false;
@@ -139,10 +137,8 @@ export default {
         addHouseholdPrize(){
             this.$store.dispatch("addHouseholdPrize", this.prize)
         }
-    },
-    components: {}
+    }
 }
->>>>>>> 2d3ef2f26c3bbfc119faf108c88c21c42d7b7efd
 </script>
 
 
