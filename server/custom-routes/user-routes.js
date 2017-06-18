@@ -60,9 +60,9 @@ export default {
           for (var i = 0; i < household.members.length; i++) {
             let member = household.members[i];
            debugger
-            if (member._id == req.body.chore.completedBy) {
+            if (member.email == req.body.chore.completedBy) {
               member.completedChores.push(req.body.chore)
-              household.members[i] = member
+             // household.members[i] = member
               
             }
           }
