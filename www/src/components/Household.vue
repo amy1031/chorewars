@@ -8,6 +8,13 @@
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="searchFormToggleBack">Add New Collabarators</button>
                 </div>
             </form>
+            <button type="button" class='btn btn-primary' @click="prizeFormToggle" v-show="addPrizeButton">Add Your Prize</button>
+            <form class="form-inline find-user-form" @submit.prevent="addHouseholdPrize" v-show="newPrize">
+                <div class="form-group">
+                    <input type="text" class="form-control" v-model="prize.name" placeholder="Prize Name" />
+                    <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
+                </div>
+            </form>
         </div>
 
         {{activeHousehold.name}}<br>
@@ -36,6 +43,9 @@ export default {
             username: "",
             newSearch: false,
             addCollaboratorsButton: true,
+            newPrize: false,
+            addPrizeButton: true,
+            prize: {name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id}
         }
     },
     computed: {
@@ -65,6 +75,14 @@ export default {
             this.newSearch = false;
             this.addCollaboratorsButton = true;
         },
+        prizeFormToggle() {
+            this.newPrize = true;
+            this.addPrizeButton = false;
+        },
+        prizeFormToggleBack() {
+            this.newPrize = false;
+            this.addPrizeButton = true;
+        },
         searchUsers(){
             //debugger
             this.$store.dispatch("searchUsers", {user: this.username, householdId: this.$route.params.id})
@@ -80,6 +98,9 @@ export default {
                 householdId: this.$route.params.id
             }
             this.$store.dispatch("startHousehold")
+        },
+        addHouseholdPrize(){
+            this.$store.dispatch("addHouseholdPrize", this.prize)
         }
     },
     components: {}

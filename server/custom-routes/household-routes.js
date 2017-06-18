@@ -38,6 +38,24 @@ export default {
         })
     }
   },
+  addPrizeByHouseholdId: {
+    path: '/households/:householdId/prize',
+    reqType: 'post',
+    method(req, res, next) {
+      debugger
+      let action = 'Add prize by household id'
+      Household.findById(req.body.householdId)
+        .then(household => {
+          debugger
+          household.prize = req.body
+          household.save()
+          res.send(handleResponse(action, household))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+
+  },
   getChoresByHousehold: {
     path: '/households/:householdId/chores',
     reqType: 'get',
@@ -58,13 +76,13 @@ export default {
   addChoresByHousehold: {
     path: '/households/:householdId/chores',
     reqType: 'put',
-    method(req, res, next){
-     //
+    method(req, res, next) {
+      //
       let action = 'Updates the game chore list to the active household'
       Household.findById(req.params.householdId)
-        .then(household =>{
+        .then(household => {
           household.choresList = req.body
-          household.save(household).then(() =>{
+          household.save(household).then(() => {
             res.send(handleResponse(action, req.body))
           })
 
@@ -74,60 +92,57 @@ export default {
         })
     }
   },
-    getWinnerByLeaderboard: {
-        path: '/households/:householdId/leaderboard/:leaderboardId/winner',
-        reqType: 'get',
-        method(req, res, next) {
-            let action = 'Return winner in the household'
-            Household.findById(req.params.householdId)
-                .then(household => {
-                    Leaderboard.find({ leaderboardId: req.params.leaderboardId })
-                        .then(winner => {
-                            leaderboard.winner = winner
-                            res.send(handleResponse(action, winner))
-                        }).catch(error => {
-                            return next(handleResponse(action, null, error))
-                        })
-                }).catch(error => {
-                    return next(handleResponse(action, null, error))
-                })
-        }
-    },
-    updateStartAndEndDate: {
-      path: 'post'
+  getWinnerByLeaderboard: {
+    path: '/households/:householdId/leaderboard/:leaderboardId/winner',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Return winner in the household'
+      Household.findById(req.params.householdId)
+        .then(household => {
+          Leaderboard.find({ leaderboardId: req.params.leaderboardId })
+            .then(winner => {
+              leaderboard.winner = winner
+              res.send(handleResponse(action, winner))
+            }).catch(error => {
+              return next(handleResponse(action, null, error))
+            })
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
     }
+  }
 
-    // getTasksAndAllComments: {
-    //     path: '/boards/:boardId/lists/:listId/tasks/comments',
-    //     reqType: 'get',
-    //     method(req, res, next) {
-    //         let action = 'Return list and all Tasks with their Comments'
-    //         Lists.findById(req.params.listId)
-    //             .then(list => {
-    //                 //console.log('here?')
-    //                 Tasks.find({ listId: req.params.listId })
-    //                     .then(tasks => {
-    //                         list.tasks = tasks
-    //                         Promise.all(tasks.map(task => {
-    //                             return Comments.find({ taskId: task._id })
-    //                                 .then(comments => {
-    //                                     task.comments = comments
-    //                                 }).catch(error => {
-    //                                     return next(handleResponse(action, null, error))
-    //                                 })
-    //                         })).then(() => {
-    //                             res.send(handleResponse(action, list))
-    //                         }).catch(error => {
-    //                             return next(handleResponse(action, null, error))
-    //                         })
-    //                     }).catch(error => {
-    //                         return next(handleResponse(action, null, error))
-    //                     })
-    //             }).catch(error => {
-    //                 return next(handleResponse(action, null, error))
-    //             })
-    //     }
-    // }
+  // getTasksAndAllComments: {
+  //     path: '/boards/:boardId/lists/:listId/tasks/comments',
+  //     reqType: 'get',
+  //     method(req, res, next) {
+  //         let action = 'Return list and all Tasks with their Comments'
+  //         Lists.findById(req.params.listId)
+  //             .then(list => {
+  //                 //console.log('here?')
+  //                 Tasks.find({ listId: req.params.listId })
+  //                     .then(tasks => {
+  //                         list.tasks = tasks
+  //                         Promise.all(tasks.map(task => {
+  //                             return Comments.find({ taskId: task._id })
+  //                                 .then(comments => {
+  //                                     task.comments = comments
+  //                                 }).catch(error => {
+  //                                     return next(handleResponse(action, null, error))
+  //                                 })
+  //                         })).then(() => {
+  //                             res.send(handleResponse(action, list))
+  //                         }).catch(error => {
+  //                             return next(handleResponse(action, null, error))
+  //                         })
+  //                     }).catch(error => {
+  //                         return next(handleResponse(action, null, error))
+  //                     })
+  //             }).catch(error => {
+  //                 return next(handleResponse(action, null, error))
+  //             })
+  //     }
+  // }
 }
 
 function handleResponse(action, data, error) {
