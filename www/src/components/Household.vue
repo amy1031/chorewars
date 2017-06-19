@@ -15,6 +15,9 @@
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
                 </div>
             </form>
+                <div>
+                    <button type="submit" class="btn btn-danger" id="start-household-button" @click="startHousehold">Start your Household</button>
+                </div>
         </div>
 
         {{activeHousehold.name}}<br>
@@ -29,6 +32,8 @@
         <ul>
             <li v-for='member in activeHousehold.members'>{{member.name}}</li>
         </ul>
+
+
     </div>
 </template>
 
@@ -87,7 +92,53 @@ export default {
         },
         addHouseholdPrize(){
             this.$store.dispatch("addHouseholdPrize", this.prize)
+        },
+        householdStartEndDate(){
+            let date = new Date();
+            let startMonth = date.getMonth();
+            let startDay = date.getDate()
+            let startHour = date.getHours();
+            let startMinutes = date.getMinutes();
+            let startDate = {
+                startMonth:startMonth,
+                startDay: startDate,
+                startHour: startHour,
+                startMinutes: startMinutes
+            }
+            if(startMonth == 1 || startMonth == 3 || startMonth == 5 || startMonth == 7 || startMonth == 8 || startMonth == 10 || startMonth == 12){
+                if(startDay + 14 > 31){
+                    let overDays = startDay + 14;
+                    let realDays = overDays - 31;
+                    let endDate = {
+                        endMonth: startMonth + 1,
+                        endDay: realDays,
+                        endHour: startHour,
+                        endMinutes: startMinutes
+                    }
+                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate , householdId: this.req.params.id})
+                    return
+                }else{
+                    let endDate = {
+                        endMonth :startMonth,
+                        endDay: startDate + 14,
+                        endHour: startHour,
+                        endMinutes: startMinutes
+                    }
+                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
+                    return
+
+                }
+            }
+            if(startMonth == 4 || startMonth == 6 || startMonth == 9 || startMonth == 11 ) {
+                if(startDay + 14 > 30){
+                  let overDays = startDay + 14;
+                  let realDays = overDays - 30;
+                }else{
+
+                }
+            }
         }
+
     },
     components: {}
 }

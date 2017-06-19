@@ -267,8 +267,11 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-    startHousehold({commit, dispatch}, timeData){
-      api.post()
+    startHousehold({commit, dispatch}, householdData){
+      api.put('startHousehold', householdData)
+        .then(res => {
+          //probably send some notification to the user that the house has been started, create two week countdown
+        })
 
     }
   }
