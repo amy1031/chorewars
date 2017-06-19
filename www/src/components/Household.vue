@@ -3,6 +3,10 @@
         <div class="text-center">
             <h1>{{activeHousehold.name}}</h1>
         </div>
+        <div class="text-center">
+          <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
+            <h2 v-else> </h2> -->
+        </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
             <form class="form-inline find-user-form" @submit.prevent="searchUsers" v-show="newSearch">
