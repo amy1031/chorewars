@@ -42,11 +42,11 @@ export default {
     path: '/households/:householdId/prize',
     reqType: 'post',
     method(req, res, next) {
-      debugger
+      //debugger
       let action = 'Add prize by household id'
       Household.findById(req.body.householdId)
         .then(household => {
-          debugger
+         // debugger
           household.prize = req.body
           household.save()
           res.send(handleResponse(action, household))
