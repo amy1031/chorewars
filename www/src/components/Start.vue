@@ -26,20 +26,24 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <form class="form-inline create-household-form" @submit.prevent="createHousehold">
+            <form class="form-inline" @submit.prevent="createHousehold">
+              <div class="col-12 col-sm-6">
                 <input type="text" class="form-control" v-model="name" name="name" placeholder="Household Name" /> &nbsp;
-                <button type="submit" class="btn btn-primary create" id="create-household-button" @click="householdFormToggleBack">Create New Household</button>
+              </div>
+              <div class="col-12 col-sm-6">
+                <button type="submit" class="btn btn-primary create" @click="householdFormToggleBack">Create New Household</button>
+              </div>
             </form>
           </div>
         </div>
   
         <!--<button type="button" class='btn btn-primary' @click="householdFormToggle" v-show="addHouseholdButton">Add a Household</button>
-            <form class="form-inline create-household-form" @submit.prevent="createHousehold" v-show="newHousehold">
-              <div class="form-group">
-                <input type="text" class="form-control" v-model="name" name="name" placeholder="Household Name" />
-                <button type="submit" class="btn btn-primary" id="create-household-button" @click="householdFormToggleBack">Create New Household</button>
-              </div>
-            </form> -->
+                  <form class="form-inline create-household-form" @submit.prevent="createHousehold" v-show="newHousehold">
+                    <div class="form-group">
+                      <input type="text" class="form-control" v-model="name" name="name" placeholder="Household Name" />
+                      <button type="submit" class="btn btn-primary" id="create-household-button" @click="householdFormToggleBack">Create New Household</button>
+                    </div>
+                  </form> -->
       </div>
     </div>
   </div>
@@ -136,9 +140,8 @@ button.create {
   border-radius: 5px;
   border: 0px;
   padding: 10px;
-  width: 45%;
-  margin-bottom: 5px;
-  margin-top: 4px;
+  width: 100%;
+  margin-bottom: 22px;
   transition-duration: 0.4s;
 }
 
@@ -148,7 +151,8 @@ button.create:hover {
 }
 
 input[type=text] {
-    width: 50%;
-    height: 43px;
+  width: 100%;
+  height: 43px;
+  float: left;
 }
 </style>
