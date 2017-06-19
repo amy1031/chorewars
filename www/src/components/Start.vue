@@ -99,8 +99,9 @@ export default {
 <style scoped>
 h2 {
   font-weight: bold;
-  font-family: Passion One;
+  font-family: Fjalla One;
   text-transform: uppercase;
+  color: #247BA0;
 }
 
 .add {
@@ -109,7 +110,7 @@ h2 {
 
 button.household {
   font-size: 25px;
-  color: #5a6ed0;
+  color: #FF1654;
   font-weight: bold;
   font-family: helvetica;
   background-color: #fff;
@@ -122,7 +123,7 @@ button.household {
 }
 
 button.household:hover {
-  background-color: #5a6ed0;
+  background-color: #FF1654;
   color: #fff;
 }
 
@@ -131,7 +132,7 @@ button.create {
   color: #fff;
   font-weight: bold;
   font-family: helvetica;
-  background-color: #5a6ed0;
+  background-color: #FF1654;
   border-radius: 5px;
   border: 0px;
   padding: 10px;
@@ -143,7 +144,7 @@ button.create {
 
 button.create:hover {
   background-color: #fff;
-  color: #5a6ed0;
+  color: #FF1654;
 }
 
 input[type=text] {
