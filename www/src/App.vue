@@ -1,7 +1,10 @@
 <template>
   <div id="app">
+    <div class="container">
+      <router-view></router-view>
+    </div>
     <error></error>
-    <router-view></router-view>
+  </div>
   </div>
 </template>
 
@@ -9,11 +12,11 @@
 import Error from './components/Error'
 export default {
   name: 'app',
-  mounted(){
+  mounted() {
     this.$store.dispatch('getAuth')
   },
   components: {
-    Error
+    Error,
   }
 }
 </script>
@@ -25,6 +28,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
+}
+
+body {
+  background-color: #faffaa;
 }
 </style>

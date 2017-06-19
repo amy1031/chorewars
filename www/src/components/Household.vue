@@ -1,5 +1,8 @@
 <template>
     <div class="household">
+        <div class="text-center">
+            <h1>{{activeHousehold.name}}</h1>
+        </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
             <form class="form-inline find-user-form" @submit.prevent="searchUsers" v-show="newSearch">
@@ -17,9 +20,10 @@
             </form>
         </div>
 
-        {{activeHousehold.name}}<br>
-        <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link><br>
-        <router-link  :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
+        <br>
+        <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
+        <br>
+        <router-link :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
         <hr>
         <h6>Household Completed Chores:</h6>
         <ul>
@@ -29,6 +33,10 @@
         <ul>
             <li v-for='member in activeHousehold.members'>{{member.name}}</li>
         </ul>
+        <h6>Scoreboard:</h6>
+        {{scoreBoard}}
+        <br>
+        <router-link :to="'/start'">Back to Households</router-link>
     </div>
 </template>
 
@@ -43,7 +51,7 @@ export default {
             addCollaboratorsButton: true,
             newPrize: false,
             addPrizeButton: true,
-            prize: {name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id}
+            prize: { name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id }
         }
     },
     computed: {
@@ -53,16 +61,29 @@ export default {
         completedChores() {
             return this.$store.state.activeHousehold.choreLog
         },
-        user(){
+        user() {
             return this.$store.state.user
+        },
+        scoreBoard() {
+            for (var i = 0; i < this.completedChores.length; i++) {
+                var chore = this.completedChores[i]
+                if (chore.householdId = this.activeHousehold._id) {
+                    if (chore.completedBy == this.user._id) {
+                        var points = chore.points
+                        if (points > 0) {
+                            points += points
+                            return points
+                        } else {
+                            return points
+                        }
+                    }
+                }
+            }
         }
-        // members() {
-        //     return this.$store.state.activeHousehold.members
-        // }
+
     },
     mounted() {
         this.$store.dispatch('getHousehold', this.$route.params.id)
-      //  this.$store.dispatch('getMembers', this.$route.params.id)
     },
     methods: {
         searchFormToggle() {
@@ -81,13 +102,22 @@ export default {
             this.newPrize = false;
             this.addPrizeButton = true;
         },
-        searchUsers(){
+        searchUsers() {
             //debugger
-            this.$store.dispatch("searchUsers", {user: this.username, householdId: this.$route.params.id})
+            this.$store.dispatch("searchUsers", { user: this.username, householdId: this.$route.params.id })
         },
-        addHouseholdPrize(){
+        addHouseholdPrize() {
             this.$store.dispatch("addHouseholdPrize", this.prize)
         }
+        // memberScoreboard() {
+        //     var scoreBoard = [];
+        //     for (var i = 0; i < this.completedChores.length; i++) {
+        //         var chore = this.completeChores[i];
+        //         if (chore.email == this.user) {
+        //             scoreBoard.push(chore);
+        //         }
+        //     } return scoreBoard;
+        // }
     },
     components: {}
 }
