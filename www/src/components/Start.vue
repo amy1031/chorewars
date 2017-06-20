@@ -36,7 +36,7 @@
             </form>
           </div>
         </div>
-  
+
         <!--<button type="button" class='btn btn-primary' @click="householdFormToggle" v-show="addHouseholdButton">Add a Household</button>
                   <form class="form-inline create-household-form" @submit.prevent="createHousehold" v-show="newHousehold">
                     <div class="form-group">
@@ -79,7 +79,7 @@ export default {
       this.addCreatorToMembers();
     },
     addCreatorToMembers() {
-      //debugger
+      debugger
       this.$store.dispatch('addCreatorToMembers', this.user)
     },
     householdFormToggle() {
