@@ -77,10 +77,17 @@ export default new Vuex.Store({
       state.user.completedChores.push(chore)
     },
     setMemberPoints(state, member){
-      state.user.points += member.points
+      debugger
+      state.user.points = 0;
+      for (var i  = 0; i < member.completedChores.length; i++) {
+        var chore = member.completedChores[i];
+        if(chore.householdId == state.activeHousehold._id){
+          state.user.points += member.completedChores[i].pointsRewarded
+        }
+      }
     },
     addPointsToUser(state, chore) {
-      debugger
+
 
       // var newPoints = chore.chorePoints;
       //     if(state.user.points[chore.householdId]) {
@@ -94,7 +101,7 @@ export default new Vuex.Store({
         Vue.set(state.user.points, chore.householdId, chore.chorePoints)
         // state.user.points[chore.householdId] += chore.chorePoints
       } else {
-        debugger
+
         state.user.points[chore.householdId] += chore.chorePoints
         Vue.set(state.user)
       }
@@ -184,17 +191,17 @@ export default new Vuex.Store({
       // //debugger
       api.post('households', household)
         .then(res => {
-          commit('setActiveHousehold', household)
+          commit('setActiveHousehold', res.data.data)
           dispatch('getHouseholds')
         })
         .catch(handleError)
     },
     createChore({ commit, dispatch }, chore) {
-      // //debugger
+      // //
       api.post('chores', chore)
         .then(res => {
-          debugger
-          commit('addNewChore', chore)
+
+          commit('addNewChore', res.data.data)
         })
         .catch(handleError)
     },
@@ -215,7 +222,7 @@ export default new Vuex.Store({
     addHouseholdPrize({ commit, dispatch }, prize) {
       api.post('households/' + prize.householdId + '/prize', prize)
         .then(res => {
-          debugger
+
           dispatch('addHouseholdPrize', prize)
         })
         .catch(handleError)
@@ -223,7 +230,7 @@ export default new Vuex.Store({
     addChoresToHousehold({ commit, dispatch }, activeHousehold) {
       api.put('households/' + activeHousehold._id + '/chores', activeHousehold.choresList)
         .then(res => {
-          commit('setHouseholdChores', activeHousehold.choresList)
+          commit('setHouseholdChores', res.data.data)
           router.push('/households/' + activeHousehold._id)
         })
         .catch(handleError)
@@ -231,15 +238,15 @@ export default new Vuex.Store({
     completedChore({ commit, dispatch }, { chore, userId }) {
       api.put('updateUserChore', { chore, userId })
         .then(res => {
-          commit('addCompletedChore', chore)
+          commit('addCompletedChore', res.data.data)
         })
         .catch(handleError)
     },
     memberCompletedChore({ commit, dispatch }, { chore, householdId }) {
-     debugger
       api.put('updateMemberChore', { chore, householdId })
         .then(res => {
-          commit('memberCompletedChore', chore)
+          debugger
+          commit('memberCompletedChore', res.data.data)
         })
         .catch(handleError)
     },
@@ -256,14 +263,13 @@ export default new Vuex.Store({
     getMemberPoints({ commit, dispatch }, memberId) {
       api('member/' + memberId, memberId)
       .then(res => {
-        debugger
         commit('setMemberPoints', res.data.data)
       }) .catch(handleError)
     },
     householdChores({ commit, dispatch }, { chore, householdId }) {
       api.put('householdChores', { chore, householdId })
         .then(res => {
-          commit('householdChores', chore)
+          commit('householdChores', res.data.data)
         })
         .catch(handleError)
     },
@@ -276,7 +282,7 @@ export default new Vuex.Store({
     logout({ commit, dispatch }, user) {
       auth.delete('logout/', user)
         .then(res => {
-          debugger
+
           router.push('/')
         })
         .catch(handleError)
