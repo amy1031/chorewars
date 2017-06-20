@@ -13,10 +13,10 @@ var schema = new mongoose.Schema({
 	endDate: {type: Number},
   creatorId: {type: ObjectId, ref: models.user.name, required: true},
   // Relations
-	chores: { type: ObjectId, ref: models.chore.name},
+	completedChores: [{ type: ObjectId, ref: models.completedChore.name}],
 	choresList: {type: Array},
 	//choresList is the chores that are added to the household when it is created
-	members: { type: Array},
+	members: [{ type: ObjectId, ref: models.user.name}],
 	prize: { type: Object},
 	leaderboard: {type: ObjectId, ref: models.leaderboard.creatorId }
 });

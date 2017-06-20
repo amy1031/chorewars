@@ -1,4 +1,5 @@
 let Household = require('../models/household')
+let CompletedChores = require('../models/completedchore')
 let Users = require('../models/user')
 
 export default {
@@ -58,17 +59,17 @@ export default {
         .then(household => {
           for (var i = 0; i < household.members.length; i++) {
             let member = household.members[i];
-           //debugger
+            //debugger
             if (member.email == req.body.chore.creatorEmail) {
               member.completedChores.push(req.body.chore)
-             // household.members[i] = member
+              // household.members[i] = member
             }
           }
           household.save()
-          .then(() => {
-                res.send(handleResponse(action, household))
-              })
-          })
+            .then(() => {
+              res.send(handleResponse(action, household))
+            })
+        })
 
         .catch(error => {
           return next(handleResponse(action, null, error))
@@ -108,7 +109,7 @@ export default {
     reqType: 'put',
     method(req, res, next) {
       // debugger
-      let action = 'Update user object'
+      let action = 'Update user points'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
           // debugger
@@ -172,6 +173,32 @@ export default {
               })
           }
         })
+    }
+  },
+  getMember: {
+    path: '/member/:id',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Get Member with Completed Chores'
+      Users.findById(req.params.id).then(user => {
+        CompletedChores.find({ userId: user.id }).then(chores => {
+          user.completedChores = chores
+          res.send(handleResponse(action, user))
+        }).catch(err => handleResponse(action, null, err))
+      }).catch(err => handleResponse(action, null, err))
+    }
+  },
+  getHouse: {
+    path: '/house/:id',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Get Member with Completed Chores'
+      Household.findById(req.params.id).then(house => {
+        CompletedChores.find({ householdId: house.id }).then(chores => {
+          house.completedChores = chores
+          res.send(handleResponse(action, house))
+        }).catch(err => handleResponse(action, null, err))
+      }).catch(err => handleResponse(action, null, err))
     }
   }
 

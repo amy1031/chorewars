@@ -10,10 +10,10 @@ let schema = new Schema({
   email: { type: String, required: true, unique: true, dropDups: true },
   password: { type: String, required: true },
 	points: { type: Object, default: {} },
-	isWinner: { type: Boolean, default: false },
-  completedChores: { type: Array },
+	// isWinner: [{ type: Boolean, default: false }],
+  completedChores: [{ type: ObjectId, ref: models.completedChore.name }],
   created: { type: Number, required: true, default: Date.now() },
-	householdId: { type: ObjectId, ref: models.household.name }
+	householdIds: [{ type: ObjectId, ref: models.household.name }]
 })
 
 

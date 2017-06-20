@@ -46,8 +46,9 @@ export default {
         addPointsToUser(chore) {
             // updates user.points
             chore.householdId = this.activeHousehold._id
-            chore.completedBy = this.user._id;
-            this.$store.dispatch('addPointsToUser', {chorePoints: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
+            chore.userId = this.user._id;
+            debugger
+            this.$store.dispatch('addPointsToUser', {choreId: chore._id, pointsRewarded: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
             this.completedChore(chore)
         },
         completedChore(chore) {
