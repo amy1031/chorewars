@@ -80,17 +80,13 @@ export default {
     path: '/addCreator/:houseHoldId',
     reqType: 'post',
     method(req, res, next) {
-      // debugger
       let action = 'Add creator to newly created household'
       Users.findOne({ name: req.body.name })
         .then(user => {
-          //
           user.houseHoldIds.push(req.params.houseHoldId)
           res.send(handleResponse(action, user))
-          //
           Household.find({ creatorId: req.body._id })
             .then(householdArr => {
-              debugger
               for (var i = 0; i < householdArr.length; i++) {
                 var myHouse = householdArr[i]
                 if (myHouse.members.length == 0) {
@@ -193,9 +189,10 @@ export default {
     }
   },
   getMembersByHouseholdId: {
-    path: 'household/:id/members',
+    path: 'households/:id/members',
     reqType: 'get',
     method(req,res,next) {
+      debugger
       let action = 'Get members by household Id'
       Users.find({householdIds: { $in: [req.params.id] }}).then(users=>{
         res.send(handleResponse(action, users))

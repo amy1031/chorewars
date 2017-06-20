@@ -75,12 +75,12 @@ export default {
   },
   methods: {
     createHousehold() {
-      this.$store.dispatch("createHousehold", { name: this.name, creatorId: this.$store.state.user._id })
-      this.addCreatorToMembers();
+      this.$store.dispatch("createHousehold", { name: this.name, creatorId: this.$store.state.user._id, user: this.user })
+      // this.addHouseholdIdToUser();
     },
-    addCreatorToMembers() {
+    addHouseholdIdToUser() {
       debugger
-      this.$store.dispatch('addCreatorToMembers', this.user)
+      this.$store.dispatch('addHouseholdIdToUser', {user: this.user, householdId: this.$store.state.activeHousehold._id} )
     },
     householdFormToggle() {
       this.newHousehold = true;

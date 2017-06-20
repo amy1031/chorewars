@@ -148,7 +148,6 @@ export default new Vuex.Store({
       commit('setError')
     },
     getHouseholds({ commit, dispatch }) {
-      ////debugger
       api('households')
         .then(res => {
           commit('setHouseholds', res.data.data)
@@ -186,11 +185,10 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     createHousehold({ commit, dispatch }, household) {
-      debugger
       api.post('households', household)
         .then(res => {
           commit('setActiveHousehold', res.data.data)
-          dispatch('getHouseholds')
+          dispatch('addHouseholdIdToUser', {householdId: res.data.data._id, user: household.user})
         })
         .catch(handleError)
     },
@@ -203,12 +201,15 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-    addCreatorToMembers({ commit, dispatch }, user) {
+    addHouseholdIdToUser({ commit, dispatch }, householdData) {
       debugger
-      api.post('addCreator', user)
+      auth.post('households/' + householdData.householdId + "/members",  householdData.user)
         .then(res => {
-          commit('setCreator', user)
+          debugger
+          // commit('setCreator', user)
+          dispatch('getHouseholds')
         })
+        .catch(handleError)
     },
     createPrize({ commit, dispatch }, prize) {
       api.post('prize/', prize)
