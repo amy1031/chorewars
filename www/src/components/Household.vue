@@ -38,11 +38,7 @@
         </ul>
         <h6>Household Members:</h6>
         <ul>
-<<<<<<< HEAD
             <li v-for='member in this.activeHousehold.members'>{{member.name}} </li> 
-=======
-            <li v-for='member in activeHousehold.members'>{{member.name}} </li>
->>>>>>> b0935a501f0480807229a9e39504b44c677ed3eb
         </ul>
         <h6>Scoreboard:</h6>
 
