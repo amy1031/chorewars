@@ -115,7 +115,7 @@ export default new Vuex.Store({
     register({ commit, dispatch }, user) {
       auth.post('register', user)
         .then(res => {
-          commit('setLogin', res.data)
+          commit('setLogin', res.data.data)
           if (res.data.error) {
             return handleError(res.data.error)
           }
@@ -155,7 +155,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     getHousehold({ commit, dispatch }, id) {
-      api('households/' + id)
+      api('house/' + id)
         .then(res => {
           //for each member id in household, dispatch get member
           commit('setActiveHousehold', res.data.data)
@@ -203,7 +203,7 @@ export default new Vuex.Store({
     },
     addHouseholdIdToUser({ commit, dispatch }, householdData) {
       debugger
-      auth.post('households/' + householdData.householdId + "/members",  householdData.user)
+      api.post('addCreator/'+ householdData.householdId,  householdData.user)
         .then(res => {
           debugger
           // commit('setCreator', user)

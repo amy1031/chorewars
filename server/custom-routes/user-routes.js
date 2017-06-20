@@ -77,30 +77,24 @@ export default {
     }
   },
   addCreatorToHousehold: {
-    path: '/addCreator/:houseHoldId',
+    path: '/addCreator/:householdId',
     reqType: 'post',
     method(req, res, next) {
+      debugger
       let action = 'Add creator to newly created household'
       Users.findOne({ name: req.body.name })
         .then(user => {
-          user.houseHoldIds.push(req.params.houseHoldId)
-          res.send(handleResponse(action, user))
-          Household.find({ creatorId: req.body._id })
-            .then(householdArr => {
-              for (var i = 0; i < householdArr.length; i++) {
-                var myHouse = householdArr[i]
-                if (myHouse.members.length == 0) {
-                  myHouse.members.push(user)
-                  myHouse.save().then(() => {
-                    res.send(handleResponse(action, req.body))
-                  })
-                }
-              }
-              // debugger
-            })
+          user.householdIds.push(req.params.householdId)
+          user.save().then(() => {
+            res.send(handleResponse(action, user))
+
+          })
             .catch(error => {
               return next(handleResponse(action, null, error))
             })
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
         })
     }
   },
@@ -191,10 +185,10 @@ export default {
   getMembersByHouseholdId: {
     path: 'households/:id/members',
     reqType: 'get',
-    method(req,res,next) {
+    method(req, res, next) {
       debugger
       let action = 'Get members by household Id'
-      Users.find({householdIds: { $in: [req.params.id] }}).then(users=>{
+      Users.find({ householdIds: { $in: [req.params.id] } }).then(users => {
         res.send(handleResponse(action, users))
       }).catch(err => handleResponse(action, null, err))
     }
@@ -205,12 +199,14 @@ export default {
     method(req, res, next) {
       let action = 'Get Member with Completed Chores'
       Household.findById(req.params.id).then(house => {
-        CompletedChores.find({ householdId: house.id }).then(chores => {
+        CompletedChores.find({ householdId: house._id }).then(chores => {
           house.completedChores = chores
-            Users.find({householdIds: { $in: [req.params.id] }}).then(members =>{
-              house.members = members
-              }).catch(err => handleResponse(action, null, err))
-          res.send(handleResponse(action, house))
+          Users.find({ householdIds: { $in: [req.params.id] } }).then(members => {
+            house.members = members
+            house.save().then(()=>{
+              res.send(handleResponse(action, house))
+            })
+          })
         }).catch(err => handleResponse(action, null, err))
       }).catch(err => handleResponse(action, null, err))
     }
