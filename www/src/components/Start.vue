@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     createHousehold() {
-      this.$store.dispatch("createHousehold", { name: this.name, creatorId: this.creatorId })
+      this.$store.dispatch("createHousehold", { name: this.name, creatorId: this.$store.state.user._id })
       this.addCreatorToMembers();
     },
     addCreatorToMembers() {
