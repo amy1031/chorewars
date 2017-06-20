@@ -44,7 +44,7 @@ export default new Vuex.Store({
       router.push('/start')
     },
     setActiveHousehold(state, activeHousehold) {
-      debugger
+     // debugger
       //state.activeHousehold = activeHousehold
       Vue.set(state, "activeHousehold", activeHousehold)
     },
