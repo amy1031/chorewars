@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
   creatorId: {type: ObjectId, ref: models.user.name, required: true},
   // Relations
 	householdId: { type: ObjectId, ref: models.household.name, required: true},
-	members: { type: ObjectId, ref: models.user.name, required: true}
+	members: [{ type: ObjectId, ref: models.user.name, required: true}]
 });
 
 module.exports = mongoose.model(models.leaderboard.name, schema);

@@ -24,6 +24,10 @@ const models = {
     name: 'Prize',
     endpoint: 'prize'
   },
+  completedChore:{
+    name: 'completedChore',
+    endpoint: 'completed-chores'
+  },
   user: {
     name: 'User',
     endpoint: 'users',
