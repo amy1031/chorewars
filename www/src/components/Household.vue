@@ -22,9 +22,9 @@
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
                 </div>
             </form>
-                <div>
+                <!--<div>
                     <button type="submit" class="btn btn-danger" id="start-household-button" @click="startHousehold">Start your Household</button>
-                </div>
+                </div>-->
         </div>
 
         <br>
@@ -41,7 +41,7 @@
             <li v-for='member in activeHousehold.members'>{{member.name}}</li>
         </ul>
         <h6>Scoreboard:</h6>
-        {{scoreBoard}}
+            {{scoreBoard}}
         <br>
         <router-link :to="'/start'">Back to Households</router-link>
     </div>
@@ -156,20 +156,59 @@ export default {
                 if(startDay + 14 > 30){
                   let overDays = startDay + 14;
                   let realDays = overDays - 30;
+                    let endDate = {
+                        endMonth: startMonth + 1,
+                        endDay: realDays,
+                        endHour: startHour,
+                        endMinutes: startMinutes
+                    }
+                        this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
+                        return
                 }else{
+                    let endDate = {
+                        endMonth: startMonth,
+                        endDay: realDays + 14,
+                        endHour: startHour,
+                        endMinutes: startMinutes
+                    }
+                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
+                    return
+                }
+            }
+            if(startMonth == 2){
+                if(startDay + 14 > 28){
+                    let overDays = startDay + 14;
+                    let realDays = overDays - 28;
+                    let endDate = {
+                        endMonth: startMonth + 1,
+                        endDay: realDays,
+                        endHour: startHour,
+                        endMinutes: startMinutes
+                    }
+                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate , householdId: this.req.params.id})
+                    return
+                }else{
+                    let endDate = {
+                        endMonth :startMonth,
+                        endDay: startDate + 14,
+                        endHour: startHour,
+                        endMinutes: startMinutes
+                    }
+                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
+                    return
 
                 }
             }
+        },
+        memberScoreboard() {
+            var scoreBoard = [];
+            for (var i = 0; i < this.completedChores.length; i++) {
+                var chore = this.completeChores[i];
+                if (chore.email == this.user) {
+                    scoreBoard.push(chore);
+                }
+            } return scoreBoard;
         }
-        // memberScoreboard() {
-        //     var scoreBoard = [];
-        //     for (var i = 0; i < this.completedChores.length; i++) {
-        //         var chore = this.completeChores[i];
-        //         if (chore.email == this.user) {
-        //             scoreBoard.push(chore);
-        //         }
-        //     } return scoreBoard;
-        // }
     },
     components: {}
 }

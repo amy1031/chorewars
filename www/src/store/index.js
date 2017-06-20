@@ -44,6 +44,7 @@ export default new Vuex.Store({
       router.push('/start')
     },
     setActiveHousehold(state, activeHousehold) {
+      debugger
       //state.activeHousehold = activeHousehold
       Vue.set(state, "activeHousehold", activeHousehold)
     },
@@ -73,11 +74,10 @@ export default new Vuex.Store({
       state.chores.push(chore)
     },
     memberCompletedChore(state, chore) {
-    //  debugger
       state.user.completedChores.push(chore)
     },
     addPointsToUser(state, chore) {
-      //debugger
+      debugger
 
       // var newPoints = chore.chorePoints;
       //     if(state.user.points[chore.householdId]) {
@@ -91,7 +91,9 @@ export default new Vuex.Store({
         Vue.set(state.user.points, chore.householdId, chore.chorePoints)
         // state.user.points[chore.householdId] += chore.chorePoints
       } else {
+        debugger
         state.user.points[chore.householdId] += chore.chorePoints
+        Vue.set(state.user)
       }
       // state.user.points[this.activeHousehold._id] += chorePoints
       //Added points so they live on the household they were earned on!
@@ -231,7 +233,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     memberCompletedChore({ commit, dispatch }, { chore, householdId }) {
-     // debugger
+     debugger
       api.put('updateMemberChore', { chore, householdId })
         .then(res => {
           commit('memberCompletedChore', chore)
