@@ -38,14 +38,10 @@
         </ul>
         <h6>Household Members:</h6>
         <ul>
-            <li v-for='member in activeHousehold.members'>{{member.name}} </li> 
+            <li v-for='member in activeHousehold.members'>{{member.name}} </li>
         </ul>
         <h6>Scoreboard:</h6>
-<<<<<<< HEAD
-            {{scoreBoard}}
-=======
-    
->>>>>>> 1c4deeef6c929ab15b9ab112593aa58b4cb56226
+
         <br>
         <router-link :to="'/start'">Back to Households</router-link>
     </div>
