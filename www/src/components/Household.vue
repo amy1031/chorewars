@@ -38,7 +38,7 @@
         </ul>
         <h6>Household Members:</h6>
         <ul>
-            <li v-for='member in activeHousehold.members'>{{member.name}} </li> 
+            <li v-for='member in this.activeHousehold.members'>{{member.name}} </li> 
         </ul>
         <h6>Scoreboard:</h6>
     
@@ -58,7 +58,7 @@ export default {
             addCollaboratorsButton: true,
             newPrize: false,
             addPrizeButton: true,
-            prize: { name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id }
+            prize: { name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id}
         }
     },
     computed: {

@@ -60,10 +60,12 @@ export default new Vuex.Store({
       //state.activeHousehold.choresList = chores;
       Vue.set(state.activeHousehold, "choresList", chores)
     },
-    setMembers(state, household) {
-      ////debugger
+    setMembers(state, member) {
+      debugger
       //state.activeHousehold.choresList = chores;
-      Vue.set(state.activeHousehold, "members", household.members)
+
+      //Vue.set(state.activeHousehold, "members", member)
+      state.activeHousehold.members.push(member)
     },
     addCompletedChore(state, chore) {
       // //debugger
@@ -80,16 +82,6 @@ export default new Vuex.Store({
       state.user.points += member.points
     },
     addPointsToUser(state, chore) {
-      //debugger
-
-      // var newPoints = chore.chorePoints;
-      //     if(state.user.points[chore.householdId]) {
-      //       var oldPoints = state.user.points[chore.householdId];
-      //       var updatedPoints = newPoints + oldPoints
-      //       state.user.points[chore.householdId] = updatedPoints
-      //       }else{
-      //         state.user.points[chore.householdId] = newPoints
-      //       }
       if (!state.user.points[chore.householdId]) {
         Vue.set(state.user.points, chore.householdId, chore.chorePoints)
         // state.user.points[chore.householdId] += chore.chorePoints
@@ -104,6 +96,10 @@ export default new Vuex.Store({
     },
     addHouseholdPrize(state, prize) {
       state.activeHousehold.prize = prize
+    },
+    setCreator(state, user) {
+      debugger
+      state.activeHousehold.members.push(user)
     }
   },
   actions: {
@@ -153,12 +149,14 @@ export default new Vuex.Store({
     getHousehold({ commit, dispatch }, id) {
       api('households/' + id)
         .then(res => {
+          //for each member id in household, dispatch get member
           commit('setActiveHousehold', res.data.data)
+          
         })
         .catch(handleError)
     },
     getMembers({ commit, dispatch }, id) {
-      api('households/' + id)
+      api('member/' + id)
         .then(res => {
           commit('setMembers', res.data.data)
         })
@@ -179,9 +177,10 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     createHousehold({ commit, dispatch }, household) {
-      // //debugger
+      debugger
       api.post('households', household)
         .then(res => {
+          debugger
           commit('setActiveHousehold', household)
           dispatch('getHouseholds')
         })
@@ -197,10 +196,10 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     addCreatorToMembers({ commit, dispatch }, user) {
-      //  //debugger
+      debugger
       api.post('addCreator', user)
         .then(res => {
-
+          commit('setCreator', user)
         })
     },
     createPrize({ commit, dispatch }, prize) {
