@@ -79,7 +79,6 @@ export default {
       // this.addHouseholdIdToUser();
     },
     addHouseholdIdToUser() {
-      debugger
       this.$store.dispatch('addHouseholdIdToUser', {user: this.user, householdId: this.$store.state.activeHousehold._id} )
     },
     householdFormToggle() {

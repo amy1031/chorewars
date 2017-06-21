@@ -80,7 +80,7 @@ export default {
     path: '/addCreator/:householdId',
     reqType: 'post',
     method(req, res, next) {
-      debugger
+      // debugger
       let action = 'Add creator to newly created household'
       Users.findOne({ name: req.body.name })
         .then(user => {
@@ -126,20 +126,27 @@ export default {
         })
     }
   },
-  updateUserChore: {
-    path: '/updateUserChore',
+  addPointsToUser: {
+    path: '/addPointsToUser',
     reqType: 'put',
     method(req, res, next) {
-      let action = 'Update user object'
+      let action = 'Update user points'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
           //debugger
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-            user.completedChores.push(req.body.chore)
-            user.save(user).then(() => {
-              res.send(handleResponse(action, req.body))
+            debugger
+            if (!user.points[req.body.chore.householdId]) {
+             // debugger
+              user.points[req.body.chore.householdId] = 0
+              user.points[req.body.chore.householdId] += req.body.chore.points
+            } else {
+              user.points[req.body.chore.householdId] += req.body.chore.points
+            }
+            user.save().then(() => {
+              res.send(handleResponse(action, user))
             })
               .catch(error => {
                 return next(handleResponse(action, null, error))
@@ -203,7 +210,7 @@ export default {
           house.completedChores = chores
           Users.find({ householdIds: { $in: [req.params.id] } }).then(members => {
             house.members = members
-            house.save().then(()=>{
+            house.save().then(() => {
               res.send(handleResponse(action, house))
             })
           })

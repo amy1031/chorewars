@@ -48,7 +48,7 @@
 
       },
       createChore(newChore){
-        debugger
+        //debugger
         this.$store.dispatch('createChore', newChore)
       }
     },

@@ -7,7 +7,7 @@
         <hr>
         <h6>Chores to Complete:</h6>
         <ul>
-            <li v-for='chore in this.choresList'>{{chore.name}} <button class="delete" @click="addPointsToUser(chore)">X</button></li>
+            <li v-for='chore in this.choresList'>{{chore.name}} <button class="delete" @click="updateUserCompletedChore(chore)">X</button></li>
         </ul>
         <h6>Completed:</h6>
         <ul>
@@ -43,17 +43,17 @@ export default {
         }
     },
     methods:{
+        updateUserCompletedChore(chore) {
+            // updates user.completedChores
+            chore.householdId = this.activeHousehold._id
+            chore.completedBy = this.user._id;
+            this.$store.dispatch('updateUserCompletedChore', {choreId: chore._id, pointsRewarded: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
+            this.addPointsToUser(chore)
+        },
         addPointsToUser(chore) {
             // updates user.points
-            chore.householdId = this.activeHousehold._id
-            chore.userId = this.user._id;
-            this.$store.dispatch('addPointsToUser', {choreId: chore._id, pointsRewarded: chore.points, userId: this.user._id, householdId: this.activeHousehold._id})
-            this.completedChore(chore)
-        },
-        completedChore(chore) {
-            // updates user.completedChores
-            this.$store.dispatch('completedChore', {chore: chore, userId: this.user._id})
-            this.householdChores(chore, this.activeHousehold._id)
+            this.$store.dispatch('addPointsToUser', {chore: chore, userId: this.user._id})
+            //this.householdChores(chore, this.activeHousehold._id)
         },
         householdChores(chore, householdId) {
             // updates activehousehold.choreLog
