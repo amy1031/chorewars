@@ -26,9 +26,11 @@ export default {
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
+            // debugger
             // Might need more validation to check if user is creator of household for stupid users
             Household.findById(req.body.householdId)
               .then(household => {
+                //debugger
                 for (var i = 0; i < household.members.length; i++) {
                   var member = household.members[i];
                   if (member.email == user.email) {
@@ -37,9 +39,11 @@ export default {
                   }
                 }
                 if (true) {
-                  household.members.push(user)
-                  household.save(household).then(() => {
-                    res.send(handleResponse(action, req.body))
+                   debugger
+                  user.householdIds.push(req.body.householdId)
+                 // household.members.push(user)
+                  user.save().then(() => {
+                    res.send(handleResponse(action, user))
                   })
                 }
               })
@@ -139,7 +143,7 @@ export default {
           } else {
             debugger
             if (!user.points[req.body.chore.householdId]) {
-             // debugger
+              // debugger
               user.points[req.body.chore.householdId] = 0
               user.points[req.body.chore.householdId] += req.body.chore.points
             } else {

@@ -110,6 +110,9 @@ export default new Vuex.Store({
     setCreator(state, user) {
       debugger
       state.activeHousehold.members.push(user)
+    },
+    setHouseholdMembers (state, user) {
+      state.activeHousehold.members.push(user)
     }
   },
   actions: {
@@ -273,8 +276,10 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     searchUsers({ commit, dispatch }, data) {
+      debugger
       api.post("findUsers", data)
         .then(res => {
+          commit('setHouseholdMembers', res.data.data)
         })
         .catch(handleError)
     },
