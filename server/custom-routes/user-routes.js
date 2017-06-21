@@ -39,7 +39,7 @@ export default {
                   }
                 }
                 if (true) {
-                   debugger
+                   //debugger
                   user.householdIds.push(req.body.householdId)
                  // household.members.push(user)
                   user.save().then(() => {
@@ -141,7 +141,7 @@ export default {
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-            debugger
+            //debugger
             if (!user.points[req.body.chore.householdId]) {
               // debugger
               user.points[req.body.chore.householdId] = 0
