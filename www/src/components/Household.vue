@@ -76,10 +76,10 @@ export default {
         scoreBoard() {
             let pointsDictionary = {}
             for (var i = 0; i < this.activeHousehold.members.length; i++) {
-                debugger
+                //debugger
                 var member = this.activeHousehold.members[i];
                 for (var j = 0; j < this.activeHousehold.completedChores.length; j++) {
-                    debugger
+                   // debugger
                     var chore = this.activeHousehold.completedChores[j];
                     if (member._id == chore.userId) {
                         if (!pointsDictionary[member._id]) {
