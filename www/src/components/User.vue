@@ -2,8 +2,8 @@
     <div class="user">
         <h3>Household: {{activeHousehold.name}}</h3>
         <h4>User: {{user.name}}</h4>
-            <h5>Points: {{this.addUpUserPoints}}</h5>
-        
+        <h5>Points: {{this.addUpUserPoints}}</h5>
+    
         <hr>
         <h6>Chores to Complete:</h6>
         <ul>
@@ -13,9 +13,10 @@
         </ul>
         <h6>Completed:</h6>
         <ul>
-            <span v-for='chore in this.activeHousehold.completedChores'>
+            <span v-for='chore in this.completedChores'>
                 <li v-if="chore.userId == user._id">{{chore.name}}</li>
             </span>
+            <!--<span v-for='chore in this.user.completedChores'>{{chore.name}}</span>-->
         </ul>
         <router-link :to="'/households/'+activeHousehold._id">Back to Household</router-link>
     </div>
@@ -32,7 +33,7 @@ export default {
         }
     },
     mounted() {
-    this.$store.dispatch('getUserChores', this.user._id)
+        this.$store.dispatch('getUserChores', this.user._id)
     },
     computed: {
         user() {
@@ -44,12 +45,16 @@ export default {
         allCompletedChores() {
             return this.$store.state.allCompletedChores
         },
-         addUpUserPoints(){
+        completedChores() {
+            return this.$store.state.activeHousehold.completedChores
+
+        },
+         addUpUserPoints() {
             let userPoints = 0;
             let completedChores = this.$store.state.allCompletedChores
             for (var i = 0; i < completedChores.length; i++) {
                 var chore = completedChores[i];
-                if(chore.userId == this.user._id && chore.householdId == this.activeHousehold._id){
+                if (chore.userId == this.user._id && chore.householdId == this.activeHousehold._id) {
                     userPoints += chore.pointsRewarded
                 }
             }
@@ -73,7 +78,7 @@ export default {
         householdChores(chore, householdId) {
             // updates activehousehold.choreLog
             this.$store.dispatch('householdChores', { chore: chore, householdId: householdId })
-          //  this.getAllUserChores()
+            this.getAllUserChores()
         },
         getAllUserChores() {
             this.$store.dispatch('getUserChores', this.user._id)

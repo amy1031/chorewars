@@ -105,6 +105,7 @@ export default new Vuex.Store({
     },
     householdChores(state, chore) {
       state.activeHousehold.choreLog.push(chore)
+      state.activeHousehold.completedChores.push(chore)
     },
     addHouseholdPrize(state, prize) {
       state.activeHousehold.prize = prize
@@ -117,6 +118,7 @@ export default new Vuex.Store({
       state.activeHousehold.members.push(user)
     },
     setUserCompletedChore (state, chore) {
+     // debugger
       state.user.completedChores.push(chore)
     },
     setUserChores (state, user){

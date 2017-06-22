@@ -4,8 +4,8 @@
             <h1>{{activeHousehold.name}}</h1>
         </div>
         <div class="text-center">
-          <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
-            <h2 v-else> </h2> -->
+            <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
+                <h2 v-else> </h2> -->
         </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
@@ -22,11 +22,11 @@
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
                 </div>
             </form>
-                <!--<div>
-                    <button type="submit" class="btn btn-danger" id="start-household-button" @click="startHousehold">Start your Household</button>
-                </div>-->
+            <!--<div>
+                        <button type="submit" class="btn btn-danger" id="start-household-button" @click="startHousehold">Start your Household</button>
+                    </div>-->
         </div>
-
+    
         <br>
         <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
         <br>
@@ -37,11 +37,13 @@
             <li v-for='completed in completedChores'>{{completed.name}}</li>
         </ul>
         <h6>Household Members:</h6>
-        <ul>
-            <li v-for='member in activeHousehold.members'>{{member.name}} </li>
-        </ul>
+            <div v-for='member in activeHousehold.members'>{{member.name}} <span v-for= 'member in scoreBoard'>{{member}}</span>
+            </div>
         <h6>Scoreboard:</h6>
-
+        <ul>
+            <li v-for= 'member in scoreBoard'>{{member}}
+            </li>
+        </ul>
         <br>
         <router-link :to="'/start'">Back to Households</router-link>
     </div>
@@ -58,7 +60,7 @@ export default {
             addCollaboratorsButton: true,
             newPrize: false,
             addPrizeButton: true,
-            prize: { name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id}
+            prize: { name: '', creatorId: this.$store.state.user._id, householdId: this.$route.params.id }
         }
     },
     computed: {
@@ -72,21 +74,40 @@ export default {
             return this.$store.state.user
         },
         scoreBoard() {
-            for (var i = 0; i < this.completedChores.length; i++) {
-                var chore = this.completedChores[i]
-                if (chore.householdId = this.activeHousehold._id) {
-                    if (chore.completedBy == this.user._id) {
-                        var points = chore.points
-                        if (points > 0) {
-                            points += points
-                            return points
+            let pointsDictionary = {}
+            for (var i = 0; i < this.activeHousehold.members.length; i++) {
+                debugger
+                var member = this.activeHousehold.members[i];
+                for (var j = 0; j < this.activeHousehold.completedChores.length; j++) {
+                    debugger
+                    var chore = this.activeHousehold.completedChores[j];
+                    if (member._id == chore.userId) {
+                        if (!pointsDictionary[member.name]) {
+                            pointsDictionary[member.name] = chore.pointsRewarded
                         } else {
-                            return points
+                            pointsDictionary[member.name] += chore.pointsRewarded
                         }
                     }
                 }
-            }
+            } console.log(pointsDictionary)
+            return pointsDictionary
         }
+        // scoreBoard() {
+        //     for (var i = 0; i < this.completedChores.length; i++) {
+        //         var chore = this.completedChores[i]
+        //         if (chore.householdId = this.activeHousehold._id) {
+        //             if (chore.completedBy == this.user._id) {
+        //                 var points = chore.points
+        //                 if (points > 0) {
+        //                     points += points
+        //                     return points
+        //                 } else {
+        //                     return points
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
     },
     mounted() {
@@ -116,20 +137,20 @@ export default {
         addHouseholdPrize() {
             this.$store.dispatch("addHouseholdPrize", this.prize)
         },
-        householdStartEndDate(){
+        householdStartEndDate() {
             let date = new Date();
             let startMonth = date.getMonth();
             let startDay = date.getDate()
             let startHour = date.getHours();
             let startMinutes = date.getMinutes();
             let startDate = {
-                startMonth:startMonth,
+                startMonth: startMonth,
                 startDay: startDate,
                 startHour: startHour,
                 startMinutes: startMinutes
             }
-            if(startMonth == 1 || startMonth == 3 || startMonth == 5 || startMonth == 7 || startMonth == 8 || startMonth == 10 || startMonth == 12){
-                if(startDay + 14 > 31){
+            if (startMonth == 1 || startMonth == 3 || startMonth == 5 || startMonth == 7 || startMonth == 8 || startMonth == 10 || startMonth == 12) {
+                if (startDay + 14 > 31) {
                     let overDays = startDay + 14;
                     let realDays = overDays - 31;
                     let endDate = {
@@ -138,45 +159,45 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate , householdId: this.req.params.id})
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
                     return
-                }else{
+                } else {
                     let endDate = {
-                        endMonth :startMonth,
+                        endMonth: startMonth,
                         endDay: startDate + 14,
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
                     return
 
                 }
             }
-            if(startMonth == 4 || startMonth == 6 || startMonth == 9 || startMonth == 11 ) {
-                if(startDay + 14 > 30){
-                  let overDays = startDay + 14;
-                  let realDays = overDays - 30;
+            if (startMonth == 4 || startMonth == 6 || startMonth == 9 || startMonth == 11) {
+                if (startDay + 14 > 30) {
+                    let overDays = startDay + 14;
+                    let realDays = overDays - 30;
                     let endDate = {
                         endMonth: startMonth + 1,
                         endDay: realDays,
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                        this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
-                        return
-                }else{
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    return
+                } else {
                     let endDate = {
                         endMonth: startMonth,
                         endDay: realDays + 14,
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
                     return
                 }
             }
-            if(startMonth == 2){
-                if(startDay + 14 > 28){
+            if (startMonth == 2) {
+                if (startDay + 14 > 28) {
                     let overDays = startDay + 14;
                     let realDays = overDays - 28;
                     let endDate = {
@@ -185,16 +206,16 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate , householdId: this.req.params.id})
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
                     return
-                }else{
+                } else {
                     let endDate = {
-                        endMonth :startMonth,
+                        endMonth: startMonth,
                         endDay: startDate + 14,
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', {startDate: startDate, endDate: endDate, householdId: this.req.params.id})
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
                     return
 
                 }
