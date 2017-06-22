@@ -4,7 +4,6 @@ let ObjectId = mongoose.Schema.ObjectId
 
 var schema = new mongoose.Schema({
   name: { type: String, required: true },
-  totalPoints: { type: Number, default: 0 },
 	finished: { type: Boolean, default: false },
 	choreLog: { type: Array },
 	//choreLog is the chores that have been completed by all the users on a certain household
