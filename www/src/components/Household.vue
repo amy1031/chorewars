@@ -36,9 +36,6 @@
         <ul>
             <li v-for='completed in completedChores'>{{completed.name}}</li>
         </ul>
-        <!--<h6>Household Members:</h6>
-                <div v-for='member in activeHousehold.members'>{{member.name}}
-                </div>-->
         <h6>Scoreboard:</h6>
         <ul>
             <li v-for='member in scoreBoard'>{{member.name}} - {{member.points}}
@@ -73,13 +70,15 @@ export default {
         user() {
             return this.$store.state.user
         },
+        prize() {
+            return this.activeHousehold.prize.name
+        },
         scoreBoard() {
             let pointsDictionary = {}
             for (var i = 0; i < this.activeHousehold.members.length; i++) {
 
                 var member = this.activeHousehold.members[i];
                 for (var j = 0; j < this.activeHousehold.completedChores.length; j++) {
-
                     var chore = this.activeHousehold.completedChores[j];
                     if (member._id == chore.userId) {
                         if (!pointsDictionary[member._id]) {
@@ -206,15 +205,6 @@ export default {
 
                 }
             }
-        },
-        memberScoreboard() {
-            var scoreBoard = [];
-            for (var i = 0; i < this.completedChores.length; i++) {
-                var chore = this.completeChores[i];
-                if (chore.email == this.user) {
-                    scoreBoard.push(chore);
-                }
-            } return scoreBoard;
         }
     },
     components: {}

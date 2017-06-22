@@ -16,7 +16,6 @@
         </div>
       </form>
     </div>
-    <error></error>
   </div>
 </template>
 
@@ -51,7 +50,7 @@
 
 
 <style scoped>
-  .input-group {
-    width: 50%;
-  }
+.input-group {
+  width: 50%;
+}
 </style>
