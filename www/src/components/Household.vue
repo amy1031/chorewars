@@ -36,9 +36,9 @@
         <ul>
             <li v-for='completed in completedChores'>{{completed.name}}</li>
         </ul>
-        <h6>Household Members:</h6>
-            <div v-for='member in activeHousehold.members'>{{member.name}} <span v-for= 'member in scoreBoard'>{{member}}</span>
-            </div>
+        <!--<h6>Household Members:</h6>
+            <div v-for='member in activeHousehold.members'>{{member.name}}
+            </div>-->
         <h6>Scoreboard:</h6>
         <ul>
             <li v-for= 'member in scoreBoard'>{{member.name}} - {{member.points}}
@@ -91,25 +91,9 @@ export default {
                         }
                     }
                 }
-            } console.log(pointsDictionary)
+            } 
             return pointsDictionary
         }
-        // scoreBoard() {
-        //     for (var i = 0; i < this.completedChores.length; i++) {
-        //         var chore = this.completedChores[i]
-        //         if (chore.householdId = this.activeHousehold._id) {
-        //             if (chore.completedBy == this.user._id) {
-        //                 var points = chore.points
-        //                 if (points > 0) {
-        //                     points += points
-        //                     return points
-        //                 } else {
-        //                     return points
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
 
     },
     mounted() {
