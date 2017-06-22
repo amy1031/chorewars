@@ -104,6 +104,7 @@ export default new Vuex.Store({
       //Added points so they live on the household they were earned on!
     },
     householdChores(state, chore) {
+     // debugger
       state.activeHousehold.choreLog.push(chore)
       state.activeHousehold.completedChores.push(chore)
     },
@@ -120,7 +121,7 @@ export default new Vuex.Store({
     setUserCompletedChore (state, chore) {
      //
       state.user.completedChores.push(chore)
-
+     // Vue.set(state, "user", user)
     },
     setUserChores (state, user){
      //
@@ -290,10 +291,17 @@ export default new Vuex.Store({
       }) .catch(handleError)
     },
     householdChores({ commit, dispatch }, { chore, householdId }) {
+<<<<<<< HEAD
 
       api.put('householdChores', { chore, householdId })
         .then(res => {
 
+=======
+      //debugger
+      api.put('householdChores', { chore, householdId })
+        .then(res => {
+          //debugger
+>>>>>>> c23e98e56ec6bc3e86971cc731e96830041e2f6d
           commit('householdChores', res.data.data.chore)
         })
         .catch(handleError)
