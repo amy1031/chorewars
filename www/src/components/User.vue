@@ -73,7 +73,7 @@ export default {
         householdChores(chore, householdId) {
             // updates activehousehold.choreLog
             this.$store.dispatch('householdChores', { chore: chore, householdId: householdId })
-            this.getAllUserChores()
+          //  this.getAllUserChores()
         },
         getAllUserChores() {
             this.$store.dispatch('getUserChores', this.user._id)
