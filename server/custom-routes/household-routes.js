@@ -54,7 +54,22 @@ export default {
           return next(handleResponse(action, null, error))
         })
     }
-
+  },
+  updateHouseStartandEndDate: {
+    path: "/startHousehold",
+    reqType: "put",
+    method(req, res, next){
+      let action = "Updates the households start and end date"
+      Household.findById(req.body.householdId)
+        .then(household => {
+          household.startDate = req.body.startDate
+          household.endDate = req.body.endDate
+          household.save()
+          res.send(handleResponse(action, household))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
   },
   getChoresByHousehold: {
     path: '/households/:householdId/chores',

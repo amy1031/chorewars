@@ -4,8 +4,8 @@
             <h1>{{activeHousehold.name}}</h1>
         </div>
         <div class="text-center">
-            <h2 v-if="this.activeHousehold.prize">Prize: {{activeHousehold.prize.name}}</h2>
-            <h2 v-else>Prize: </h2> 
+            <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
+                    <h2 v-else> </h2> -->
         </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
@@ -124,13 +124,13 @@ export default {
         },
         householdStartEndDate() {
             let date = new Date();
-            let startMonth = date.getMonth();
+            let startMonth = date.getMonth() + 1;
             let startDay = date.getDate()
             let startHour = date.getHours();
             let startMinutes = date.getMinutes();
             let startDate = {
                 startMonth: startMonth,
-                startDay: startDate,
+                startDay: startDay,
                 startHour: startHour,
                 startMinutes: startMinutes
             }
@@ -144,7 +144,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
                 } else {
                     let endDate = {
@@ -153,7 +153,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
 
                 }
@@ -168,7 +168,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
                 } else {
                     let endDate = {
@@ -177,7 +177,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
                 }
             }
@@ -191,7 +191,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id})
                     return
                 } else {
                     let endDate = {
@@ -200,7 +200,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
 
                 }

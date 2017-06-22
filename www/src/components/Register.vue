@@ -20,28 +20,31 @@
 </template>
 
 <script>
-export default {
-  name: 'register',
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: ""
+  export default {
+    name: 'register',
+    data() {
+      return {
+        name: "",
+        email: "",
+        password: ""
+
+      }
+    },
+    computed: {},
+    methods: {
+      register() {
+        //
+        this.$store.dispatch('register', {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        })
+      }
+    },
+    components: {
+
     }
-  },
-  computed: {},
-  methods: {
-    register() {
-      //debugger
-      this.$store.dispatch('register', {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      })
     }
-  },
-  components: {}
-}
 
 </script>
 
