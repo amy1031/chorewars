@@ -10,7 +10,7 @@
           <button type="submit" class="btn btn-outline-danger float-right">Logout</button>
         </form>
     </nav>
-  
+
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     logout() {
-      debugger
+
       this.$store.dispatch('logout', this.user)
     }
   },

@@ -26,7 +26,7 @@
                         <button type="submit" class="btn btn-danger" id="start-household-button" @click="startHousehold">Start your Household</button>
                     </div>-->
         </div>
-    
+
         <br>
         <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
         <br>
@@ -76,10 +76,10 @@ export default {
         scoreBoard() {
             let pointsDictionary = {}
             for (var i = 0; i < this.activeHousehold.members.length; i++) {
-                debugger
+
                 var member = this.activeHousehold.members[i];
                 for (var j = 0; j < this.activeHousehold.completedChores.length; j++) {
-                    debugger
+
                     var chore = this.activeHousehold.completedChores[j];
                     if (member._id == chore.userId) {
                         if (!pointsDictionary[member._id]) {
@@ -91,7 +91,7 @@ export default {
                         }
                     }
                 }
-            } 
+            }
             return pointsDictionary
         }
 
@@ -117,7 +117,7 @@ export default {
             this.addPrizeButton = true;
         },
         searchUsers() {
-            //debugger
+            //
             this.$store.dispatch("searchUsers", { user: this.username, householdId: this.$route.params.id })
         },
         addHouseholdPrize() {
