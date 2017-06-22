@@ -120,13 +120,14 @@ export default new Vuex.Store({
     setUserCompletedChore (state, chore) {
      // debugger
       state.user.completedChores.push(chore)
+
     },
     setUserChores (state, user){
      // debugger
      state.allCompletedChores = [];
       for (var i = 0; i < user.completedChores.length; i++) {
         var chore = user.completedChores[i];
-          state.allCompletedChores.push(chore)        
+          state.allCompletedChores.push(chore)
       }
     }
   },
@@ -289,9 +290,11 @@ export default new Vuex.Store({
       }) .catch(handleError)
     },
     householdChores({ commit, dispatch }, { chore, householdId }) {
+      debugger
       api.put('householdChores', { chore, householdId })
         .then(res => {
-          commit('householdChores', res.data.data)
+          debugger
+          commit('householdChores', res.data.data.chore)
         })
         .catch(handleError)
     },
