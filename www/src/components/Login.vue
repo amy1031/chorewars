@@ -19,38 +19,38 @@
         <router-link to='/register'> Create an account</router-link>
       </p>
     </div>
-  </div>
+      <error></error>
   </div>
 </template>
 
 
 <script>
-  export default {
-    name: 'login',
-    data() {
-      return {
-        email: "",
-        password: "",
+export default {
+  name: 'login',
+  data() {
+    return {
+      email: "",
+      password: "",
+    }
+  },
+  computed: {},
+  methods: {
+    login() {
+      let user = {
+        email: this.email,
+        password: this.password
       }
-    },
-    computed: {},
-    methods: {
-      login() {
-        let user = {
-          email: this.email,
-          password: this.password
-        }
-        this.$store.dispatch('login', user)
-      }
-    },
-    components: {}
-  }
+      this.$store.dispatch('login', user)
+    }
+  },
+  components: {}
+}
 
 </script>
 
 
 <style scoped>
-  .form-group {
-    width: 50%;
-  }
+.form-group {
+  width: 50%;
+}
 </style>
