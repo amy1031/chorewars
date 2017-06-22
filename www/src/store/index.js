@@ -311,16 +311,16 @@ export default new Vuex.Store({
     logout({ commit, dispatch }, user) {
       auth.delete('logout/', user)
         .then(res => {
-
           router.push('/')
         })
         .catch(handleError)
     },
     startHousehold({commit, dispatch}, householdData){
-      debugger
+     // debugger
       api.put('startHousehold', householdData)
         .then(res => {
-          debugger
+          //debugger
+           commit('setActiveHousehold', res.data.data)
           //probably send some notification to the user that the house has been started, create two week countdown
         })
         .catch(handleError)
