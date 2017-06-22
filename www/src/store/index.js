@@ -128,7 +128,7 @@ export default new Vuex.Store({
      state.allCompletedChores = [];
       for (var i = 0; i < user.completedChores.length; i++) {
         var chore = user.completedChores[i];
-          state.allCompletedChores.push(chore)        
+          state.allCompletedChores.push(chore)
       }
     }
   },

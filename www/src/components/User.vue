@@ -3,7 +3,7 @@
         <h3>Household: {{activeHousehold.name}}</h3>
         <h4>User: {{user.name}}</h4>
         <h5>Points: {{this.addUpUserPoints}}</h5>
-    
+
         <hr>
         <h6>Chores to Complete:</h6>
         <ul>
@@ -13,8 +13,8 @@
         </ul>
         <h6>Completed:</h6>
         <ul>
-            <span v-for='chore in this.completedChores'>
-                <li v-if="chore.userId == user._id">{{chore.name}}</li>
+            <span v-for='chore in this.choresLog'>
+                <li v-if="chore.completedBy == user._id">{{chore.name}}</li>
             </span>
             <!--<span v-for='chore in this.user.completedChores'>{{chore.name}}</span>-->
         </ul>
@@ -47,7 +47,9 @@ export default {
         },
         completedChores() {
             return this.$store.state.activeHousehold.completedChores
-
+        },
+        choresLog(){
+            return this.$store.state.activeHousehold.choreLog
         },
          addUpUserPoints() {
             let userPoints = 0;
