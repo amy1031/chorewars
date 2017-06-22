@@ -26,11 +26,9 @@ export default {
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-            // debugger
             // Might need more validation to check if user is creator of household for stupid users
             Household.findById(req.body.householdId)
               .then(household => {
-                //debugger
                 for (var i = 0; i < household.members.length; i++) {
                   var member = household.members[i];
                   if (member.email == user.email) {
@@ -39,11 +37,9 @@ export default {
                   }
                 }
                 if (true) {
-                   //debugger
-                  user.householdIds.push(req.body.householdId)
-                 // household.members.push(user)
-                  user.save().then(() => {
-                    res.send(handleResponse(action, user))
+                  household.members.push(user)
+                  household.save(household).then(() => {
+                    res.send(handleResponse(action, req.body))
                   })
                 }
               })
@@ -63,7 +59,7 @@ export default {
         .then(household => {
           for (var i = 0; i < household.members.length; i++) {
             let member = household.members[i];
-            //debugger
+            //
             if (member.email == req.body.chore.creatorEmail) {
               member.completedChores.push(req.body.chore)
               // household.members[i] = member
@@ -84,7 +80,7 @@ export default {
     path: '/addCreator/:householdId',
     reqType: 'post',
     method(req, res, next) {
-      // debugger
+
       let action = 'Add creator to newly created household'
       Users.findOne({ name: req.body.name })
         .then(user => {
@@ -106,11 +102,11 @@ export default {
     path: '/updateUserPoints',
     reqType: 'put',
     method(req, res, next) {
-      // debugger
+      //
       let action = 'Update user points'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
-          // debugger
+          //
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
@@ -130,27 +126,20 @@ export default {
         })
     }
   },
-  addPointsToUser: {
-    path: '/addPointsToUser',
+  updateUserChore: {
+    path: '/updateUserChore',
     reqType: 'put',
     method(req, res, next) {
-      let action = 'Update user points'
+      let action = 'Update user object'
       Users.findOne({ _id: req.body.userId })
         .then(user => {
-          //debugger
+          //
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-            //debugger
-            if (!user.points[req.body.chore.householdId]) {
-              // debugger
-              user.points[req.body.chore.householdId] = 0
-              user.points[req.body.chore.householdId] += req.body.chore.points
-            } else {
-              user.points[req.body.chore.householdId] += req.body.chore.points
-            }
-            user.save().then(() => {
-              res.send(handleResponse(action, user))
+            user.completedChores.push(req.body.chore)
+            user.save(user).then(() => {
+              res.send(handleResponse(action, req.body))
             })
               .catch(error => {
                 return next(handleResponse(action, null, error))
@@ -197,7 +186,7 @@ export default {
     path: 'households/:id/members',
     reqType: 'get',
     method(req, res, next) {
-      debugger
+
       let action = 'Get members by household Id'
       Users.find({ householdIds: { $in: [req.params.id] } }).then(users => {
         res.send(handleResponse(action, users))
@@ -214,7 +203,7 @@ export default {
           house.completedChores = chores
           Users.find({ householdIds: { $in: [req.params.id] } }).then(members => {
             house.members = members
-            house.save().then(() => {
+            house.save().then(()=>{
               res.send(handleResponse(action, house))
             })
           })

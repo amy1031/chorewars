@@ -27,7 +27,6 @@ export default {
       name: "",
       email: "",
       password: ""
-
     }
   },
   computed: {},
