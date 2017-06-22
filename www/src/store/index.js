@@ -291,17 +291,10 @@ export default new Vuex.Store({
       }) .catch(handleError)
     },
     householdChores({ commit, dispatch }, { chore, householdId }) {
-<<<<<<< HEAD
 
       api.put('householdChores', { chore, householdId })
         .then(res => {
 
-=======
-      //debugger
-      api.put('householdChores', { chore, householdId })
-        .then(res => {
-          //debugger
->>>>>>> c23e98e56ec6bc3e86971cc731e96830041e2f6d
           commit('householdChores', res.data.data.chore)
         })
         .catch(handleError)
