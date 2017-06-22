@@ -16,6 +16,7 @@
         </div>
       </form>
     </div>
+    <error></error>
   </div>
 </template>
 
