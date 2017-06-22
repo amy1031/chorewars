@@ -9,8 +9,8 @@ var schema = new mongoose.Schema({
 	choreLog: { type: Array },
 	//choreLog is the chores that have been completed by all the users on a certain household
   created: { type: Number, default: Date.now() },
-	startDate: { type: Number },
-	endDate: {type: Number},
+	startDate: { type: Object, default: {}},
+	endDate: {type: Object, default: {}},
   creatorId: {type: ObjectId, ref: models.user.name, required: true},
   // Relations
 	completedChores: [{ type: ObjectId, ref: models.completedChore.name}],

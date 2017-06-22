@@ -42,7 +42,9 @@
         })
       }
     },
-    components: {}
+    components: {
+
+    }
     }
 
 </script>

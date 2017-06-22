@@ -316,11 +316,13 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     startHousehold({commit, dispatch}, householdData){
+      debugger
       api.put('startHousehold', householdData)
         .then(res => {
+          debugger
           //probably send some notification to the user that the house has been started, create two week countdown
         })
-
+        .catch(handleError)
     }
   }
 

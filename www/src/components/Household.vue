@@ -5,7 +5,7 @@
         </div>
         <div class="text-center">
             <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
-                <h2 v-else> </h2> -->
+                    <h2 v-else> </h2> -->
         </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
@@ -22,9 +22,9 @@
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
                 </div>
             </form>
-            <!--<div>
-                        <button type="submit" class="btn btn-danger" id="start-household-button" @click="startHousehold">Start your Household</button>
-                    </div>-->
+            <div>
+                <button type="submit" class="btn btn-danger" id="start-household-button" @click="householdStartEndDate">Start your Household</button>
+            </div>
         </div>
 
         <br>
@@ -37,11 +37,11 @@
             <li v-for='completed in completedChores'>{{completed.name}}</li>
         </ul>
         <!--<h6>Household Members:</h6>
-            <div v-for='member in activeHousehold.members'>{{member.name}}
-            </div>-->
+                <div v-for='member in activeHousehold.members'>{{member.name}}
+                </div>-->
         <h6>Scoreboard:</h6>
         <ul>
-            <li v-for= 'member in scoreBoard'>{{member.name}} - {{member.points}}
+            <li v-for='member in scoreBoard'>{{member.name}} - {{member.points}}
             </li>
         </ul>
         <br>
@@ -83,7 +83,7 @@ export default {
                     var chore = this.activeHousehold.completedChores[j];
                     if (member._id == chore.userId) {
                         if (!pointsDictionary[member._id]) {
-                            pointsDictionary[member._id] = {name: '', points: ''}
+                            pointsDictionary[member._id] = { name: '', points: '' }
                             pointsDictionary[member._id].name = member.name
                             pointsDictionary[member._id].points = chore.pointsRewarded
                         } else {
@@ -125,13 +125,13 @@ export default {
         },
         householdStartEndDate() {
             let date = new Date();
-            let startMonth = date.getMonth();
+            let startMonth = date.getMonth() + 1;
             let startDay = date.getDate()
             let startHour = date.getHours();
             let startMinutes = date.getMinutes();
             let startDate = {
                 startMonth: startMonth,
-                startDay: startDate,
+                startDay: startDay,
                 startHour: startHour,
                 startMinutes: startMinutes
             }
@@ -145,7 +145,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
                 } else {
                     let endDate = {
@@ -154,7 +154,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
 
                 }
@@ -169,7 +169,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
                 } else {
                     let endDate = {
@@ -178,7 +178,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
                 }
             }
@@ -192,7 +192,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id})
                     return
                 } else {
                     let endDate = {
@@ -201,7 +201,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.req.params.id })
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
 
                 }
