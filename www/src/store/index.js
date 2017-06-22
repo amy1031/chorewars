@@ -47,7 +47,7 @@ export default new Vuex.Store({
     setActiveHousehold(state, activeHousehold) {
      //
       //state.activeHousehold = activeHousehold
-      debugger
+      //debugger
       Vue.set(state, "activeHousehold", activeHousehold)
     },
     setHouseholds(state, households) {

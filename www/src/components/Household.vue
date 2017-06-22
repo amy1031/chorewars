@@ -4,7 +4,8 @@
             <h1>{{activeHousehold.name}}</h1>
         </div>
         <div class="text-center">
-            Prize: {{prize.name}}
+            <h2 v-if="this.activeHousehold.prize">Prize: {{activeHousehold.prize.name}}</h2>
+            <h2 v-else>Prize: </h2> 
         </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
@@ -112,7 +113,7 @@ export default {
         },
         prizeFormToggleBack() {
             this.newPrize = false;
-            this.addPrizeButton = true;
+            this.addPrizeButton = false;
         },
         searchUsers() {
             //
