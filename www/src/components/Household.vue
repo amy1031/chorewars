@@ -4,8 +4,7 @@
             <h1>{{activeHousehold.name}}</h1>
         </div>
         <div class="text-center">
-            <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
-                <h2 v-else> </h2> -->
+            Prize: {{prize.name}}
         </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
@@ -22,9 +21,9 @@
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
                 </div>
             </form>
-            <!--<div>
-                        <button type="submit" class="btn btn-danger" id="start-household-button" @click="startHousehold">Start your Household</button>
-                    </div>-->
+            <div>
+                <button type="submit" class="btn btn-danger" id="start-household-button" @click="householdStartEndDate">Start your Household</button>
+            </div>
         </div>
     
         <br>
@@ -36,12 +35,9 @@
         <ul>
             <li v-for='completed in completedChores'>{{completed.name}}</li>
         </ul>
-        <!--<h6>Household Members:</h6>
-            <div v-for='member in activeHousehold.members'>{{member.name}}
-            </div>-->
         <h6>Scoreboard:</h6>
         <ul>
-            <li v-for= 'member in scoreBoard'>{{member.name}} - {{member.points}}
+            <li v-for='member in scoreBoard'>{{member.name}} - {{member.points}}
             </li>
         </ul>
         <br>
@@ -73,17 +69,20 @@ export default {
         user() {
             return this.$store.state.user
         },
+        prize() {
+            return this.activeHousehold.prize.name
+        },
         scoreBoard() {
             let pointsDictionary = {}
             for (var i = 0; i < this.activeHousehold.members.length; i++) {
                 //debugger
                 var member = this.activeHousehold.members[i];
                 for (var j = 0; j < this.activeHousehold.completedChores.length; j++) {
-                   // debugger
+                    // debugger
                     var chore = this.activeHousehold.completedChores[j];
                     if (member._id == chore.userId) {
                         if (!pointsDictionary[member._id]) {
-                            pointsDictionary[member._id] = {name: '', points: ''}
+                            pointsDictionary[member._id] = { name: '', points: '' }
                             pointsDictionary[member._id].name = member.name
                             pointsDictionary[member._id].points = chore.pointsRewarded
                         } else {
@@ -91,7 +90,7 @@ export default {
                         }
                     }
                 }
-            } 
+            }
             return pointsDictionary
         }
 
@@ -206,15 +205,6 @@ export default {
 
                 }
             }
-        },
-        memberScoreboard() {
-            var scoreBoard = [];
-            for (var i = 0; i < this.completedChores.length; i++) {
-                var chore = this.completeChores[i];
-                if (chore.email == this.user) {
-                    scoreBoard.push(chore);
-                }
-            } return scoreBoard;
         }
     },
     components: {}

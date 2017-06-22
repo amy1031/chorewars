@@ -19,7 +19,6 @@
         <router-link to='/register'> Create an account</router-link>
       </p>
     </div>
-      <error></error>
   </div>
 </template>
 

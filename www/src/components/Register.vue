@@ -16,40 +16,39 @@
         </div>
       </form>
     </div>
-    <error></error>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'register',
-    data() {
-      return {
-        name: "",
-        email: "",
-        password: ""
+export default {
+  name: 'register',
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: ""
 
-      }
-    },
-    computed: {},
-    methods: {
-      register() {
-        //debugger
-        this.$store.dispatch('register', {
-          name: this.name,
-          email: this.email,
-          password: this.password
-        })
-      }
-    },
-    components: {}
     }
+  },
+  computed: {},
+  methods: {
+    register() {
+      //debugger
+      this.$store.dispatch('register', {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      })
+    }
+  },
+  components: {}
+}
 
 </script>
 
 
 <style scoped>
-  .input-group {
-    width: 50%;
-  }
+.input-group {
+  width: 50%;
+}
 </style>
