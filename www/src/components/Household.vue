@@ -5,7 +5,7 @@
         </div>
         <div class="text-center">
             <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
-                    <h2 v-else> </h2> -->
+                        <h2 v-else> </h2> -->
         </div>
         <div id="start-view">
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
@@ -191,7 +191,7 @@ export default {
                         endHour: startHour,
                         endMinutes: startMinutes
                     }
-                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id})
+                    this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
                     return
                 } else {
                     let endDate = {
