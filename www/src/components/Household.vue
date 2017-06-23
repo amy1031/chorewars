@@ -23,7 +23,7 @@
                 </div>
             </form>
             <div>
-                <button type="submit" class="btn btn-danger" id="start-household-button" @click="householdStartEndDate">Start your Household</button>
+                <button v-if="this.user._id == this.activeHousehold.creatorId" type="submit" class="btn btn-danger" id="start-household-button" @click="householdStartEndDate">Start your Household</button>
             </div>
         </div>
 
