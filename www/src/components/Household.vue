@@ -113,7 +113,7 @@ export default {
         },
         prizeFormToggleBack() {
             this.newPrize = false;
-            this.addPrizeButton = true;
+            this.addPrizeButton = false;
         },
         searchUsers() {
             //
