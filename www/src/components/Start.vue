@@ -12,7 +12,9 @@
           <div class="col-sm-6" v-for="household in households">
             <h6>
               <router-link :to="'/households/'+household._id">
-                <button class="household">{{household.name}}</button>
+                <button class="household">
+                  <i class="fa fa-home" aria-hidden="true"></i>
+                  {{household.name}}</button>
               </router-link>
             </h6>
           </div>
@@ -38,12 +40,12 @@
         </div>
 
         <!--<button type="button" class='btn btn-primary' @click="householdFormToggle" v-show="addHouseholdButton">Add a Household</button>
-                  <form class="form-inline create-household-form" @submit.prevent="createHousehold" v-show="newHousehold">
-                    <div class="form-group">
-                      <input type="text" class="form-control" v-model="name" name="name" placeholder="Household Name" />
-                      <button type="submit" class="btn btn-primary" id="create-household-button" @click="householdFormToggleBack">Create New Household</button>
-                    </div>
-                  </form> -->
+                    <form class="form-inline create-household-form" @submit.prevent="createHousehold" v-show="newHousehold">
+                      <div class="form-group">
+                        <input type="text" class="form-control" v-model="name" name="name" placeholder="Household Name" />
+                        <button type="submit" class="btn btn-primary" id="create-household-button" @click="householdFormToggleBack">Create New Household</button>
+                      </div>
+                    </form> -->
       </div>
     </div>
   </div>
@@ -79,7 +81,7 @@ export default {
       // this.addHouseholdIdToUser();
     },
     addHouseholdIdToUser() {
-      this.$store.dispatch('addHouseholdIdToUser', {user: this.user, householdId: this.$store.state.activeHousehold._id} )
+      this.$store.dispatch('addHouseholdIdToUser', { user: this.user, householdId: this.$store.state.activeHousehold._id })
     },
     householdFormToggle() {
       this.newHousehold = true;
