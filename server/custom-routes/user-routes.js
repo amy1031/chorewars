@@ -39,7 +39,7 @@ export default {
                 if (true) {
                   household.members.push(user)
                   household.save(household).then(() => {
-                    res.send(handleResponse(action, req.body))
+                    res.send(handleResponse(action, user))
                   })
                 }
               })

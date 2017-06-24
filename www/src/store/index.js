@@ -302,9 +302,10 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     searchUsers({ commit, dispatch }, data) {
-     //
+      debugger
       api.post("findUsers", data)
         .then(res => {
+          debugger
           commit('setHouseholdMembers', res.data.data)
         })
         .catch(handleError)

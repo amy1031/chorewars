@@ -119,7 +119,7 @@ export default {
             this.addPrizeButton = false;
         },
         searchUsers() {
-            //
+            debugger
             this.$store.dispatch("searchUsers", { user: this.username, householdId: this.$route.params.id })
         },
         addHouseholdPrize() {
