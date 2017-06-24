@@ -330,9 +330,11 @@ export default new Vuex.Store({
     checkIfHouseHasEnded({commit, dispatch}, timeData){
       api('house/' + timeData.householdId)
         .then(res => {
-          debugger
+         // debugger
           if(res.data.data.endDate.endMonth == timeData.checkDate.checkMonth && res.data.data.endDate.endDay == timeData.checkDate.checkDay && res.data.data.endDate.endHour == timeData.checkDate.checkHour){
             router.push('households/' + timeData.householdId + "/winner")
+          } else {
+            commit('setActiveHousehold', res.data.data)
           }
 
         })
