@@ -98,8 +98,8 @@ export default {
         })
     }
   },
-  updateUserPoints: {
-    path: '/updateUserPoints',
+  addPointsToUser: {
+    path: '/addPointsToUser',
     reqType: 'put',
     method(req, res, next) {
       //
