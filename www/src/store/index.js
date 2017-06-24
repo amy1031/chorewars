@@ -326,6 +326,17 @@ export default new Vuex.Store({
           //probably send some notification to the user that the house has been started, create two week countdown
         })
         .catch(handleError)
+    },
+    checkIfHouseHasEnded({commit, dispatch}, timeData){
+      api('house/' + timeData.householdId)
+        .then(res => {
+          debugger
+          if(res.data.data.endDate.endMonth == timeData.checkDate.checkMonth && res.data.data.endDate.endDay == timedata.checkDate.checkDay && res.data.data.endDate.endHour == timedata.checkDate.checkHour){
+            router.push('households/' + timeData.householdId + "/winner")
+          }
+
+        })
+        .catch(handleError)
     }
   }
 

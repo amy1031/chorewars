@@ -97,6 +97,7 @@ export default {
             return pointsDictionary
         }
 
+
     },
     mounted() {
         this.$store.dispatch('getHousehold', this.$route.params.id)
@@ -148,6 +149,7 @@ export default {
                         endMinutes: startMinutes
                     }
                     this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
+                    this.checkIfHouseHasEnded()
                     return
                 } else {
                     let endDate = {
@@ -157,6 +159,7 @@ export default {
                         endMinutes: startMinutes
                     }
                     this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
+                    this.checkIfHouseHasEnded()
                     return
 
                 }
@@ -172,6 +175,7 @@ export default {
                         endMinutes: startMinutes
                     }
                     this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
+                    this.checkIfHouseHasEnded()
                     return
                 } else {
                     let endDate = {
@@ -181,6 +185,7 @@ export default {
                         endMinutes: startMinutes
                     }
                     this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
+                    this.checkIfHouseHasEnded()
                     return
                 }
             }
@@ -195,6 +200,7 @@ export default {
                         endMinutes: startMinutes
                     }
                     this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
+                    this.checkIfHouseHasEnded()
                     return
                 } else {
                     let endDate = {
@@ -204,10 +210,31 @@ export default {
                         endMinutes: startMinutes
                     }
                     this.$store.dispatch('startHousehold', { startDate: startDate, endDate: endDate, householdId: this.$route.params.id })
+                    this.checkIfHouseHasEnded()
                     return
 
                 }
             }
+        },
+        checkIfHouseHasEnded(){
+            debugger
+            let date = new Date();
+            let checkMonth = date.getMonth() + 1;
+            let checkDay = date.getDate()
+            let checkHour = date.getHours();
+            let checkMinutes = date.getMinutes();
+            let checkDate = {
+                checkMonth: checkMonth,
+                checkDay: checkDay,
+                checkHour: checkHour,
+                checkMinutes: checkMinutes
+            }
+            this.$store.dispatch('checkIfHouseHasEnded', {checkDate: checkDate, householdId: this.activeHousehold._id})
+            setInterval(this.reCheckIfHouseHasEnded, 600000);
+
+        },
+        reCheckIfHouseHasEnded(){
+            this.checkIfHouseHasEnded();
         }
     },
     components: {}
