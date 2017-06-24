@@ -333,9 +333,7 @@ export default new Vuex.Store({
          // debugger
           if(res.data.data.endDate.endMonth == timeData.checkDate.checkMonth && res.data.data.endDate.endDay == timeData.checkDate.checkDay && res.data.data.endDate.endHour == timeData.checkDate.checkHour){
             router.push('households/' + timeData.householdId + "/winner")
-          } else {
-            commit('setActiveHousehold', res.data.data)
-          }
+          } 
 
         })
         .catch(handleError)
