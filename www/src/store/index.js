@@ -339,10 +339,11 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     resetHousehold({commit, dispatch}, activeHousehold){
-      api.put('resetHousehold', activeHousehold)
+     // debugger
+      api.post('resetHousehold', activeHousehold)
       .then (res => {
-        debugger
-        router.push('households/' + activeHousehold._id)
+      //  debugger
+        router.push('households')
       })
     }
   }

@@ -6,7 +6,7 @@
             <li v-for='member in scoreBoard'>{{member.name}} - {{member.points}}
             </li>
         </ul>
-        <button type="button" class="btn btn-success" @click="resetHousehold">Reset Household</button>
+        <button type="button" class="btn btn-success" @click="resetHousehold">End Household</button>
   </div>
 </template>
 

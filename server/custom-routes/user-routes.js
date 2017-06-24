@@ -224,29 +224,18 @@ export default {
   },
   resetHousehold: {
     path: '/resetHousehold',
-    reqType: 'put',
+    reqType: 'post',
     method(req, res, next) {
-      let action = 'Reset Household'
-      //debugger
-      Household.findOne({ _id: req.body._id })
+      debugger
+      let action = 'Delete Household'
+      Household.findByIdAndRemove(req.body._id )
         .then(household => {
-          //debugger
-          household.choreLog = []
-          household.choresList = []
-          household.completedChores = []
-          household.prize = {}
-          household.created = Date.now()
-          household.startDate = {}
-          household.endDate = {}
-          household.members.points[household._id] = 0
-          household.save(household).then(() => {
-            //debugger
-            res.send(handleResponse(action, household))
+          debugger
+            res.send(handleResponse(action, "household has been deleted"))
           })
             .catch(error => {
               return next(handleResponse(action, null, error))
             })
-        })
     }
   }
 
