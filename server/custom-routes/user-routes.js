@@ -211,6 +211,16 @@ export default {
         }).catch(err => handleResponse(action, null, err))
       }).catch(err => handleResponse(action, null, err))
     }
+  },
+  getHouseData: {
+    path: '/housedata/:id',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Get household'
+      Household.findById(req.params.id).then(house => {
+        res.send(handleResponse(action, house))
+      }).catch(err => handleResponse(action, null, err))
+    }
   }
 
 }

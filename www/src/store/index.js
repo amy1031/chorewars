@@ -328,7 +328,7 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     checkIfHouseHasEnded({commit, dispatch}, timeData){
-      api('house/' + timeData.householdId)
+      api('housedata/' + timeData.householdId)
         .then(res => {
           debugger
           if(res.data.data.endDate.endMonth == timeData.checkDate.checkMonth && res.data.data.endDate.endDay == timeData.checkDate.checkDay && res.data.data.endDate.endHour == timeData.checkDate.checkHour){
