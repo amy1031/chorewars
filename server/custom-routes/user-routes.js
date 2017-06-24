@@ -110,7 +110,7 @@ export default {
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-           // debugger
+            // debugger
             var householdId = req.body.chore.householdId
             var points = req.body.chore.points || 0
             var newPoints = Object.assign(user.points)
@@ -204,7 +204,7 @@ export default {
           house.completedChores = chores
           Users.find({ householdIds: { $in: [req.params.id] } }).then(members => {
             house.members = members
-            house.save().then(()=>{
+            house.save().then(() => {
               res.send(handleResponse(action, house))
             })
           })
@@ -220,6 +220,33 @@ export default {
       Household.findById(req.params.id).then(house => {
         res.send(handleResponse(action, house))
       }).catch(err => handleResponse(action, null, err))
+    }
+  },
+  resetHousehold: {
+    path: '/resetHousehold',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Reset Household'
+      //debugger
+      Household.findOne({ _id: req.body._id })
+        .then(household => {
+          //debugger
+          household.choreLog = []
+          household.choresList = []
+          household.completedChores = []
+          household.prize = {}
+          household.created = Date.now()
+          household.startDate = {}
+          household.endDate = {}
+          household.members.points[household._id] = 0
+          household.save(household).then(() => {
+            //debugger
+            res.send(handleResponse(action, household))
+          })
+            .catch(error => {
+              return next(handleResponse(action, null, error))
+            })
+        })
     }
   }
 
