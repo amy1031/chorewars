@@ -331,7 +331,7 @@ export default new Vuex.Store({
       api('house/' + timeData.householdId)
         .then(res => {
           debugger
-          if(res.data.data.endDate.endMonth == timeData.checkDate.checkMonth && res.data.data.endDate.endDay == timedata.checkDate.checkDay && res.data.data.endDate.endHour == timedata.checkDate.checkHour){
+          if(res.data.data.endDate.endMonth == timeData.checkDate.checkMonth && res.data.data.endDate.endDay == timeData.checkDate.checkDay && res.data.data.endDate.endHour == timeData.checkDate.checkHour){
             router.push('households/' + timeData.householdId + "/winner")
           }
 
