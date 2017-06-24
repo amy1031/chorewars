@@ -198,7 +198,7 @@ export default {
     path: '/house/:id',
     reqType: 'get',
     method(req, res, next) {
-      let action = 'Get Member with Completed Chores'
+      let action = 'Get household'
       Household.findById(req.params.id).then(house => {
         CompletedChores.find({ householdId: house._id }).then(chores => {
           house.completedChores = chores

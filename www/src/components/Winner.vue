@@ -1,13 +1,14 @@
 <template>
-  <div class="household">
-    <h1>{{household.name}}</h1>
+  <div class="winner">
+    <h1>{{this.activeHousehold.name}}</h1>
+    
   </div>
 </template>
 
 
 <script>
 export default {
-  name: 'household',
+  name: 'winner',
   data(){
     return {
 
@@ -20,8 +21,8 @@ export default {
     user(){
       return this.$store.state.user
     },
-    household() {
-      return this.$store.state.household
+    activeHousehold() {
+      return this.$store.state.activeHousehold
     }
   },
   methods:{},

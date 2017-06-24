@@ -5,7 +5,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Start from '@/components/Start'
 import Chores from '@/components/Chores'
-import Households from '@/components/Households'
+import Winner from '@/components/Winner'
 import Household from '@/components/Household'
 import User from '@/components/User'
 
@@ -35,9 +35,9 @@ export default new Router({
       component: Start
     },
     {
-      path: '/households',
-      name: 'Households',
-      component: Households
+      path: '/households/:id/winner',
+      name: 'Winner',
+      component: Winner
     },
     {
       path: '/households/:id',
