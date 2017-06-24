@@ -1,12 +1,12 @@
 // LOCAL DEV VARIABLES
 let env = {
-	NODE_ENV: 'development',
+	NODE_ENV: 'production',
 	PORT: 3000,
 	DBPROTOCOL: 'mongodb',
-	DBUSERNAME: 'chorewars2',
-	DBPASSWORD: 'chorewars',
-	DBHOST: 'ds131512.mlab.com:31512',
-	DBNAME: 'chorewars2',
+	DBUSERNAME: 'amycw',
+	DBPASSWORD: 'amycw',
+	DBHOST: 'ds135912.mlab.com:35912',
+	DBNAME: 'chorewarsdb',
 	SERVERNAME: 'dev-server'
 }
 // mongodb://<dbuser>:<dbpassword>@ds131512.mlab.com:31512/chorewars2
