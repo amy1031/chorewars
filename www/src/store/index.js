@@ -93,11 +93,12 @@ export default new Vuex.Store({
       }
     },
     setUserPoints(state, user) {
-      if (!user.points[state.activeHousehold._id]) {
+      var householdId = state.activeHousehold._id
+      if (!user.points.householdId) {
         Vue.set(state.user.points, state.activeHousehold._id, user.points[state.activeHousehold._id])
         // state.user.points[chore.householdId] = chore.chorePoints
       } else {
-        //
+       // debugger
         state.user = user
        // state.user.points[state.activeHousehold._id] = user.points[state.activeHousehold._id]
         Vue.set(state, "user", user)
@@ -270,8 +271,8 @@ export default new Vuex.Store({
         })
         .catch(handleError)
     },
-    addPointsToUser({ commit, dispatch }, { chore, userId }) {
-      api.put('addPointsToUser', { chore, userId })
+    addPointsToUser({ commit, dispatch }, { chore, user }) {
+      api.put('addPointsToUser', { chore, user })
         .then(res => {
         //
           commit('setUserPoints', res.data.data)

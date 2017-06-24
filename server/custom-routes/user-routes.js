@@ -104,20 +104,21 @@ export default {
     method(req, res, next) {
       //
       let action = 'Update user points'
-      Users.findOne({ _id: req.body.userId })
+      Users.findOne({ _id: req.body.user._id })
         .then(user => {
           //
           if (!user) {
             res.sendStatus(404)({ error: "User Not Found" })
           } else {
-            var householdId = req.body.householdId
-            var points = req.body.chorePoints || 0
-            var newPoints = Object.assign({}, user.points)
+           // debugger
+            var householdId = req.body.chore.householdId
+            var points = req.body.chore.points || 0
+            var newPoints = Object.assign(user.points)
             newPoints[householdId] = user.points[householdId] ? user.points[householdId] + points : points
             Users.update({ _id: user._id }, { $set: { points: newPoints } }).then(() => {
               user.points = newPoints
               console.log('The User Points', user.points)
-              res.send(handleResponse(action, req.body))
+              res.send(handleResponse(action, user))
             })
               .catch(error => {
                 return next(handleResponse(action, null, error))

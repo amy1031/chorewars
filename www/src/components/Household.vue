@@ -11,14 +11,14 @@
             <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
             <form class="form-inline find-user-form" @submit.prevent="searchUsers" v-show="newSearch">
                 <div class="form-group">
-                    <input type="text" class="form-control" v-model="username" name="userName" placeholder="Member Name" />
+                    <input type="text" class="form-control" v-model="username" name="userName" placeholder="Member Name">
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="searchFormToggleBack">Add New Collabarators</button>
                 </div>
             </form>
             <button type="button" class='btn btn-primary' @click="prizeFormToggle" v-show="addPrizeButton">Add Your Prize</button>
             <form class="form-inline find-user-form" @submit.prevent="addHouseholdPrize" v-show="newPrize">
                 <div class="form-group">
-                    <input type="text" class="form-control" v-model="prize.name" placeholder="Prize Name" />
+                    <input type="text" class="form-control" v-model="prize.name" placeholder="Prize Name">
                     <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
                 </div>
             </form>
@@ -36,6 +36,9 @@
         <ul>
             <li v-for='completed in completedChores'>{{completed.name}}</li>
         </ul>
+        <h6>Household Members:</h6>
+            <div v-for='member in activeHousehold.members'>{{member.name}}
+            </div>
         <h6>Scoreboard:</h6>
         <ul>
             <li v-for='member in scoreBoard'>{{member.name}} - {{member.points}}
