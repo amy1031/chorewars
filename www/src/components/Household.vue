@@ -217,7 +217,7 @@ export default {
             }
         },
         checkIfHouseHasEnded(){
-            debugger
+            //debugger
             let date = new Date();
             let checkMonth = date.getMonth() + 1;
             let checkDay = date.getDate()
