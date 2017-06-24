@@ -74,7 +74,7 @@ export default {
         },
         addPointsToUser(chore) {
             // updates user.points
-            this.$store.dispatch('addPointsToUser', { chore: chore, userId: this.user._id })
+            this.$store.dispatch('addPointsToUser', { chore: chore, user: this.user })
             this.householdChores(chore, this.activeHousehold._id)
         },
         householdChores(chore, householdId) {
