@@ -1,56 +1,66 @@
 <template>
     <div class="household">
-        <div class="text-center">
-            <h1>{{activeHousehold.name}}</h1>
-        </div>
-        <div class="text-center">
-            <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
-                        <h2 v-else> </h2> -->
-        </div>
-        <div id="start-view">
-            <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
-            <form class="form-inline find-user-form" @submit.prevent="searchUsers" v-show="newSearch">
-                <div class="form-group">
-                    <input type="text" class="form-control" v-model="username" name="userName" placeholder="Member Name">
-                    <button type="submit" class="btn btn-primary" id="search-user-button" @click="searchFormToggleBack">Add New Collabarators</button>
+        <navbar></navbar>
+        <div class="row">
+            <div class="name">
+                <div class="col-12">
+                    <h1 class="text-center">{{activeHousehold.name}}</h1>
+                    <br>
+                    <button v-if="this.user._id == this.activeHousehold.creatorId && !this.activeHousehold.endDate" type="submit" class="btn btn-success" id="start-household-button" @click="householdStartEndDate">Start your Household</button>
                 </div>
-            </form>
-            <button type="button" class='btn btn-primary' @click="prizeFormToggle" v-show="addPrizeButton">Add Your Prize</button>
-            <form class="form-inline find-user-form" @submit.prevent="addHouseholdPrize" v-show="newPrize">
-                <div class="form-group">
-                    <input type="text" class="form-control" v-model="prize.name" placeholder="Prize Name">
-                    <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
-                </div>
-            </form>
-            <div>
-                <button v-if="this.user._id == this.activeHousehold.creatorId && !this.activeHousehold.endDate" type="submit" class="btn btn-danger" id="start-household-button" @click="householdStartEndDate">Start your Household</button>
             </div>
         </div>
-
-        <br>
-        <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
-        <br>
-        <router-link :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
-        <hr>
-        <h6>Household Completed Chores:</h6>
-        <ul>
-            <li v-for='completed in completedChores'>{{completed.name}}</li>
-        </ul>
-        <h6>Household Members:</h6>
-            <div v-for='member in activeHousehold.members'>{{member.name}}
+        <div class="row justify-content-sm-center">
+            <div class="col-3">
+                <div class="sidebar">
+                    <button type="button" class='btn btn-primary' @click="searchFormToggle" v-show="addCollaboratorsButton">Search Users</button>
+                    <form class="form-inline find-user-form" @submit.prevent="searchUsers" v-show="newSearch">
+                        <div class="form-group">
+                            <input type="text" class="form-control" v-model="username" name="userName" placeholder="Member Name">
+                            <button type="submit" class="btn btn-primary" id="search-user-button" @click="searchFormToggleBack">Add New Collabarators</button>
+                        </div>
+                    </form>
+                    <br>
+                    <button type="button" class='btn btn-primary' @click="prizeFormToggle" v-show="addPrizeButton">Add Your Prize</button>
+                    <form class="form-inline find-user-form" @submit.prevent="addHouseholdPrize" v-show="newPrize">
+                        <div class="form-group">
+                            <input type="text" class="form-control" v-model="prize.name" placeholder="Prize Name">
+                            <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add Your Prize</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        <h6>Scoreboard:</h6>
-        <ul>
-            <li v-for='member in scoreBoard'>{{member.name}} - {{member.points}}
-            </li>
-        </ul>
-        <br>
-        <router-link :to="'/start'">Back to Households</router-link>
+            <div class="col-7">
+                <div class="maincontent">
+                    <router-link v-if="this.activeHousehold.choresList.length <= 0" :to="'/households/'+activeHousehold._id + '/chores'">Add Chores</router-link>
+                    <br>
+                    <router-link :to="'/households/'+activeHousehold._id + '/user'">User Profile</router-link>
+                    <hr>
+                    <h6>Household Completed Chores:</h6>
+                    <ul>
+                        <li v-for='completed in completedChores'>{{completed.name}}</li>
+                    </ul>
+                    <h6>Household Members:</h6>
+                    <div v-for='member in activeHousehold.members'>{{member.name}}
+                    </div>
+                    <h6>Scoreboard:</h6>
+                    <ul>
+                        <li v-for='member in scoreBoard'>{{member.name}} - {{member.points}}
+                        </li>
+                    </ul>
+                    <br>
+                    <router-link :to="'/start'">Back to Households</router-link>
+                </div>
+            </div>
+        </div>
+        <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
+                                                    <h2 v-else> </h2> -->
     </div>
 </template>
 
 
 <script>
+import Navbar from '@/components/Navbar'
 export default {
     name: 'household',
     data() {
@@ -216,7 +226,7 @@ export default {
                 }
             }
         },
-        checkIfHouseHasEnded(){
+        checkIfHouseHasEnded() {
             //debugger
             let date = new Date();
             let checkMonth = date.getMonth() + 1;
@@ -229,19 +239,36 @@ export default {
                 checkHour: checkHour,
                 checkMinutes: checkMinutes
             }
-            this.$store.dispatch('checkIfHouseHasEnded', {checkDate: checkDate, householdId: this.activeHousehold._id})
+            this.$store.dispatch('checkIfHouseHasEnded', { checkDate: checkDate, householdId: this.activeHousehold._id })
             setInterval(this.reCheckIfHouseHasEnded, 600000);
 
         },
-        reCheckIfHouseHasEnded(){
+        reCheckIfHouseHasEnded() {
             this.checkIfHouseHasEnded();
         }
     },
-    components: {}
+    components: {
+        Navbar
+    }
 }
 </script>
 
 
 <style scoped>
+.sidebar {
+    background-color: #fff;
+    width: 100%;
+    padding: 30px;
+}
 
+.maincontent {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px;
+}
+
+.name {
+    padding-top: 10px;
+    text-align: center;
+}
 </style>

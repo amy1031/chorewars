@@ -15,7 +15,7 @@
                 {{household.name}}</button>
             </router-link>
         </div>
-        <h3 v-show="ishousehold">You have not created or joined any households yet.</h3>
+        <h3 v-if="households[0] == null">You have not created or joined any households yet.</h3>
       </div>
     </div>
     <div class="row">
@@ -32,7 +32,7 @@
             <input type="text" class="form-control" v-model="name" name="name" placeholder="Household Name or Street Number and Address"> &nbsp;
           </div>
           <div class="col-12 col-sm-6">
-            <button type="submit" class="btn btn-primary create" @click="householdFormToggleBack">Create a New Household</button>
+            <button type="submit" class="btn btn-primary create">Create a New Household</button>
           </div>
         </form>
       </div>
@@ -51,7 +51,6 @@ export default {
       creatorId: this.$store.state.user._id,
       newHousehold: false,
       addHouseholdButton: true,
-      ishousehold: 'something'
     }
   },
   mounted() {
@@ -67,20 +66,11 @@ export default {
   },
   methods: {
     createHousehold() {
-      this.ishousehold = null
       this.$store.dispatch("createHousehold", { name: this.name, creatorId: this.$store.state.user._id, user: this.user })
       // this.addHouseholdIdToUser();
     },
     addHouseholdIdToUser() {
       this.$store.dispatch('addHouseholdIdToUser', { user: this.user, householdId: this.$store.state.activeHousehold._id })
-    },
-    householdFormToggle() {
-      this.newHousehold = true;
-      this.addHouseholdButton = false;
-    },
-    householdFormToggleBack() {
-      this.newHousehold = false;
-      this.addHouseholdButton = true;
     }
   },
   components: {
