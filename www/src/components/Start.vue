@@ -1,6 +1,6 @@
 <template>
   <div class="start">
-    <!-- <navbar></navbar> -->
+    <navbar></navbar>
     <div class="container-fluid">
       <div id='myHouseholds'>
         <div class="row">

@@ -18,6 +18,14 @@
             <a href="#start" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">
               <i class="fa fa-bolt" aria-hidden="true"></i> Start</a>
           </li>
+          <li class="nav-item">
+            <router-link to='/login' class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <i class="fa fa-bolt" aria-hidden="true"></i> Log In</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to='/register' class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <i class="fa fa-bolt" aria-hidden="true"></i> Register</router-link>
+          </li>
         </ul>
       </div>
     </nav>
