@@ -19,7 +19,7 @@
             </div>
           </form>
           <p class="text-center">Don't have an account?
-            <router-link to='/register'> Register Here</router-link>.
+            <router-link to='/register'> Register here</router-link>.
           </p>
         </div>
       </div>
