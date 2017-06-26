@@ -5,6 +5,7 @@
             <div class="name">
                 <div class="col-12 text-center">
                     <h1 class="text-center">{{activeHousehold.name}}</h1>
+                    <h3 v-if='activeHousehold.prize != {}'>Prize: {{activeHousehold.prize.name}}</h3>
                     <button v-if="this.user._id == this.activeHousehold.creatorId && !this.activeHousehold.endDate" type="submit" class="btn btn-success start" @click="householdStartEndDate">Start your Household</button>
                 </div>
                 <hr>
@@ -25,15 +26,15 @@
                     <form class="form-inline find-user-form" @submit.prevent="searchUsers" v-show="newSearch">
                         <div class="form-group">
                             <input type="text" class="form-control" v-model="username" name="userName" placeholder="Member Name">
-                            <button type="submit" class="btn btn-primary" id="search-user-button" @click="searchFormToggleBack">Add</button>
+                            &nbsp;<button type="submit" class="btn btn-primary searchuser" @click="searchFormToggleBack"> Add</button>
                         </div>
                     </form>
                     <br>
-                    <button type="button" class='btn btn-primary prize' @click="prizeFormToggle" v-show="addPrizeButton">Add Your Prize</button>
+                    <button type="button" class='btn btn-primary prize' @click="prizeFormToggle" v-show="addPrizeButton" v-if="activeHousehold.prize.name == ''">Add Your Prize</button>
                     <form class="form-inline find-user-form" @submit.prevent="addHouseholdPrize" v-show="newPrize">
                         <div class="form-group">
                             <input type="text" class="form-control" v-model="prize.name" placeholder="Prize Name">
-                            <button type="submit" class="btn btn-primary" id="search-user-button" @click="prizeFormToggleBack">Add</button>
+                            &nbsp;<button type="submit" class="btn btn-primary addprize" @click="prizeFormToggleBack">Add</button>
                         </div>
                     </form>
                     <hr>
@@ -72,8 +73,6 @@
                 </div>
             </div>
         </div>
-        <!--  <h2 v-if='activeHousehold.prize != "" || activeHousehold.prize != undefined || activeHousehold.prize != null'>Prize: {{activeHousehold.prize.name}}</h2>
-                                                                            <h2 v-else> </h2> -->
     </div>
 </template>
 
@@ -435,5 +434,31 @@ li {
   text-align: center;
   background: #5cb85c;
   padding: 10px;
+}
+
+button.searchuser {
+    font-size: 16px;
+    color: #000;
+    font-family: helvetica;
+    background-color: #d9d7d7;
+    border: 0px;
+    padding: 10px;
+    transition-duration: 0.4s;
+}
+button.searchuser:hover {
+    background-color: #a09a9a;
+}
+
+button.addprize {
+    font-size: 16px;
+    color: #000;
+    font-family: helvetica;
+    background-color: #d9d7d7;
+    border: 0px;
+    padding: 10px;
+    transition-duration: 0.4s;
+}
+button.addprize:hover {
+    background-color: #a09a9a;
 }
 </style>
