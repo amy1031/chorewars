@@ -3,19 +3,16 @@
     <div class="container-fluid">
       <router-view></router-view>
     </div>
-  <error></error>
   </div>
 </template>
 
 <script>
-import Error from './components/Error'
 export default {
   name: 'app',
   mounted() {
     this.$store.dispatch('getAuth')
   },
   components: {
-    Error,
   }
 }
 </script>

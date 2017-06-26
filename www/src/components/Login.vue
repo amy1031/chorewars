@@ -24,11 +24,13 @@
         </div>
       </div>
     </div>
+    <error></error>
   </div>
 </template>
 
 
 <script>
+import Error from '@/components/Error'
 import Navbar from '@/components/Navbar'
 export default {
   name: 'login',
@@ -49,7 +51,8 @@ export default {
     }
   },
   components: {
-    Navbar
+    Navbar,
+    Error
   }
 }
 
