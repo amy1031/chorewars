@@ -7,13 +7,19 @@ export default {
     path: '/gethouseholds',
     reqType: 'get',
     method(req, res, next) {
-   //   debugger
+        // debugger
       let action = 'Get Household Information'
-      Household.find({ members: { $in: [req.session.uid]}})
-      .then(household => {
-      //  debugger
-          res.send(handleResponse(action, household))
-
+      Household.find({ members: { $in: [req.session.uid] } })
+        .then(household => {
+        // //  debugger
+        //   Household.find()
+        //     .then(houses => {
+        //      // debugger
+        //       household.push(houses)
+              res.send(handleResponse(action, household))
+            // }).catch(error => {
+            //   return next(handleResponse(action, null, error))
+            //})
         }).catch(error => {
           return next(handleResponse(action, null, error))
         })
@@ -243,14 +249,14 @@ export default {
     method(req, res, next) {
       debugger
       let action = 'Delete Household'
-      Household.findByIdAndRemove(req.body._id )
+      Household.findByIdAndRemove(req.body._id)
         .then(household => {
           debugger
-            res.send(handleResponse(action, "household has been deleted"))
-          })
-            .catch(error => {
-              return next(handleResponse(action, null, error))
-            })
+          res.send(handleResponse(action, "household has been deleted"))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
     }
   }
 

@@ -132,7 +132,11 @@ export default new Vuex.Store({
         var chore = user.completedChores[i];
           state.allCompletedChores.push(chore)
       }
-    }
+    },
+      setNewHousehold(state, household) {
+       // debugger
+      router.push('households/' + household.householdId)
+    },
   },
   actions: {
     register({ commit, dispatch }, user) {
@@ -177,10 +181,8 @@ export default new Vuex.Store({
       commit('setError')
     },
     getHouseholds({ commit, dispatch }) {
-    //  debugger
       api('gethouseholds')
         .then(res => {
-       //   debugger
           commit('setHouseholds', res.data.data)
         })
         .catch(handleError)
@@ -233,7 +235,7 @@ export default new Vuex.Store({
     createHousehold({ commit, dispatch }, household) {
       api.post('households', household)
         .then(res => {
-          commit('setActiveHousehold', res.data.data)
+         // commit('setActiveHousehold', res.data.data)
           dispatch('addHouseholdIdToUser', {householdId: res.data.data._id, user: household.user})
         })
         .catch(handleError)
@@ -250,9 +252,8 @@ export default new Vuex.Store({
     addHouseholdIdToUser({ commit, dispatch }, householdData) {
       api.post('addCreator/'+ householdData.householdId,  householdData.user)
         .then(res => {
-         //
-          // commit('setCreator', user)
-          dispatch('getHouseholds')
+          commit('setActiveHousehold', res.data.data)
+          commit('setNewHousehold', householdData)
         })
         .catch(handleError)
     },
@@ -310,18 +311,11 @@ export default new Vuex.Store({
         .catch(handleError)
     },
     searchUsers({ commit, dispatch }, data) {
-      debugger
+     // debugger
       api.post("findUsers", data)
         .then(res => {
           debugger
           commit('setHouseholdMembers', res.data.data)
-        })
-        .catch(handleError)
-    },
-    logout({ commit, dispatch }, user) {
-      auth.delete('logout/', user)
-        .then(res => {
-          router.push('/')
         })
         .catch(handleError)
     },
