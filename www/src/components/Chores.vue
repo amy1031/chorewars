@@ -29,6 +29,15 @@
         </form>
       </div>
     </div>
+    <div class="row justify-content-sm-center">
+            <div class="return">
+                <div class="col-12 text-center">
+                    <center>
+                        <p class="back">Not ready yet? <router-link :to="'/households/'+activeHousehold._id">Back to Household</router-link></p>
+                    </center>
+                </div>
+            </div>
+        </div>
   </div>
 </template>
 
@@ -103,5 +112,14 @@ button.addchores {
 }
 .addchore:hover {
     background-color: #5cb85c;
+}
+
+a {
+    color: #443f3f;
+    text-decoration: underline;
+}
+
+.back {
+  padding-top: 20px;
 }
 </style>
