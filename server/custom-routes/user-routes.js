@@ -16,6 +16,18 @@ export default {
         })
     }
   },
+    sharedhouseholds: {
+    path: '/allhouseholds',
+    reqType: 'get',
+    method(req, res, next){
+      Household.find({members: { $in: req.session.uid}})
+        .then(households => {
+          res.send(handleResponse(action, households))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
   findUsersByName: {
     path: '/findUsers',
     reqType: 'post',
