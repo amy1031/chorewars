@@ -4,30 +4,33 @@ let Users = require('../models/user')
 
 export default {
   household: {
-    path: '/households',
+    path: '/gethouseholds',
     reqType: 'get',
     method(req, res, next) {
+   //   debugger
       let action = 'Get Household Information'
-      Household.find({ creatorId: req.session.uid })
-        .then(household => {
+      Household.find({ members: { $in: [req.session.uid]}})
+      .then(household => {
+      //  debugger
           res.send(handleResponse(action, household))
+
         }).catch(error => {
           return next(handleResponse(action, null, error))
         })
     }
   },
-    sharedhouseholds: {
-    path: '/allhouseholds',
-    reqType: 'get',
-    method(req, res, next){
-      Household.find({members: { $in: req.session.uid}})
-        .then(households => {
-          res.send(handleResponse(action, households))
-        }).catch(error => {
-          return next(handleResponse(action, null, error))
-        })
-    }
-  },
+  //   sharedhouseholds: {
+  //   path: '/allhouseholds',
+  //   reqType: 'get',
+  //   method(req, res, next){
+  //     Household.find({members: { $in: req.session.uid}})
+  //       .then(households => {
+  //         res.send(handleResponse(action, households))
+  //       }).catch(error => {
+  //         return next(handleResponse(action, null, error))
+  //       })
+  //   }
+  // },
   findUsersByName: {
     path: '/findUsers',
     reqType: 'post',
