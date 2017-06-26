@@ -12,16 +12,19 @@
                     <span class="membername">{{user.name}}</span>
                     <span class="memberpoints">{{this.addUpUserPoints}}</span>
                 </h4>
+                <button class="pull-right logout" @click="logout(user)">Logout</button>
             </div>
         </div>
         <div class="row justify-content-sm-center">
             <div class="col-4">
                 <h3 class="chores">Chores to Complete:</h3>
                 <div v-for='chore in this.choresList'>{{chore.name}}
-                    <button class="done" @click="updateUserCompletedChore(chore)"><i class="fa fa-check" aria-hidden="true"></i></button>
+                    <button class="done" @click="updateUserCompletedChore(chore)">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
                     <hr>
                 </div>
-
+    
             </div>
             <div class="col-4">
                 <h3 class="completed">Chores Completed:</h3>
@@ -37,6 +40,7 @@
                 <div class="col-12 text-center">
                     <center>
                         <router-link :to="'/households/'+activeHousehold._id">Back to Household</router-link>
+                        <br>
                     </center>
                 </div>
             </div>
@@ -107,6 +111,9 @@ export default {
         },
         getAllUserChores() {
             this.$store.dispatch('getUserChores', this.user._id)
+        },
+        logout() {
+            this.$store.dispatch('logout', this.user)
         }
     },
     components: {
@@ -175,10 +182,31 @@ a {
     transition-duration: 0.4s;
     height: 30px;
 }
+
 .done:hover {
     background-color: #5cb85c;
 }
+
 hr {
     border: 0px solid #fff;
+}
+
+button.logout {
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    font-family: helvetica;
+    background-color: #a09a9a;
+    border-radius: 5px;
+    border: 0px;
+    padding: 8px;
+    margin-bottom: 5px;
+    transition-duration: 0.4s;
+    margin-right: 200px;
+}
+
+button.logout:hover {
+    background-color: #fff;
+    color: #251f1f;
 }
 </style>
