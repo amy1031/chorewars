@@ -11,7 +11,7 @@
               <input type="text" v-model="email" id="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon1">
             </div>
             <div class="form-group">
-              <label for="password">Password:</label>
+              <label for="password">Password: </label>
               <input type="password" v-model="password" id="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
             </div>
             <div class="form-group">
