@@ -16,7 +16,7 @@ let auth = axios.create({
   withCredentials: true
 })
 
-let state = {
+let state = { 
   user: {},
   error: {},
   households: [],
