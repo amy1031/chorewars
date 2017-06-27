@@ -3,16 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import io from 'socket.io-client'
+//import io from 'socket.io-client'
 import store from './store'
 
 
-let socket = io('https://chorewars.herokuapp.com')
+// let socket = io('https://chorewars.herokuapp.com')
 
-socket.on('CONNECTED', function (data) {
-  console.log(data)
-  socket.emit('update', {})
-})
+// socket.on('CONNECTED', function (data) {
+//   console.log(data)
+//   socket.emit('update', {})
+// })
 
 Vue.config.productionTip = false
 
