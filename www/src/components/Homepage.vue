@@ -87,7 +87,7 @@
     <div class="row">
       <div class="footer">
         <div class="col-12">
-          <p class="text-center footer">Created by Amy Roche, Kaleb Hundersmarck, and Nathan Elg at Boise CodeWorks.</p>
+          <p class="text-center footer">Created by Amy Roche, Kaleb Hundersmarck, and Nathan Elg at Boise CodeWorks. Designed by Amy Roche.</p>
         </div>
       </div>
     </div>
