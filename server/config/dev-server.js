@@ -41,20 +41,20 @@ app.use(Validate)
 app.use('/api', api)
 app.use('/', defaultErrorHandler)
 
-let io = require('socket.io')(server, {
-    origins: '*:*'
-})
+// let io = require('socket.io')(server, {
+//     origins: '*:*'
+// })
 
-io.on('connection', function (socket) {
-    socket.emit('CONNECTED', {
-        socket: socket.id,
-        message: 'Welcome to Chore Wars'
-    })
+// io.on('connection', function (socket) {
+//     socket.emit('CONNECTED', {
+//         socket: socket.id,
+//         message: 'Welcome to Chore Wars'
+//     })
 
-    socket.on('update', (d) => {
-        console.log(d)
-    })
+//     socket.on('update', (d) => {
+//         console.log(d)
+//     })
 
-})
+// })
 
 export default server
