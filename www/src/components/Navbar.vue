@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12">
         <center>
-          <img src="http://i.imgur.com/V8xAS9b.jpg" class="img-fluid">
+          <img src="https://i.imgur.com/V8xAS9b.jpg" class="img-fluid">
         </center>
       </div>
     </div>
